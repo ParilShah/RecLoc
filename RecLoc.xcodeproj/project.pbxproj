@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		025D5C3885407DB96D0297A1 /* Pods_RecLocTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60955A697BB333C8577A5F1 /* Pods_RecLocTests.framework */; };
+		08122858ED5DB8C17F8C800B /* Pods_RecLoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5952231D283859FE0808AB /* Pods_RecLoc.framework */; };
+		29A0E06235CD6DBB9B512643 /* Pods_RecLocUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D9A1A1E1B797F7498BFE17 /* Pods_RecLocUITests.framework */; };
 		FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */; };
 		FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13161E45FE2F00207DB5 /* ViewController.swift */; };
 		FF6E131A1E45FE2F00207DB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6E13181E45FE2F00207DB5 /* Main.storyboard */; };
@@ -34,6 +37,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05D9A1A1E1B797F7498BFE17 /* Pods_RecLocUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecLocUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C286240BAB9FB2F11838504 /* Pods-RecLocTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLocTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecLocTests/Pods-RecLocTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1E83786A8F866D5B36FE9EA3 /* Pods-RecLocUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLocUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecLocUITests/Pods-RecLocUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3B5952231D283859FE0808AB /* Pods_RecLoc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecLoc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		494D90D9542C70312C04E36F /* Pods-RecLoc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLoc.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecLoc/Pods-RecLoc.release.xcconfig"; sourceTree = "<group>"; };
+		5B18171B54EFF2D6D1632DAC /* Pods-RecLoc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLoc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecLoc/Pods-RecLoc.debug.xcconfig"; sourceTree = "<group>"; };
+		A953468A28934B306D62FA94 /* Pods-RecLocTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLocTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecLocTests/Pods-RecLocTests.release.xcconfig"; sourceTree = "<group>"; };
+		B7113363EF696B3A92CBAEC8 /* Pods-RecLocUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLocUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecLocUITests/Pods-RecLocUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D60955A697BB333C8577A5F1 /* Pods_RecLocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecLocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13111E45FE2F00207DB5 /* RecLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF6E13161E45FE2F00207DB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08122858ED5DB8C17F8C800B /* Pods_RecLoc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				025D5C3885407DB96D0297A1 /* Pods_RecLocTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +82,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29A0E06235CD6DBB9B512643 /* Pods_RecLocUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EB1EEAE216BF7ED6B4E1C65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B5952231D283859FE0808AB /* Pods_RecLoc.framework */,
+				D60955A697BB333C8577A5F1 /* Pods_RecLocTests.framework */,
+				05D9A1A1E1B797F7498BFE17 /* Pods_RecLocUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45C99C294D0B6975C6B0D029 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B18171B54EFF2D6D1632DAC /* Pods-RecLoc.debug.xcconfig */,
+				494D90D9542C70312C04E36F /* Pods-RecLoc.release.xcconfig */,
+				1C286240BAB9FB2F11838504 /* Pods-RecLocTests.debug.xcconfig */,
+				A953468A28934B306D62FA94 /* Pods-RecLocTests.release.xcconfig */,
+				B7113363EF696B3A92CBAEC8 /* Pods-RecLocUITests.debug.xcconfig */,
+				1E83786A8F866D5B36FE9EA3 /* Pods-RecLocUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FF6E13081E45FE2F00207DB5 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +119,8 @@
 				FF6E13281E45FE3000207DB5 /* RecLocTests */,
 				FF6E13331E45FE3000207DB5 /* RecLocUITests */,
 				FF6E13121E45FE2F00207DB5 /* Products */,
+				45C99C294D0B6975C6B0D029 /* Pods */,
+				1EB1EEAE216BF7ED6B4E1C65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,9 +172,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF6E13391E45FE3000207DB5 /* Build configuration list for PBXNativeTarget "RecLoc" */;
 			buildPhases = (
+				94B9C402DD304D2DB78D5544 /* [CP] Check Pods Manifest.lock */,
 				FF6E130D1E45FE2F00207DB5 /* Sources */,
 				FF6E130E1E45FE2F00207DB5 /* Frameworks */,
 				FF6E130F1E45FE2F00207DB5 /* Resources */,
+				106B556D0FB6AFE1402046B1 /* [CP] Embed Pods Frameworks */,
+				DB5811E6E218390DC24C520B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +192,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF6E133C1E45FE3000207DB5 /* Build configuration list for PBXNativeTarget "RecLocTests" */;
 			buildPhases = (
+				D18D7E3AC7048B8D136C4CED /* [CP] Check Pods Manifest.lock */,
 				FF6E13211E45FE3000207DB5 /* Sources */,
 				FF6E13221E45FE3000207DB5 /* Frameworks */,
 				FF6E13231E45FE3000207DB5 /* Resources */,
+				707BB340776BF1C27A6B91C1 /* [CP] Embed Pods Frameworks */,
+				1B4801884E30A3F95554296C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +213,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF6E133F1E45FE3000207DB5 /* Build configuration list for PBXNativeTarget "RecLocUITests" */;
 			buildPhases = (
+				B75403C40C510AF9C29FE16B /* [CP] Check Pods Manifest.lock */,
 				FF6E132C1E45FE3000207DB5 /* Sources */,
 				FF6E132D1E45FE3000207DB5 /* Frameworks */,
 				FF6E132E1E45FE3000207DB5 /* Resources */,
+				BE64D5AFBE13DE7D66C0C108 /* [CP] Embed Pods Frameworks */,
+				86C5DE6DC7A509BBED91C9E2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,6 +305,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		106B556D0FB6AFE1402046B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecLoc/Pods-RecLoc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B4801884E30A3F95554296C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecLocTests/Pods-RecLocTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		707BB340776BF1C27A6B91C1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecLocTests/Pods-RecLocTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86C5DE6DC7A509BBED91C9E2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecLocUITests/Pods-RecLocUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94B9C402DD304D2DB78D5544 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B75403C40C510AF9C29FE16B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BE64D5AFBE13DE7D66C0C108 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecLocUITests/Pods-RecLocUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D18D7E3AC7048B8D136C4CED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DB5811E6E218390DC24C520B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RecLoc/Pods-RecLoc-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF6E130D1E45FE2F00207DB5 /* Sources */ = {
@@ -413,6 +600,7 @@
 		};
 		FF6E133A1E45FE3000207DB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B18171B54EFF2D6D1632DAC /* Pods-RecLoc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8L389JCGUE;
@@ -426,6 +614,7 @@
 		};
 		FF6E133B1E45FE3000207DB5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 494D90D9542C70312C04E36F /* Pods-RecLoc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8L389JCGUE;
@@ -439,6 +628,7 @@
 		};
 		FF6E133D1E45FE3000207DB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C286240BAB9FB2F11838504 /* Pods-RecLocTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -454,6 +644,7 @@
 		};
 		FF6E133E1E45FE3000207DB5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A953468A28934B306D62FA94 /* Pods-RecLocTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -469,6 +660,7 @@
 		};
 		FF6E13401E45FE3000207DB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7113363EF696B3A92CBAEC8 /* Pods-RecLocUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 8L389JCGUE;
@@ -483,6 +675,7 @@
 		};
 		FF6E13411E45FE3000207DB5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E83786A8F866D5B36FE9EA3 /* Pods-RecLocUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 8L389JCGUE;
