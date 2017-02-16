@@ -6,9 +6,9 @@ This is a term project for Distribution System course.
 Objective: Suggest travel location to user on basis of image recognition deep learning.
 
 Technologies:
-Front-end -> iOS
-Back-end -> Java with REST Services using SPRING and HIBERNET
-Database -> MySQL
+Front-end -> iOS, 
+Back-end -> Java with REST Services using SPRING and HIBERNET, 
+Database -> MySQL, 
 Other Frameworks and Tools -> Amazon Rekognition, Amazon EC2
 
 -- The basic idea of this project is to develop a simple and efficient application which help the users to explore new places, attractions and destinations using posted images by the user in the past. The application constantly focuses on user directed search from the pool of images. Photos of these destinations or places guides new users to having better understanding through various perceptive. On the other side the active users who are actually visiting those places can upload their collection which can be used by some other user as reference in future.
