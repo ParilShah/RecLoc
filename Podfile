@@ -6,7 +6,9 @@ target 'RecLoc' do
   use_frameworks!
 pod 'AFNetworking', '~> 3.0'
 pod 'AWSRekognition'
-
+pod 'GooglePlaces'
+pod 'GooglePlacePicker'
+pod 'GoogleMaps'
   # Pods for RecLoc
 
   target 'RecLocTests' do
