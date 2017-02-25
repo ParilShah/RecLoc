@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil) // this assumes your storyboard is titled "Main.storyboard"
+//        let yourVC = mainStoryboard.instantiateViewControllerWithIdentifier("YOUR_VC_IDENTIFIER") as! YourViewController // inside "YOUR_VC_IDENTIFIER" substitute the Storyboard ID you created in step 2 for the view controller you want to open here. And substitute YourViewController with the name of your view controller, like, for example, ViewController2.
+//        appDelegate.window?.rootViewController = yourVC
+//        appDelegate.window?.makeKeyAndVisible()
+        
         return true
     }
 
