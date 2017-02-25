@@ -1,6 +1,0 @@
-framework module Pods_RecLocUITests {
-  umbrella header "Pods-RecLocUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}
