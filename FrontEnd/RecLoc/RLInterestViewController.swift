@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import Alamofire
 
 class RLInterestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var tableView:UITableView?
-    var items: [String] = ["Mountain", "Beach", "Forest", "lake","City"]
+    var items: [String] = ["Mountains", "Beach", "Forest", "lake","City"]
     var selectedRows:[Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.selectedRows = Array(repeating:0, count:items.count)
+        
+        // Testing
+        Alamofire.request("http://localhost:8080/greeting?name=paril").responseJSON { response in
+            debugPrint(response)
+            
+            if let json = response.result.value {
+                print("JSON: \(json)")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

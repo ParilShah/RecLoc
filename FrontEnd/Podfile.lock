@@ -1,48 +1,37 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
-    - AFNetworking/NSURLSession
-  - AWSCore (2.5.0)
-  - AWSRekognition (2.5.0):
-    - AWSCore (= 2.5.0)
-  - GoogleMaps (2.1.1):
-    - GoogleMaps/Maps (= 2.1.1)
-  - GoogleMaps/Base (2.1.1)
-  - GoogleMaps/Maps (2.1.1):
+  - Alamofire (4.4.0)
+  - AWSCore (2.5.2)
+  - AWSRekognition (2.5.2):
+    - AWSCore (= 2.5.2)
+  - GoogleMaps (2.2.0):
+    - GoogleMaps/Maps (= 2.2.0)
+  - GoogleMaps/Base (2.2.0)
+  - GoogleMaps/Maps (2.2.0):
     - GoogleMaps/Base
-  - GooglePlacePicker (2.1.1):
-    - GoogleMaps (= 2.1.1)
-    - GooglePlaces (= 2.1.1)
-  - GooglePlaces (2.1.1):
-    - GoogleMaps/Base (= 2.1.1)
+  - GooglePlacePicker (2.2.0):
+    - GoogleMaps (= 2.2.0)
+    - GooglePlaces (= 2.2.0)
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
+  - TagListView (1.1.0)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.0)
+  - Alamofire (~> 4.4)
   - AWSRekognition
   - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
+  - TagListView (~> 1.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSCore: e9839d27ceaa2db75934a9c418630ce63c23e347
-  AWSRekognition: 7ed012f3ac6974425b2a200ef346b80c6b03f7e5
-  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
-  GooglePlacePicker: 665f39f931f2df32f9dd3fcc45f7e8abf71e535c
-  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AWSCore: b2fe455c2c7d6653521238c5b0b0ddb67ec4f063
+  AWSRekognition: 3e4af236a7787336ae3d68378fa757927664095b
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  TagListView: d0267a71393f3c73db5c9ea2f979ac1125fcab56
 
-PODFILE CHECKSUM: d6302273ceab6b5e6ba5ec034d6db0a7716bb6bb
+PODFILE CHECKSUM: 20bdce56492757c70bc5bbdd579350ac0cfa8165
 
 COCOAPODS: 1.2.0

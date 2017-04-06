@@ -10,6 +10,10 @@
 		025D5C3885407DB96D0297A1 /* Pods_RecLocTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60955A697BB333C8577A5F1 /* Pods_RecLocTests.framework */; };
 		08122858ED5DB8C17F8C800B /* Pods_RecLoc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5952231D283859FE0808AB /* Pods_RecLoc.framework */; };
 		29A0E06235CD6DBB9B512643 /* Pods_RecLocUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D9A1A1E1B797F7498BFE17 /* Pods_RecLocUITests.framework */; };
+		FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */; };
+		FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */; };
+		FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */; };
+		FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */; };
 		FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */; };
 		FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13161E45FE2F00207DB5 /* ViewController.swift */; };
 		FF6E131A1E45FE2F00207DB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6E13181E45FE2F00207DB5 /* Main.storyboard */; };
@@ -55,6 +59,10 @@
 		A953468A28934B306D62FA94 /* Pods-RecLocTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLocTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RecLocTests/Pods-RecLocTests.release.xcconfig"; sourceTree = "<group>"; };
 		B7113363EF696B3A92CBAEC8 /* Pods-RecLocUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecLocUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RecLocUITests/Pods-RecLocUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D60955A697BB333C8577A5F1 /* Pods_RecLocTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecLocTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLCaptureViewController.swift; sourceTree = "<group>"; };
+		FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
+		FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLLocationDetailViewController.swift; sourceTree = "<group>"; };
+		FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPhotoSubmitViewController.swift; sourceTree = "<group>"; };
 		FF6E13111E45FE2F00207DB5 /* RecLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF6E13161E45FE2F00207DB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +162,10 @@
 				FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */,
 				FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */,
 				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
+				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
+				FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */,
+				FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */,
+				FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */,
 				FF6E13181E45FE2F00207DB5 /* Main.storyboard */,
 				FF6E131B1E45FE2F00207DB5 /* Assets.xcassets */,
 				FF6E131D1E45FE2F00207DB5 /* LaunchScreen.storyboard */,
@@ -468,7 +480,11 @@
 				FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */,
 				FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */,
 				FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */,
+				FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */,
+				FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */,
 				FF9CB1131E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */,
+				FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */,
+				FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
