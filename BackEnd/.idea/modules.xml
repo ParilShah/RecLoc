@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BackEnd.iml" filepath="$PROJECT_DIR$/.idea/modules/BackEnd.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/distributedsystem.iml" filepath="$PROJECT_DIR$/.idea/modules/distributedsystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/webapi/webapi.iml" filepath="$PROJECT_DIR$/.idea/modules/webapi/webapi.iml" group="webapi" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/webapi/webapi_main.iml" filepath="$PROJECT_DIR$/.idea/modules/webapi/webapi_main.iml" group="webapi" />
