@@ -12,8 +12,15 @@ class RLTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        let numberOfItems = CGFloat(tabBar.items!.count)
+        let tabBarItemSize = CGSize(width: tabBar.frame.width / numberOfItems, height: tabBar.frame.height)
+        tabBar.selectionIndicatorImage = UIImage.imageWithColor(color: UIColor.init(colorLiteralRed: 14.0/255.0, green: 75.0/255.0, blue: 185.0/255.0, alpha: 1.0), size: tabBarItemSize).resizableImage(withCapInsets:UIEdgeInsets.zero)
+        // remove default border
+        tabBar.frame.size.width = self.view.frame.width + 4
+        tabBar.frame.origin.x = -2
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,4 +39,18 @@ class RLTabViewController: UITabBarController {
     }
     */
 
+}
+
+extension UIImage {
+    
+    class func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect: CGRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
 }

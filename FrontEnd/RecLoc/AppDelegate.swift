@@ -25,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        appDelegate.window?.makeKeyAndVisible()
         
         GMSServices.provideAPIKey("AIzaSyD9mNFQqvpbHnwYw5BNVp6jn_oes7zXcOI")
+        UINavigationBar.appearance().barTintColor = UIColor(colorLiteralRed: 41/255, green: 128/255, blue: 185/255, alpha: 1)
+        
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        UITabBar.appearance().barTintColor = UIColor(colorLiteralRed: 41/255, green: 128/255, blue: 185/255, alpha: 1)
+        UITabBar.appearance().tintColor = UIColor.white
+        UITabBar.appearance().unselectedItemTintColor = UIColor.white
         return true
     }
 

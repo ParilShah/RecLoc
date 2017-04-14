@@ -10,7 +10,10 @@ pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
 pod 'TagListView', '~> 1.0'
-
+pod 'Material', '~> 2.0'
+pod 'Material/Capture', '~> 2.0'
+pod 'Material/Photos', '~> 2.0'
+pod 'Sharaku'
   # Pods for RecLoc
 
   target 'RecLocTests' do

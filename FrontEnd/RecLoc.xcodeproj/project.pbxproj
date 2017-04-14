@@ -13,6 +13,7 @@
 		FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */; };
 		FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */; };
 		FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */; };
+		FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */; };
 		FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */; };
 		FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */; };
 		FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13161E45FE2F00207DB5 /* ViewController.swift */; };
@@ -62,6 +63,7 @@
 		FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLCaptureViewController.swift; sourceTree = "<group>"; };
 		FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLLocationDetailViewController.swift; sourceTree = "<group>"; };
+		FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPhotoEditViewController.swift; sourceTree = "<group>"; };
 		FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPhotoSubmitViewController.swift; sourceTree = "<group>"; };
 		FF6E13111E45FE2F00207DB5 /* RecLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FF2AEA3A1E99417F00B56429 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */,
+				FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */,
+				FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */,
+			);
+			name = Capture;
+			sourceTree = "<group>";
+		};
+		FF2AEA3B1E99419F00B56429 /* Places */ = {
+			isa = PBXGroup;
+			children = (
+				FF6E13161E45FE2F00207DB5 /* ViewController.swift */,
+				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
+				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
+				FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */,
+			);
+			name = Places;
+			sourceTree = "<group>";
+		};
 		FF6E13081E45FE2F00207DB5 = {
 			isa = PBXGroup;
 			children = (
@@ -158,14 +181,10 @@
 			isa = PBXGroup;
 			children = (
 				FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */,
-				FF6E13161E45FE2F00207DB5 /* ViewController.swift */,
 				FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */,
 				FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */,
-				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
-				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
-				FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */,
-				FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */,
-				FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */,
+				FF2AEA3B1E99419F00B56429 /* Places */,
+				FF2AEA3A1E99417F00B56429 /* Capture */,
 				FF6E13181E45FE2F00207DB5 /* Main.storyboard */,
 				FF6E131B1E45FE2F00207DB5 /* Assets.xcassets */,
 				FF6E131D1E45FE2F00207DB5 /* LaunchScreen.storyboard */,
@@ -477,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF9CB10B1E5C766D006E4E5C /* RLTabViewController.swift in Sources */,
+				FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */,
 				FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */,
 				FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */,
 				FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */,

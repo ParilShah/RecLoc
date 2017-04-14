@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 import AVFoundation
 
 class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
@@ -19,17 +20,16 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
     var captureSesssion : AVCaptureSession!
     var cameraOutput : AVCapturePhotoOutput!
     var previewLayer : AVCaptureVideoPreviewLayer!
-    
+    var locationFromGalleryImage : CLLocationCoordinate2D?
+    var isFromGallery : Bool = false
     let picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        segment.selectedSegmentIndex = 1;
         if(segment.selectedSegmentIndex == 0){
-            print("I am here1")
+            prepareCameraController()
         }else{
-            picker.delegate = self
             prepareGallery()
         }
     }
@@ -45,11 +45,23 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         captureImageView.contentMode = .scaleAspectFit //3
         captureImageView.image = chosenImage //4
+        
+        if let URL = info[UIImagePickerControllerReferenceURL] as? URL {
+            let opts = PHFetchOptions()
+            opts.fetchLimit = 1
+            let assets = PHAsset.fetchAssets(withALAssetURLs: [URL], options: opts)
+            let asset = assets.firstObject
+            let location = asset!.location?.coordinate
+            print(location ?? CLLocationCoordinate2D())
+            self.locationFromGalleryImage = location
+        }
         dismiss(animated:true, completion: nil) //5
+        self.isFromGallery = true
+        pressNext()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTakePhoto(){
@@ -82,6 +94,8 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
                 let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
             
                 self.captureImageView.image = image
+                self.isFromGallery = false
+                pressNext()
             } else {
                 print("some error here")
             }
@@ -135,6 +149,7 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
     func prepareGallery(){
         captureView.alpha = 0
         previewView.alpha = 0
+        picker.delegate = self
         picker.allowsEditing = false
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
@@ -168,12 +183,23 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
             print("some problem here")
         }
     }
+
+    @IBAction func changePhotoSource(){
+        if (segment.selectedSegmentIndex == 0){
+            prepareCameraController()
+        }else{
+            prepareGallery()
+        }
+    }
+
     
     @IBAction func pressNext(){
         //photoSubmit
-        let yourVC = self.storyboard?.instantiateViewController(withIdentifier: "photoSubmit") as! RLPhotoSubmitViewController
+        let yourVC = self.storyboard?.instantiateViewController(withIdentifier: "RLPhotoEditViewController") as! RLPhotoEditViewController
         yourVC.placeImage = self.captureImageView.image
+        yourVC.locationFromGalleryImage = self.locationFromGalleryImage
+        yourVC.isFromGallery = self.isFromGallery
         self.navigationController?.pushViewController(yourVC, animated: true)
-
     }
+    
 }

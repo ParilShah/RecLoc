@@ -45,6 +45,10 @@
 	<string>Camera Use</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Use</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Glad to use</string>
+	<key>NSLocationUsageDescription</key>
+	<string>To improve the performance</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
