@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ec4d980-cadd-45df-9fa8-f0835dd52d3b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/webapi/.gradle/" />
@@ -1000,7 +999,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1492139956871</updated>
-      <workItem from="1492139958439" duration="444000" />
+      <workItem from="1492139958439" duration="455000" />
     </task>
     <task id="LOCAL-00001" summary="comitting gitignore file">
       <created>1492140082743</created>
@@ -1037,11 +1036,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492140278861</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="removing unwanted files">
+      <created>1492140411591</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1492140411591</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="444000" />
+    <option name="totallyTimeSpent" value="455000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
