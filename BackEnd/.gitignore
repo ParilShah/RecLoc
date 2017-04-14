@@ -109,11 +109,9 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 .idea/modules/-1887508169/
-.idea/modules/webapi/
 gradle/
 gradlew
 gradlew.bat
 webapi/build/
-.idea/vcs.xml
 .gradle
 .idea
