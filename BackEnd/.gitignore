@@ -115,3 +115,4 @@ gradle/
 gradlew
 gradlew.bat
 webapi/build/
+.idea/vcs.xml
