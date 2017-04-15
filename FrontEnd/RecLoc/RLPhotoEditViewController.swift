@@ -44,6 +44,7 @@ class RLPhotoEditViewController: UIViewController, SHViewControllerDelegate {
         let yourVC = self.storyboard?.instantiateViewController(withIdentifier: "photoSubmit") as! RLPhotoSubmitViewController
         yourVC.placeImage = self.placeImageView.image
         yourVC.isFromGallery = self.isFromGallery
+        yourVC.locationFromGalleryImage = self.locationFromGalleryImage
         self.navigationController?.pushViewController(yourVC, animated: true)
     }
     

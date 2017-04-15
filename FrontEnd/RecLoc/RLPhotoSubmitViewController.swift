@@ -11,6 +11,7 @@ import TagListView
 import CoreLocation
 import AWSRekognition
 
+
 class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
     
     public var placeImage:UIImage!
@@ -23,6 +24,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     @IBOutlet weak var placeImageView:UIImageView!
     @IBOutlet weak var placeHolderLabel:UILabel!
     @IBOutlet weak var descriptionTxtView:UITextView!
+    @IBOutlet weak var locationLbl:UILabel!
     
     
     
@@ -31,48 +33,51 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         // Do any additional setup after loading the view.
         tagListView.delegate = self
         tagListView.alignment = .left // possible values are .Left, .Center, and .Right
-        tagListView.addTag("Forest")
-        tagListView.insertTag("Mountain", atIndex: 1)
         uploadButton = UIBarButtonItem.init(title: "Upload", style: .plain, target: self, action: #selector(pressUpload(Sender:)))
         self.navigationItem.rightBarButtonItem = uploadButton
         self.placeImageView!.image = placeImage
         
         // TODO: When the photo is taken from Camera, then use the below and move it in the function.
-        // Configuration for getting CoreLocation
-        
+        // Configuration for getting CoreLocation        
         if(!isFromGallery){
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }else{
-        
+//            let getLat: CLLocationDegrees = (self.locationFromGalleryImage?.latitude)!
+//            let getLon: CLLocationDegrees = (self.locationFromGalleryImage?.longitude)!
+//            let getMovedMapCenter: CLLocation =  CLLocation(latitude: getLat, longitude: getLon)
+//            
+//            CLGeocoder().reverseGeocodeLocation(getMovedMapCenter, completionHandler: {(placemarks, error)-> Void in
+//                
+//                if (error != nil) {
+//                    print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+//                    return
+//                }
+//                
+//                if (placemarks?.count)! > 0 {
+//                    let pm = placemarks?.first
+//                    self.displayLocationInfo(placemark: pm!)
+//                } else {
+//                    print("Problem with the data received from geocoder")
+//                }
+//            })
         }
         
-        let credentialProvider:AWSCognitoCredentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2, identityPoolId:"us-west-2:cad15e21-3514-4df2-9b95-b5349963acfb")
-        
-        let configuration: AWSServiceConfiguration = AWSServiceConfiguration(region: .USEast2, credentialsProvider: credentialProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        AWSRekognition.register(with:configuration, forKey:"USWest2Rekognition")
-        let Rekognition = AWSRekognition(forKey:"USWest2Rekognition")
-        
-        let image = AWSRekognitionImage()
-        image!.bytes = UIImageJPEGRepresentation(placeImage!, 0.7)
-        
-        guard let request = AWSRekognitionDetectLabelsRequest() else {
-            puts("Unable to initialize AWSRekognitionDetectLabelsRequest.")
-            return
-        }
-        
-        request.image = image
-        request.maxLabels = 3
-        request.minConfidence = 60
-        
-        Rekognition.detectLabels(request) { (response:AWSRekognitionDetectLabelsResponse?, error:Error?) in
-            print(response?.labels)
-        }
-        
+        let instanceOfCustomObject: RLPhotoManipulate = RLPhotoManipulate.init(block: {(response: Any?, error:Error?)in
+            if (error == nil){
+                print(response!)
+                DispatchQueue.main.async {
+                    for object in (response as? Array<Any>)!{
+                        let jsonResult = object as! AWSRekognitionLabel
+                        //print(jsonResult.name)
+                        self.tagListView.addTag(jsonResult.name!)
+                    }
+                }
+            }
+        })
+        instanceOfCustomObject.returnDictionary(placeImage!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,24 +116,32 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     }
     
     // MARK: Custom Methods
-
     func displayLocationInfo(placemark: CLPlacemark) {
-        if (placemark != nil) {
+        
             //stop updating location to save battery life
             locationManager.stopUpdatingLocation()
             print(placemark.addressDictionary!)
-            
-        }
+            self.locationLbl.text = (placemark.name!+","+placemark.country!)
+        
     }
     
     // MARK: UITextViewDelegate
     public func textViewDidBeginEditing(_ textView: UITextView){
-    
+        self.placeHolderLabel.isHidden = true
     }
     
     public func textViewDidEndEditing(_ textView: UITextView){
-    
+        if (textView.text.characters.count == 0){
+            self.placeHolderLabel.isHidden = false
+        }else{
+            self.placeHolderLabel.isHidden = true
+        }
     }
     
-
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool{
+        if text.characters.contains("\n"){
+            textView.resignFirstResponder()
+        }
+        return true
+    }
 }
