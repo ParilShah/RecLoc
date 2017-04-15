@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.Valid;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,22 +14,23 @@ import java.util.Map;
 @JsonPropertyOrder({
         "errorDetail"
 })
-public class ErrorResponse implements Serializable {
+public class ErrorResponse {
 
     @JsonProperty("errorDetail")
     private String errorDetail;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 6161460576269821286L;
 
     /**
      * No args constructor for use in serialization
+     * 
      */
     public ErrorResponse() {
     }
 
     /**
+     * 
      * @param errorDetail
      */
     public ErrorResponse(String errorDetail) {

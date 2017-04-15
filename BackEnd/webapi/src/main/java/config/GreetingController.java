@@ -1,4 +1,4 @@
-package hello;
+package config;
 
 import ds.frontend.domain.searchcategory.request.SearchCategoryRequest;
 import ds.frontend.domain.searchcategory.request.SearchCategoryRequestWrapper;
@@ -22,15 +22,22 @@ public class GreetingController {
     }
 
     @RequestMapping(value = "/searchCategory", method = RequestMethod.POST)
-    public SearchCategoryRequestWrapper searchCategory(@RequestBody SearchCategoryRequestWrapper searchCategoryRequestWrapper, HttpServletRequest request, HttpServletResponse response) {
+    public SearchCategoryRequest searchCategory(@RequestBody SearchCategoryRequestWrapper searchCategoryRequestWrapper, HttpServletRequest request, HttpServletResponse response) {
         printHeaders(request);
 
         SearchCategoryRequest category = searchCategoryRequestWrapper.getSearchCategoryRequest();
         category.setCategoryName(category.getCategoryName() + "-Changed");
         System.out.println(category);
         response.setHeader("Content-Type", "application/json");
-        //Server logic
-        return searchCategoryRequestWrapper;
+
+        return category;
+        /*SuccessResponse successResponse = new SuccessResponse();
+        successResponse.setResult(new ArrayList<Result>() {{
+            add(new Result(123L, "Forest category"));
+        }});
+        ResponseDetail responseDetail = new ResponseDetail(200L, "Success");
+        SearchCategoryResponse searchCategoryResponse = new SearchCategoryResponse(responseDetail, successResponse, null);
+        return new SearchCategoryResponseWrapper(searchCategoryResponse);*/
     }
 
     public void printHeaders(HttpServletRequest request) {

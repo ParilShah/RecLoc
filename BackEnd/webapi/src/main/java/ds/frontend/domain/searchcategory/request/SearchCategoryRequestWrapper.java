@@ -17,7 +17,7 @@ import java.util.Map;
 })
 public class SearchCategoryRequestWrapper implements Serializable {
 
-    @JsonProperty("searchCategoryRequest")
+    @JsonProperty("searchCategoryRequest1")
     @Valid
     private SearchCategoryRequest searchCategoryRequest;
     @JsonIgnore

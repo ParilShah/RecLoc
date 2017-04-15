@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.Valid;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,44 +15,45 @@ import java.util.Map;
         "responseCode",
         "responseMessage"
 })
-public class ResponseDetail implements Serializable {
+public class ResponseDetail {
 
     @JsonProperty("responseCode")
-    private Long responseCode;
+    private Integer responseCode;
     @JsonProperty("responseMessage")
     private String responseMessage;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 7564795886902124614L;
 
     /**
      * No args constructor for use in serialization
+     * 
      */
     public ResponseDetail() {
     }
 
     /**
+     * 
      * @param responseMessage
      * @param responseCode
      */
-    public ResponseDetail(Long responseCode, String responseMessage) {
+    public ResponseDetail(Integer responseCode, String responseMessage) {
         super();
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
     }
 
     @JsonProperty("responseCode")
-    public Long getResponseCode() {
+    public Integer getResponseCode() {
         return responseCode;
     }
 
     @JsonProperty("responseCode")
-    public void setResponseCode(Long responseCode) {
+    public void setResponseCode(Integer responseCode) {
         this.responseCode = responseCode;
     }
 
-    public ResponseDetail withResponseCode(Long responseCode) {
+    public ResponseDetail withResponseCode(Integer responseCode) {
         this.responseCode = responseCode;
         return this;
     }

@@ -1,4 +1,4 @@
-package hello;
+package config;
 
 /**
  * Created by desair4 on 2/24/2017.

@@ -2,56 +2,57 @@
 package ds.frontend.domain.common;
 
 import com.fasterxml.jackson.annotation.*;
+import ds.frontend.domain.category.Category;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.Valid;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "Result"
+        "Categories"
 })
-public class SuccessResponse implements Serializable {
+public class SuccessResponse {
 
-    @JsonProperty("Result")
+    @JsonProperty("Categories")
     @Valid
-    private List<Result> result = null;
+    private List<Category> categories = null;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 4831613610075304827L;
 
     /**
      * No args constructor for use in serialization
+     * 
      */
     public SuccessResponse() {
     }
 
     /**
-     * @param result
+     *
+     * @param categories
      */
-    public SuccessResponse(List<Result> result) {
+    public SuccessResponse(List<Category> categories) {
         super();
-        this.result = result;
+        this.categories = categories;
     }
 
-    @JsonProperty("Result")
-    public List<Result> getResult() {
-        return result;
+    @JsonProperty("Categories")
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    @JsonProperty("Result")
-    public void setResult(List<Result> result) {
-        this.result = result;
+    @JsonProperty("Categories")
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
-    public SuccessResponse withResult(List<Result> result) {
-        this.result = result;
+    public SuccessResponse withCategories(List<Category> categories) {
+        this.categories = categories;
         return this;
     }
 
@@ -77,7 +78,7 @@ public class SuccessResponse implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(result).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(categories).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -89,7 +90,7 @@ public class SuccessResponse implements Serializable {
             return false;
         }
         SuccessResponse rhs = ((SuccessResponse) other);
-        return new EqualsBuilder().append(result, rhs.result).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(categories, rhs.categories).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

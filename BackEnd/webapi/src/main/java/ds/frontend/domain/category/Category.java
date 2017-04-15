@@ -1,5 +1,5 @@
 
-package ds.frontend.domain.common;
+package ds.frontend.domain.category;
 
 import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -7,7 +7,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.validation.Valid;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,44 +15,45 @@ import java.util.Map;
         "categoryId",
         "categoryName"
 })
-public class Result implements Serializable {
+public class Category {
 
     @JsonProperty("categoryId")
-    private Long categoryId;
+    private Integer categoryId;
     @JsonProperty("categoryName")
     private String categoryName;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 3672118104220993969L;
 
     /**
      * No args constructor for use in serialization
+     * 
      */
-    public Result() {
+    public Category() {
     }
 
     /**
+     * 
      * @param categoryName
      * @param categoryId
      */
-    public Result(Long categoryId, String categoryName) {
+    public Category(Integer categoryId, String categoryName) {
         super();
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 
     @JsonProperty("categoryId")
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
     @JsonProperty("categoryId")
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Result withCategoryId(Long categoryId) {
+    public Category withCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
         return this;
     }
@@ -68,7 +68,7 @@ public class Result implements Serializable {
         this.categoryName = categoryName;
     }
 
-    public Result withCategoryName(String categoryName) {
+    public Category withCategoryName(String categoryName) {
         this.categoryName = categoryName;
         return this;
     }
@@ -88,7 +88,7 @@ public class Result implements Serializable {
         this.additionalProperties.put(name, value);
     }
 
-    public Result withAdditionalProperty(String name, Object value) {
+    public Category withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
     }
@@ -103,10 +103,10 @@ public class Result implements Serializable {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Result) == false) {
+        if ((other instanceof Category) == false) {
             return false;
         }
-        Result rhs = ((Result) other);
+        Category rhs = ((Category) other);
         return new EqualsBuilder().append(categoryId, rhs.categoryId).append(categoryName, rhs.categoryName).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
