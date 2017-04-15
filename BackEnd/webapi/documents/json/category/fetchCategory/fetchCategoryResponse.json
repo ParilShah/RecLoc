@@ -1,0 +1,12 @@
+{
+  "responseDetail": {
+    "responseCode": 200,
+    "responseMessage": "Category Found"
+  },
+  "category": [
+    {
+      "categoryId": "",
+      "categroyName": ""
+    }
+  ]
+}
