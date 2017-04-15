@@ -19,6 +19,7 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         // Do any additional setup after loading the view.
         self.selectedRows = Array(repeating:0, count:items.count)
         self.tableView!.tableFooterView = UIView()
+
         // Testing
 //        Alamofire.request("http://localhost:8080/greeting?name=paril").responseJSON { response in
 //            debugPrint(response)
@@ -29,8 +30,8 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
 //        }
         
         // TODO: Testing POST
-        //
-//        Alamofire.request("http://localhost:8080/searchCategory", method: .post, parameters: ["SearchCategoryRequest":["categoryName": "bar", "deviceId":"3232-2323123-2313123"]],encoding: JSONEncoding.default, headers: nil).responseJSON {
+    
+//        Alamofire.request("http://localhost:8080/searchCategory", method: .post, parameters: ["searchCategoryRequest":["categoryName": "bar", "deviceId":"3232-2323123-2313123"]],encoding: JSONEncoding.default, headers: nil).responseJSON {
 //            response in
 //            switch response.result {
 //            case .success:

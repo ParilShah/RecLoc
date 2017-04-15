@@ -112,5 +112,5 @@ gradle/
 gradlew
 gradlew.bat
 webapi/build/
-.gradle
-.idea
+.gradle/
+.idea/

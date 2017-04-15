@@ -14,6 +14,7 @@
 		FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */; };
 		FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */; };
 		FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */; };
+		FF3C3D721EA1FAC2009B6200 /* RLPhotoManipulate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3C3D711EA1FAC2009B6200 /* RLPhotoManipulate.m */; };
 		FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */; };
 		FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */; };
 		FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13161E45FE2F00207DB5 /* ViewController.swift */; };
@@ -64,6 +65,9 @@
 		FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLLocationDetailViewController.swift; sourceTree = "<group>"; };
 		FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPhotoEditViewController.swift; sourceTree = "<group>"; };
+		FF3C3D6F1EA1FAC2009B6200 /* RecLoc-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RecLoc-Bridging-Header.h"; sourceTree = "<group>"; };
+		FF3C3D701EA1FAC2009B6200 /* RLPhotoManipulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLPhotoManipulate.h; sourceTree = "<group>"; };
+		FF3C3D711EA1FAC2009B6200 /* RLPhotoManipulate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLPhotoManipulate.m; sourceTree = "<group>"; };
 		FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPhotoSubmitViewController.swift; sourceTree = "<group>"; };
 		FF6E13111E45FE2F00207DB5 /* RecLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +141,9 @@
 		FF2AEA3A1E99417F00B56429 /* Capture */ = {
 			isa = PBXGroup;
 			children = (
+				FF3C3D701EA1FAC2009B6200 /* RLPhotoManipulate.h */,
+				FF3C3D711EA1FAC2009B6200 /* RLPhotoManipulate.m */,
+				FF3C3D6F1EA1FAC2009B6200 /* RecLoc-Bridging-Header.h */,
 				FF1B04A31E80AC9600CE9729 /* RLCaptureViewController.swift */,
 				FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */,
 				FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */,
@@ -289,6 +296,7 @@
 					FF6E13101E45FE2F00207DB5 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 8L389JCGUE;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					FF6E13241E45FE3000207DB5 = {
@@ -502,6 +510,7 @@
 				FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */,
 				FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */,
 				FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */,
+				FF3C3D721EA1FAC2009B6200 /* RLPhotoManipulate.m in Sources */,
 				FF9CB1131E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */,
 				FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */,
 				FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */,
@@ -663,11 +672,14 @@
 			baseConfigurationReference = 5B18171B54EFF2D6D1632DAC /* Pods-RecLoc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 8L389JCGUE;
 				INFOPLIST_FILE = RecLoc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectIq.RecLoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RecLoc/RecLoc-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -677,11 +689,13 @@
 			baseConfigurationReference = 494D90D9542C70312C04E36F /* Pods-RecLoc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 8L389JCGUE;
 				INFOPLIST_FILE = RecLoc/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectIq.RecLoc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RecLoc/RecLoc-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
