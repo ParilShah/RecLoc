@@ -25,6 +25,6 @@ public class CategoryMapper {
     }
 
     public static CategoryDomain mapCategoryFrontendToBackend(Category category) {
-        return new CategoryDomain(category.getCategoryId(), category.getcategoryName());
+        return new CategoryDomain(category.getCategoryId(), category.getCategoryName());
     }
 }

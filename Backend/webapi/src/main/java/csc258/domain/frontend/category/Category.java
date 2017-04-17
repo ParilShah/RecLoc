@@ -59,16 +59,16 @@ public class Category implements Serializable {
     }
 
     @JsonProperty("categoryName")
-    public String getcategoryName() {
+    public String getCategoryName() {
         return categoryName;
     }
 
     @JsonProperty("categoryName")
-    public void setcategoryName(String categoryName) {
+    public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public Category withcategoryName(String categoryName) {
+    public Category withCategoryName(String categoryName) {
         this.categoryName = categoryName;
         return this;
     }
