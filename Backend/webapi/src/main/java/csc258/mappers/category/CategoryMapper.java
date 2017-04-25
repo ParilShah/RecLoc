@@ -12,19 +12,22 @@ import java.util.stream.Collectors;
 public class CategoryMapper {
 
     public static Category mapCategoryBackendToFrontend(CategoryDomain categoryDomain) {
+        if (categoryDomain == null) return null;
         return new Category(categoryDomain.getCategoryId(), categoryDomain.getCategoryName());
     }
 
     public static List<Category> mapCategoryListBackendToFrontend(List<CategoryDomain> categoryDomainList) {
-        return categoryDomainList.stream().map(CategoryMapper::mapCategoryBackendToFrontend).collect(Collectors.toList());
+        if (categoryDomainList == null) return null;
+        return categoryDomainList.parallelStream().map(CategoryMapper::mapCategoryBackendToFrontend).collect(Collectors.toList());
     }
 
     public static List<CategoryDomain> mapCategoryListFrontendToBackend(List<Category> categoryList) {
         if (categoryList == null) return null;
-        return categoryList.stream().map(CategoryMapper::mapCategoryFrontendToBackend).collect(Collectors.toList());
+        return categoryList.parallelStream().map(CategoryMapper::mapCategoryFrontendToBackend).collect(Collectors.toList());
     }
 
     public static CategoryDomain mapCategoryFrontendToBackend(Category category) {
+        if (category == null) return null;
         return new CategoryDomain(category.getCategoryId(), category.getCategoryName());
     }
 }

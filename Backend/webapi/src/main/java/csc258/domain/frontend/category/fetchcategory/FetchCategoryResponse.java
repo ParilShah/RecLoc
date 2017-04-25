@@ -1,31 +1,25 @@
-package csc258.domain.frontend.fetchcategory;
+package csc258.domain.frontend.category.fetchcategory;
 
+import com.fasterxml.jackson.annotation.*;
+import csc258.domain.frontend.category.Category;
+import csc258.domain.frontend.common.ResponseDetail;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.validation.Valid;
-
-import csc258.domain.frontend.category.Category;
-import csc258.domain.frontend.common.ResponseDetail;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "responseDetail",
-    "category"
+        "responseDetail",
+        "category"
 })
-public class FetchCategoryResponse implements Serializable
-{
+public class FetchCategoryResponse implements Serializable {
 
     @JsonProperty("responseDetail")
     @Valid
@@ -40,13 +34,11 @@ public class FetchCategoryResponse implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public FetchCategoryResponse() {
     }
 
     /**
-     * 
      * @param category
      * @param responseDetail
      */

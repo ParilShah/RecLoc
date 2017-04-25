@@ -1,8 +1,11 @@
 package csc258.domain.db.category;
 
 import csc258.domain.db.user.UserDomain;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.List;
@@ -17,7 +20,11 @@ public class CategoryDomain {
 
     private String categoryName;
 
-    @ManyToMany
+    @ManyToMany(
+//            cascade = CascadeType.ALL,
+            mappedBy = "categoryDomains", fetch = FetchType.LAZY)
+//    @ManyToMany
+//    @JoinTable(name = "user_category", joinColumns = @JoinColumn(name = "categoryId"), inverseJoinColumns = @JoinColumn(name = "deviceId"))
     private List<UserDomain> userDomains;
 
     public CategoryDomain() {
@@ -56,6 +63,36 @@ public class CategoryDomain {
 
     public void setUserDomains(List<UserDomain> userDomains) {
         this.userDomains = userDomains;
+    }
+
+    public void addUserDomain(UserDomain userDomain) {
+        userDomains.add(userDomain);
+        userDomain.getCategoryDomains().add(this);
+    }
+
+    public void removeUserDomain(UserDomain userDomain) {
+        userDomains.remove(userDomain);
+        userDomain.getCategoryDomains().remove(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof CategoryDomain)) return false;
+
+        CategoryDomain that = (CategoryDomain) o;
+
+        return new EqualsBuilder()
+                .append(getCategoryId(), that.getCategoryId())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getCategoryId())
+                .toHashCode();
     }
 
     @Override

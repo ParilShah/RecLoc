@@ -1,0 +1,24 @@
+{
+  "category": [
+    {
+      "categoryId": 1,
+      "categoryName": "Forest"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "Beach"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "Mountain"
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "Disney"
+    },
+    {
+      "categoryId": 5,
+      "categoryName": "India"
+    }
+  ]
+}

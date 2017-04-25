@@ -1,29 +1,24 @@
 package csc258.domain.frontend.common;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "responseCode",
-    "responseMessage"
+        "responseCode",
+        "responseMessage"
 })
-public class ResponseDetail implements Serializable
-{
+public class ResponseDetail implements Serializable {
 
     @JsonProperty("responseCode")
-    private Integer responseCode;
+    private Long responseCode;
     @JsonProperty("responseMessage")
     private String responseMessage;
     @JsonIgnore
@@ -33,42 +28,39 @@ public class ResponseDetail implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public ResponseDetail() {
     }
 
     /**
-     * 
      * @param responseCode
      */
-    public ResponseDetail(Integer responseCode) {
+    public ResponseDetail(Long responseCode) {
         super();
         this.responseCode = responseCode;
     }
 
     /**
-     *
      * @param responseMessage
      * @param responseCode
      */
-    public ResponseDetail(Integer responseCode, String responseMessage) {
+    public ResponseDetail(Long responseCode, String responseMessage) {
         super();
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
     }
 
     @JsonProperty("responseCode")
-    public Integer getResponseCode() {
+    public Long getResponseCode() {
         return responseCode;
     }
 
     @JsonProperty("responseCode")
-    public void setResponseCode(Integer responseCode) {
+    public void setResponseCode(Long responseCode) {
         this.responseCode = responseCode;
     }
 
-    public ResponseDetail withResponseCode(Integer responseCode) {
+    public ResponseDetail withResponseCode(Long responseCode) {
         this.responseCode = responseCode;
         return this;
     }

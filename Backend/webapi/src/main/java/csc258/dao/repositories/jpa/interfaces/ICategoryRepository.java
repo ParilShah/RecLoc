@@ -3,6 +3,7 @@ package csc258.dao.repositories.jpa.interfaces;
 import csc258.domain.db.category.CategoryDomain;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,6 +17,8 @@ public interface ICategoryRepository extends CrudRepository<CategoryDomain, Long
     List<CategoryDomain> findByCategoryIdAndCategoryName(Long id1, String categoryName1);
 
     List<CategoryDomain> findByCategoryIdOrCategoryName(Long id1, String categoryName1);
+
+    Collection<CategoryDomain> findByCategoryIdIsIn(Collection<Long> categoryId);
 
 //    void saveAll(List<CategoryDomain> categoryDomain);
 }

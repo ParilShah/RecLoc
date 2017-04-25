@@ -5,16 +5,19 @@ import csc258.domain.db.category.CategoryDomain;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by desair4 on 4/15/2017.
  */
 @Component
+@Transactional
 public class CategoryDao {
 
     private ICategoryRepository categoryRepository;
@@ -28,6 +31,11 @@ public class CategoryDao {
 
     public CategoryDomain findCategoryByCategoryId(long categoryId) {
         return categoryRepository.findByCategoryId(categoryId);
+    }
+
+    public List<CategoryDomain> findCategoryByCategoriesByIds(List<CategoryDomain> categoryDomainList) {
+        final List<Long> list = categoryDomainList.parallelStream().map(CategoryDomain::getCategoryId).collect(Collectors.toList());
+        return categoryRepository.findByCategoryIdIsIn(list).parallelStream().collect(Collectors.toList());
     }
 
     public void saveAllCategories(List<CategoryDomain> categoryDomain) {

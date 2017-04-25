@@ -1,4 +1,3 @@
-
 package csc258.domain.frontend.common;
 
 import com.fasterxml.jackson.annotation.*;
@@ -24,13 +23,11 @@ public class ErrorResponse {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public ErrorResponse() {
     }
 
     /**
-     * 
      * @param errorDetail
      */
     public ErrorResponse(String errorDetail) {

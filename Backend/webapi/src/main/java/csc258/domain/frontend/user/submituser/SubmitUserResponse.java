@@ -1,27 +1,21 @@
+package csc258.domain.frontend.user.submituser;
 
-package csc258.domain.frontend.submituser;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import csc258.domain.frontend.common.ResponseDetail;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "responseDetail"
+        "responseDetail"
 })
-public class SubmitUserResponse implements Serializable
-{
+public class SubmitUserResponse implements Serializable {
 
     @JsonProperty("responseDetail")
     @Valid
@@ -33,13 +27,11 @@ public class SubmitUserResponse implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public SubmitUserResponse() {
     }
 
     /**
-     * 
      * @param responseDetail
      */
     public SubmitUserResponse(ResponseDetail responseDetail) {

@@ -1,0 +1,41 @@
+spring:
+    profiles:
+#        active: dev
+    datasource:
+#            dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+            url: jdbc:h2:mem:RecLoc;DB_CLOSE_DELAY=-1
+            databaseName:
+            serverName:
+            username:
+            password:
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        database: H2
+        openInView: true
+        show_sql: true
+#        generate-ddl: true
+        hibernate:
+            ddl-auto: create-drop
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                cache.use_query_cache: false
+                show_sql: true
+
+#            hibernate.generate_statistics: true
+
+multipart:
+  maxFileSize: 10MB
+  maxRequestSize: 10MB
+
+logging:
+    level:
+        org.hibernate:
+            #show sql statement
+            SQL: debug
+            type: trace
+#            type.descriptor.sql.BasicBinder: TRACE
+            #show sql values
+            type.descriptor.sql: trace
+    root: info
+#    level: info

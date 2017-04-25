@@ -1,4 +1,3 @@
-
 package csc258.domain.frontend.category;
 
 import com.fasterxml.jackson.annotation.*;

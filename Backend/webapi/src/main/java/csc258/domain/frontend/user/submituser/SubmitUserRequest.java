@@ -1,34 +1,28 @@
+package csc258.domain.frontend.user.submituser;
 
-package csc258.domain.frontend.submituser;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.validation.Valid;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import csc258.domain.frontend.category.Category;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "deviceId",
-    "category"
+        "deviceId",
+        "categoryName"
 })
-public class SubmitUserRequest implements Serializable
-{
+public class SubmitUserRequest implements Serializable {
 
     @JsonProperty("deviceId")
     private String deviceId;
-    @JsonProperty("category")
+    @JsonProperty("categoryName")
     @Valid
     private List<Category> category = new ArrayList<Category>();
     @JsonIgnore
@@ -38,13 +32,11 @@ public class SubmitUserRequest implements Serializable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public SubmitUserRequest() {
     }
 
     /**
-     * 
      * @param category
      * @param deviceId
      */

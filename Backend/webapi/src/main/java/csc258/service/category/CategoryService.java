@@ -3,13 +3,12 @@ package csc258.service.category;
 import csc258.dao.CategoryDao;
 import csc258.domain.db.category.CategoryDomain;
 import csc258.domain.frontend.category.Category;
+import csc258.domain.frontend.category.fetchcategory.FetchCategoryResponse;
 import csc258.domain.frontend.common.ResponseDetail;
-import csc258.domain.frontend.fetchcategory.FetchCategoryResponse;
 import csc258.mappers.category.CategoryMapper;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +19,6 @@ import java.util.List;
  * Created by desair4 on 4/16/2017.
  */
 @Service
-@Transactional
 public class CategoryService {
 
     private CategoryDao categoryDao;
@@ -35,11 +33,19 @@ public class CategoryService {
         List<CategoryDomain> categoryDomainList = new ArrayList<>();
         CollectionUtils.addAll(categoryDomainList, categoryDomainIterable);
         List<Category> categoryList = CategoryMapper.mapCategoryListBackendToFrontend(categoryDomainList);
-        return new FetchCategoryResponse(new ResponseDetail(200, "FetchCategory Succes"), categoryList);
+        return new FetchCategoryResponse(new ResponseDetail(200L, "Fetch All Categories Success"), categoryList);
     }
 
     public Category findCategoryByCategoryId(long categoryId) {
         return CategoryMapper.mapCategoryBackendToFrontend(categoryDao.findCategoryByCategoryId(categoryId));
+    }
+
+    public List<Category> findCategoriesByCategoryIds(List<Category> categoryList) {
+        return CategoryMapper
+                .mapCategoryListBackendToFrontend((
+                        categoryDao.findCategoryByCategoriesByIds(
+                                CategoryMapper.mapCategoryListFrontendToBackend(categoryList)
+                        )));
     }
 
     public CategoryDao getCategoryDao() {

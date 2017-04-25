@@ -1,0 +1,28 @@
+{
+  "user": {
+    "deviceId": ""
+  },
+  "location": {
+    "locationDetails": {
+      "locationName": "Yosemite",
+      "locationDescription": "Cool Place.",
+      "Address": {
+        "addressLine1": "",
+        "addressLine2": "",
+        "city": "",
+        "state": "",
+        "country": "",
+        "zip": ""
+      },
+      "tags": [
+        "Mountains",
+        "WaterFall",
+        "Trees"
+      ]
+    },
+    "photoDetails": {
+      "fileName": "",
+      "file": ""
+    }
+  }
+}

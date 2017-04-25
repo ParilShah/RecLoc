@@ -1,5 +1,6 @@
 package csc258.bootstrap;
 
+import csc258.dao.UserDao;
 import csc258.domain.db.category.CategoryDomain;
 import csc258.domain.db.user.UserDomain;
 import csc258.service.category.CategoryService;
@@ -26,36 +27,66 @@ public class Bootstrap {
 
     public void init() {
         try {
-            userService.saveUser("1234", null);
-            userService.saveUser("1235", null);
-            userService.saveUser("1236", null);
-            userService.saveUser("1237", null);
 
-            CategoryDomain forest = new CategoryDomain(1L, "Forest", new ArrayList<UserDomain>() {{
-                add(new UserDomain("1234"));
-                add(new UserDomain("1235"));
-            }});
-            CategoryDomain beach = new CategoryDomain(2L, "Beach", new ArrayList<UserDomain>() {{
-                add(new UserDomain("1234"));
-                add(new UserDomain("1236"));
-            }});
-            CategoryDomain mountain = new CategoryDomain(3L, "Mountain", new ArrayList<UserDomain>() {{
-                add(new UserDomain("1235"));
-                add(new UserDomain("1237"));
-            }});
+//            CategoryDomain forest = new CategoryDomain(1L, "Forest", new ArrayList<UserDomain>() {{
+//                add(new UserDomain("1234"));
+//                add(new UserDomain("1235"));
+//            }});
+//            CategoryDomain beach = new CategoryDomain(2L, "Beach", new ArrayList<UserDomain>() {{
+//                add(new UserDomain("1234"));
+//                add(new UserDomain("1236"));
+//            }});
+//            CategoryDomain mountain = new CategoryDomain(3L, "Mountain", new ArrayList<UserDomain>() {{
+//                add(new UserDomain("1235"));
+//                add(new UserDomain("1237"));
+//            }});
+            CategoryDomain forest = new CategoryDomain(1L, "Forest");
+            CategoryDomain beach = new CategoryDomain(2L, "Beach");
+            CategoryDomain mountain = new CategoryDomain(3L, "Mountain");
             CategoryDomain disney = new CategoryDomain(4L, "Disney");
             CategoryDomain india = new CategoryDomain(5L, "India");
-            List<CategoryDomain> categoryDomainList = new ArrayList<CategoryDomain>() {{
+
+            List<CategoryDomain> categoryDomainList1 = new ArrayList<CategoryDomain>() {{
                 add(india);
                 add(forest);
                 add(beach);
                 add(mountain);
                 add(disney);
             }};
+            List<CategoryDomain> categoryDomainList2 = new ArrayList<CategoryDomain>() {{
+                add(india);
+                add(forest);
+//                add(beach);
+//                add(mountain);
+//                add(disney);
+            }};
+            List<CategoryDomain> categoryDomainList3 = new ArrayList<CategoryDomain>() {{
+                add(india);
+//                add(forest);
+//                add(beach);
+//                add(mountain);
+//                add(disney);
+            }};
+            List<CategoryDomain> categoryDomainList4 = new ArrayList<CategoryDomain>() {{
+                add(india);
+//                add(forest);
+                add(beach);
+                add(mountain);
+//                add(disney);
+            }};
             // save a couple of categories
-            categoryService.getCategoryDao().saveAllCategories(categoryDomainList);
-            System.out.println(categoryService.findCategoryByCategoryId(1));
+//            categoryService.getCategoryDao().saveAllCategories(categoryDomainList1);
+//            System.out.println(categoryService.findCategoryByCategoryId(1));
 
+            UserDomain userDomain1 = new UserDomain("1234", categoryDomainList1);
+            UserDomain userDomain2 = new UserDomain("1235", categoryDomainList2);
+            UserDomain userDomain3 = new UserDomain("1236", categoryDomainList3);
+            UserDomain userDomain4 = new UserDomain("1237", categoryDomainList4);
+            UserDao userDao = userService.getUserDao();
+            userDao.saveUser(userDomain1);
+            userDao.saveUser(userDomain2);
+            userDao.saveUser(userDomain3);
+            userDao.saveUser(userDomain4);
             /*categoryService.save(new CategoryDomain(1L, "Forest", new ArrayList<UserDomain>() {{
                 add(new UserDomain("1234"));
                 add(new UserDomain("1235"));
