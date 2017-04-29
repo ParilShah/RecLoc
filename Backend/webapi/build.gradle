@@ -1,3 +1,7 @@
+//wrapper{
+//    gradleVersion = '3.5'
+//}
+
 buildscript {
     ext {
         springBootVersion = '2.0.0.BUILD-SNAPSHOT'
