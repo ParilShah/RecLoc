@@ -1,0 +1,8 @@
+
+
+
+1.) First Time User start app
+--> Fetch Categories --> SubmitUser --> Fetch All Location (FetchCategoriesByIds)
+
+2.) Open Application After regis.
+--> Fetch All Location (FetchCategoriesByIds)
