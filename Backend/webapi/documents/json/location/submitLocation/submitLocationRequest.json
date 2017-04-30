@@ -12,17 +12,15 @@
         "city": "",
         "state": "",
         "country": "",
-        "zip": ""
+        "zip": "",
+        "latitude": "",
+        "longitude": ""
       },
       "tags": [
         "Mountains",
         "WaterFall",
         "Trees"
       ]
-    },
-    "photoDetails": {
-      "fileName": "",
-      "file": ""
     }
   }
 }
