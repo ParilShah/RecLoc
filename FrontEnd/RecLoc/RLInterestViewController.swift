@@ -11,38 +11,14 @@ import Alamofire
 
 class RLInterestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var tableView:UITableView?
-    var items: [String] = ["Mountains", "Beach", "Forest", "lake","City"]
-    var selectedRows:[Int] = []
+    var items = [Categories]()
+    var selectedRows = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.selectedRows = Array(repeating:0, count:items.count)
         self.tableView!.tableFooterView = UIView()
-
-        // Testing
-//        Alamofire.request("http://localhost:8080/greeting?name=paril").responseJSON { response in
-//            debugPrint(response)
-//            
-//            if let json = response.result.value {
-//                print("JSON: \(json)")
-//            }
-//        }
-        
-        // TODO: Testing POST
-    
-//        Alamofire.request("http://localhost:8080/searchCategory", method: .post, parameters: ["searchCategoryRequest":["categoryName": "bar", "deviceId":"3232-2323123-2313123"]],encoding: JSONEncoding.default, headers: nil).responseJSON {
-//            response in
-//            switch response.result {
-//            case .success:
-//                print(response)
-//                
-//                break
-//            case .failure(let error):
-//                
-//                print(error)
-//            }
-//        }
+        fetchCategories()
         
     }
 
@@ -50,6 +26,46 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: CUSTOM METHODS
+    @IBAction func onPressDone(_ sender: Any?){
+        let arry = getSelectedCategoriesArray()
+        let dic:[String: Any] = ["deviceId":"1042323", "category":arry]
+        let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/user/submitUser", paramerts:dic, block:{(response:AnyObject)in
+            let s = response as! [String:Any]
+            let code = s["responseCode"] as! Int
+            if code == 200{
+                UserDefaults.standard.set(arry, forKey: "Categories") //setObject
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let controller = storyboard.instantiateViewController(withIdentifier: "RLTab")
+                self.present(controller, animated: true, completion: nil)
+            }
+        })
+        rlInterestVM.submitUser()
+    }
+    
+    func fetchCategories(){
+        let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/category/fetchAllCategories", paramerts:nil, block:{(response:AnyObject)in
+            self.items = response as! [Categories]
+            self.selectedRows = Array(repeating:0, count:self.items.count)
+            self.tableView?.reloadData()
+        })
+        rlInterestVM.fetchCategories()
+    }
+    
+    func getSelectedCategoriesArray()->[AnyObject]{
+        let arryIndexPath = self.tableView?.indexPathsForSelectedRows
+        var arryForCategories = [AnyObject]()
+        for i in arryIndexPath!{
+            let selectedCat = self.items[i.row] as Categories
+            let dict:[String:AnyObject] = ["categoryId":selectedCat.categoryId as AnyObject, "categoryName":selectedCat.categoryName as AnyObject]
+            arryForCategories.append(dict as AnyObject)
+        }
+        return arryForCategories
+    }
+}
+
+extension RLInterestViewController {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -61,7 +77,8 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = (self.tableView?.dequeueReusableCell(withIdentifier: "interestcell"))!
-        cell.textLabel?.text = items[indexPath.row]
+        let categories:Categories = items[indexPath.row] as Categories
+        cell.textLabel?.text = categories.categoryName
         return cell
     }
     
@@ -70,26 +87,10 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         self.selectedRows[indexPath.row] = 1;
         
     }
-
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
         self.selectedRows[indexPath.row] = 0;
         
     }
-    
-    @IBAction func onPressDone(_ sender: Any?){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "RLTab")
-        self.present(controller, animated: true, completion: nil)
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

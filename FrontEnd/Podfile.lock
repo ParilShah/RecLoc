@@ -15,12 +15,9 @@ PODS:
     - GoogleMaps/Base (= 2.2.0)
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
-  - Material/Capture (2.6.3):
-    - Material/Core
   - Material/Core (2.6.3)
-  - Material/Photos (2.6.3):
-    - Material/Core
   - Sharaku (1.0.2)
+  - SwiftyJSON (3.1.4)
   - TagListView (1.1.0)
 
 DEPENDENCIES:
@@ -30,9 +27,8 @@ DEPENDENCIES:
   - GooglePlacePicker
   - GooglePlaces
   - Material (~> 2.0)
-  - Material/Capture (~> 2.0)
-  - Material/Photos (~> 2.0)
   - Sharaku
+  - SwiftyJSON
   - TagListView (~> 1.0)
 
 SPEC CHECKSUMS:
@@ -44,8 +40,9 @@ SPEC CHECKSUMS:
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TagListView: d0267a71393f3c73db5c9ea2f979ac1125fcab56
 
-PODFILE CHECKSUM: 09c54c208c61dc18a3d6e6fcc882973b6cedf425
+PODFILE CHECKSUM: c03bc2f1615033a3647fa633c0ac277852aca67e
 
 COCOAPODS: 1.2.0

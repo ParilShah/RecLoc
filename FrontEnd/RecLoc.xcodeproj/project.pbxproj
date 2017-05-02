@@ -32,6 +32,9 @@
 		FF9CB1131E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */; };
 		FF9CB1141E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */; };
 		FF9CB1151E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */; };
+		FFBB347E1EB816BA0074B484 /* RLNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFBB347D1EB816BA0074B484 /* RLNetworking.swift */; };
+		FFD12DD61EB8643D006B6F4F /* RLInterestVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD12DD51EB8643D006B6F4F /* RLInterestVM.swift */; };
+		FFD12DD91EB867D7006B6F4F /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD12DD81EB867D7006B6F4F /* Categories.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLInterestViewController.swift; sourceTree = "<group>"; };
 		FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLTabViewController.swift; sourceTree = "<group>"; };
 		FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlacesCollectionViewController.swift; sourceTree = "<group>"; };
+		FFBB347D1EB816BA0074B484 /* RLNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLNetworking.swift; sourceTree = "<group>"; };
+		FFD12DD51EB8643D006B6F4F /* RLInterestVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLInterestVM.swift; sourceTree = "<group>"; };
+		FFD12DD81EB867D7006B6F4F /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,8 +194,10 @@
 			isa = PBXGroup;
 			children = (
 				FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */,
-				FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */,
 				FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */,
+				FFD12DDC1EB87B28006B6F4F /* Interest */,
+				FFD12DD71EB86722006B6F4F /* Model */,
+				FFBB347C1EB8169C0074B484 /* Utility */,
 				FF2AEA3B1E99419F00B56429 /* Places */,
 				FF2AEA3A1E99417F00B56429 /* Capture */,
 				FF6E13181E45FE2F00207DB5 /* Main.storyboard */,
@@ -216,6 +224,31 @@
 				FF6E13361E45FE3000207DB5 /* Info.plist */,
 			);
 			path = RecLocUITests;
+			sourceTree = "<group>";
+		};
+		FFBB347C1EB8169C0074B484 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				FFBB347D1EB816BA0074B484 /* RLNetworking.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		FFD12DD71EB86722006B6F4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FFD12DD81EB867D7006B6F4F /* Categories.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		FFD12DDC1EB87B28006B6F4F /* Interest */ = {
+			isa = PBXGroup;
+			children = (
+				FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */,
+				FFD12DD51EB8643D006B6F4F /* RLInterestVM.swift */,
+			);
+			name = Interest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,16 +537,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF9CB10B1E5C766D006E4E5C /* RLTabViewController.swift in Sources */,
+				FFD12DD91EB867D7006B6F4F /* Categories.swift in Sources */,
 				FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */,
 				FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */,
 				FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */,
 				FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */,
 				FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */,
 				FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */,
+				FFBB347E1EB816BA0074B484 /* RLNetworking.swift in Sources */,
 				FF3C3D721EA1FAC2009B6200 /* RLPhotoManipulate.m in Sources */,
 				FF9CB1131E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */,
 				FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */,
 				FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */,
+				FFD12DD61EB8643D006B6F4F /* RLInterestVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

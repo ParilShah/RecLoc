@@ -203,7 +203,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sje-2m-Fda" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Places" image="places" id="Eb5-7i-pBT"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="taM-DH-jRc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="taM-DH-jRc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -314,11 +314,28 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5uu-Sm-a0a" customClass="TagListView" customModule="TagListView">
-                                <rect key="frame" x="0.0" y="130" width="414" height="16"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="16"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.84705882349999995" green="0.26274509800000001" blue="0.08235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="06Z-rh-uAG">
-                                <rect key="frame" x="0.0" y="146" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="154" width="414" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="250" constant="128" id="rvR-R0-fiP"/>
@@ -328,7 +345,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bz-qwb" userLabel="MapView">
-                                <rect key="frame" x="0.0" y="282" width="414" height="290"/>
+                                <rect key="frame" x="0.0" y="290" width="414" height="282"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -337,7 +354,7 @@
                             <constraint firstAttribute="trailing" secondItem="S8D-LI-9AN" secondAttribute="trailing" id="3mF-w2-GET"/>
                             <constraint firstAttribute="trailing" secondItem="5uu-Sm-a0a" secondAttribute="trailing" id="4ty-Ak-bDZ"/>
                             <constraint firstItem="S8D-LI-9AN" firstAttribute="leading" secondItem="E7S-K2-Z3y" secondAttribute="leading" id="ASH-YB-fHx"/>
-                            <constraint firstItem="5uu-Sm-a0a" firstAttribute="top" secondItem="S8D-LI-9AN" secondAttribute="bottom" id="Gty-rs-skE"/>
+                            <constraint firstItem="5uu-Sm-a0a" firstAttribute="top" secondItem="S8D-LI-9AN" secondAttribute="bottom" constant="8" id="Gty-rs-skE"/>
                             <constraint firstItem="06Z-rh-uAG" firstAttribute="top" secondItem="5uu-Sm-a0a" secondAttribute="bottom" id="HfU-Fo-C7l"/>
                             <constraint firstItem="gAn-bz-qwb" firstAttribute="top" secondItem="06Z-rh-uAG" secondAttribute="bottom" constant="8" id="Ir8-KF-RYT"/>
                             <constraint firstItem="06Z-rh-uAG" firstAttribute="leading" secondItem="E7S-K2-Z3y" secondAttribute="leading" id="NbA-zE-7OC"/>
@@ -373,6 +390,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="McX-Pw-NDb">
+                                <rect key="frame" x="0.0" y="64" width="414" height="555"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wPN-4x-0Cw">
                                 <rect key="frame" x="0.0" y="627" width="414" height="60"/>
                                 <subviews>
@@ -394,19 +415,13 @@
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kjk-ZX-vXn">
                                 <rect key="frame" x="0.0" y="64" width="414" height="555"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="McX-Pw-NDb">
-                                <rect key="frame" x="0.0" y="64" width="414" height="555"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019610000005" green="0.94117647059999998" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="McX-Pw-NDb" firstAttribute="leading" secondItem="IAB-6U-kff" secondAttribute="leading" id="7Aw-V7-Zr4"/>
                             <constraint firstItem="wPN-4x-0Cw" firstAttribute="leading" secondItem="IAB-6U-kff" secondAttribute="leading" id="8Ou-4A-gIU"/>
-                            <constraint firstItem="McX-Pw-NDb" firstAttribute="height" secondItem="Kjk-ZX-vXn" secondAttribute="height" id="8j0-1g-wBQ"/>
                             <constraint firstItem="wPN-4x-0Cw" firstAttribute="top" secondItem="McX-Pw-NDb" secondAttribute="bottom" constant="8" id="9Nq-T5-lON"/>
                             <constraint firstAttribute="trailing" secondItem="wPN-4x-0Cw" secondAttribute="trailing" id="A5J-xb-bFN"/>
-                            <constraint firstItem="McX-Pw-NDb" firstAttribute="width" secondItem="Kjk-ZX-vXn" secondAttribute="width" id="TR7-Ns-QP0"/>
                             <constraint firstItem="wPN-4x-0Cw" firstAttribute="top" secondItem="Kjk-ZX-vXn" secondAttribute="bottom" constant="8" id="XIx-g0-7or"/>
                             <constraint firstItem="Kjk-ZX-vXn" firstAttribute="leading" secondItem="IAB-6U-kff" secondAttribute="leading" id="b0s-Fi-scJ"/>
                             <constraint firstItem="zUF-fQ-Xr0" firstAttribute="top" secondItem="wPN-4x-0Cw" secondAttribute="bottom" id="eIN-Gz-2ll"/>
@@ -460,7 +475,7 @@
                                 <rect key="frame" x="0.0" y="546" width="414" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eli-0K-n3v">
-                                        <rect key="frame" x="190.66666666666666" y="23" width="33" height="30"/>
+                                        <rect key="frame" x="191" y="23" width="33" height="30"/>
                                         <state key="normal" title="EDIT"/>
                                         <connections>
                                             <action selector="editPlacePhoto" destination="ORL-iT-pUu" eventType="touchUpInside" id="SWe-ln-GmM"/>
@@ -508,7 +523,7 @@
                         <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RP9-Qu-m6S">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RP9-Qu-m6S">
                                 <rect key="frame" x="20" y="20" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="sJZ-lJ-Bsv"/>
@@ -532,22 +547,31 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                        <color key="value" red="0.84705882349999995" green="0.26274509800000001" blue="0.08235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
                                         <color key="value" cocoaTouchSystemColor="lightTextColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedBorderColor">
-                                        <color key="value" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="value" red="0.91764705879999997" green="0.30196078430000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="tagHighlightedBackgroundColor">
                                         <color key="value" red="0.91764705879999997" green="0.30196078430000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.91764705879999997" green="0.30196078430000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -607,7 +631,7 @@
         <scene sceneID="ZeO-XC-EHn">
             <objects>
                 <collectionViewController id="S1R-4x-fLe" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="xhx-Um-2tm">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xhx-Um-2tm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -644,7 +668,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Bg-YI-hay" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Capture" image="camera" id="W9a-Xy-I0p"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uc7-ek-HYI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uc7-ek-HYI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -663,7 +687,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4A-1J-xo3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Photos" image="myphoto" id="qnX-Mh-Vti"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ibQ-6Q-1dC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ibQ-6Q-1dC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
