@@ -14,18 +14,14 @@ public class FileSaveService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileSaveService.class);
 
-    public static String saveFileToLocal(byte[] fileBytes, String fileName) {
-        String filePath = getFilePath();
+    public static boolean saveFileToLocal(byte[] fileBytes, String fileName, String filePath) {
+        if (fileBytes == null) return false;
         try {
-            FileUtils.writeByteArrayToFile(new File(filePath), fileBytes);
+            FileUtils.writeByteArrayToFile(new File(filePath + File.pathSeparator + filePath), fileBytes);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return filePath;
-    }
-
-    private static String getFilePath() {
-        return "D:/Rushi/Paril/images/try1";
+        return false;
     }
 }

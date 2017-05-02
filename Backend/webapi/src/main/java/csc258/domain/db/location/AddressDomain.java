@@ -2,7 +2,6 @@ package csc258.domain.db.location;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,7 +9,7 @@ import javax.persistence.Id;
 /**
  * Created by desair4 on 4/24/2017.
  */
-@Entity(name = "Address")
+//@Entity(name = "Address")
 public class AddressDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

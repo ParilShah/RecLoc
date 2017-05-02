@@ -38,6 +38,14 @@ public class CategoryDao {
         return categoryRepository.findByCategoryIdIsIn(list).parallelStream().collect(Collectors.toList());
     }
 
+    public List<CategoryDomain> findByCategoryNameIn(List<String> categoryNamesList) {
+        return categoryRepository.findByCategoryNameIn(categoryNamesList).parallelStream().collect(Collectors.toList());
+    }
+
+    public CategoryDomain saveCategory(CategoryDomain categoryDomain) {
+        return categoryRepository.save(categoryDomain);
+    }
+
     public void saveAllCategories(List<CategoryDomain> categoryDomain) {
         categoryRepository.save(categoryDomain);
     }

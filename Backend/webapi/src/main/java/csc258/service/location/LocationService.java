@@ -1,9 +1,14 @@
 package csc258.service.location;
 
+import csc258.dao.CategoryDao;
 import csc258.dao.location.LocationDao;
+import csc258.domain.db.category.CategoryDomain;
+import csc258.domain.db.location.LocationDomain;
 import csc258.domain.frontend.location.submitlocation.SubmitLocationRequest;
 import csc258.domain.frontend.photo.PhotoDetails;
+import csc258.domain.frontend.user.User;
 import csc258.mappers.location.LocationMapper;
+import csc258.mappers.user.UserMapper;
 import csc258.service.file.FileSaveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by desair4 on 4/24/2017.
@@ -21,32 +30,86 @@ public class LocationService {
     @Autowired
     private LocationDao locationDao;
 
+    @Autowired
+    private CategoryDao categoryDao;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationService.class);
 
     public boolean saveLocation(SubmitLocationRequest submitLocationRequest) {
-//        create image file
-        boolean isPhotoSaveSuccessful = savePhoto(submitLocationRequest);
 
+        //TODO what to do if photo save is not successful
+        boolean isPhotoSaveSuccessful = savePhoto(submitLocationRequest);
+        List<CategoryDomain> categoryDomainList = categoryDao.findByCategoryNameIn(submitLocationRequest.getLocation().getLocationDetails().getTags());
+        LocationDomain locationDomain = LocationMapper.mapLocationFrontendToBackend(submitLocationRequest.getLocation());
+        locationDomain.setUserDomains(UserMapper.mapUserListFrontendToBackend(new ArrayList<User>() {{
+            add(submitLocationRequest.getUser());
+        }}));
         //save location to db
         try {
-            locationDao.saveLocation(LocationMapper.mapLocationFrontendToBackend(submitLocationRequest.getLocation()));
+            locationDomain.setCategoryDomains(categoryDomainList);
+            locationDao.saveLocation(locationDomain);
+            return true;
         } catch (Exception e) {
             LOGGER.error("Location Save failed", e);
         }
         return false;
     }
 
+    public void findLocations() {
+
+    }
+
     private boolean savePhoto(SubmitLocationRequest submitLocationRequest) {
         PhotoDetails photoDetails = submitLocationRequest.getLocation().getPhotoDetails();
+        if (photoDetails == null) return true;
         byte[] fileBytes = null;
         try {
-            fileBytes = photoDetails.getFile().getBytes();
-            FileSaveService.saveFileToLocal(fileBytes, photoDetails.getFileName());
+            fileBytes = photoDetails.getFile() != null ? photoDetails.getFile().getBytes() : null;
+            List<String> tempList = getFilePathAndFileName(photoDetails);
+            FileSaveService.saveFileToLocal(fileBytes, tempList.get(0), tempList.get(1));
+            photoDetails.setFileName(tempList.get(0));
             return true;
         } catch (IOException e) {
             e.printStackTrace();
             LOGGER.error("Error obtaining file bytes", e);
         }
         return false;
+    }
+
+    private List<String> getFilePathAndFileName(PhotoDetails photoDetails) {
+        List<String> list = new LinkedList<>();
+        list.add(getFileName(photoDetails));
+        list.add(getFilePath(photoDetails));
+        return list;
+    }
+
+    private String getFilePath(PhotoDetails photoDetails) {
+        String basePath = System.getProperty("fileBasePath");
+        if (photoDetails.getFilePath() == null) {
+            return basePath + UUID.randomUUID().toString();
+        } else {
+            return basePath + photoDetails.getFilePath();
+        }
+    }
+
+    private String getFileName(PhotoDetails photoDetails) {
+        if (photoDetails.getFileName() == null) {
+            return getRandomFileName();
+        } else {
+            return photoDetails.getFileName();
+        }
+    }
+
+    private String getRandomFileName() {
+        return UUID.randomUUID().toString();
+    }
+
+
+    public LocationDao getLocationDao() {
+        return locationDao;
+    }
+
+    public void setLocationDao(LocationDao locationDao) {
+        this.locationDao = locationDao;
     }
 }

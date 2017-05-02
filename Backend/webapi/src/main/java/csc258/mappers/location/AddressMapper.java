@@ -9,6 +9,7 @@ import csc258.domain.frontend.location.Address;
 public class AddressMapper {
 
     public static Address mapAddressBackendToFrontend(AddressDomain addressDomain) {
+        if (addressDomain == null) return null;
         return new Address(addressDomain.getAddressLine1(), addressDomain.getAddressLine2(), addressDomain.getCity(), addressDomain.getState(), addressDomain.getCountry(), addressDomain.getZip());
     }
 

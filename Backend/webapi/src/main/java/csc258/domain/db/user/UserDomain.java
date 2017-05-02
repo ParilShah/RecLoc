@@ -1,6 +1,7 @@
 package csc258.domain.db.user;
 
 import csc258.domain.db.category.CategoryDomain;
+import csc258.domain.db.location.LocationDomain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -18,7 +19,7 @@ public class UserDomain implements Serializable {
     private String deviceId;
 
     //        @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userDomains")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "user_category", joinColumns = @JoinColumn(name = "device_Id",
             referencedColumnName = "deviceId"
     ),
@@ -26,6 +27,11 @@ public class UserDomain implements Serializable {
                     referencedColumnName = "categoryId"
             ))
     private List<CategoryDomain> categoryDomains;
+
+    @ManyToMany(
+//            cascade = CascadeType.ALL,
+            mappedBy = "userDomains", fetch = FetchType.LAZY)
+    private List<LocationDomain> locationDomains;
 
     public UserDomain() {
     }

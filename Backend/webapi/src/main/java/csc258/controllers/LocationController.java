@@ -26,7 +26,7 @@ public class LocationController {
     private LocationService locationService;
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationController.class);
 
-    @RequestMapping(value = "/submitLocation", method = RequestMethod.GET)
+    @RequestMapping(value = "/submitLocation", method = RequestMethod.POST)
     public ResponseDetail submitLocation(@RequestBody SubmitLocationRequest submitLocationRequest, HttpServletRequest request, HttpServletResponse response) {
         try {
             if (locationService.saveLocation(submitLocationRequest)) {

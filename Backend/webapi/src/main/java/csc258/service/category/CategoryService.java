@@ -36,6 +36,15 @@ public class CategoryService {
         return new FetchCategoryResponse(new ResponseDetail(200L, "Fetch All Categories Success"), categoryList);
     }
 
+    public boolean saveCategory(Category category) {
+        try {
+            categoryDao.saveCategory(CategoryMapper.mapCategoryFrontendToBackend(category));
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
+    }
+
     public Category findCategoryByCategoryId(long categoryId) {
         return CategoryMapper.mapCategoryBackendToFrontend(categoryDao.findCategoryByCategoryId(categoryId));
     }

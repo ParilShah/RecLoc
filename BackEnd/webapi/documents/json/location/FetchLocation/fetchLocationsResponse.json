@@ -15,9 +15,9 @@
     "tags": [
       "Mountains",
       "WaterFall",
-      "Trees"]
+      "Trees"
+    ]
   },
-
   {
     "locationName": "Florida",
     "locationDescription": "Awesome Weather.",
@@ -33,7 +33,7 @@
     },
     "tags": [
       "Beach",
-      "sea"]
+      "sea"
+    ]
   }
-
 ]

@@ -20,5 +20,7 @@ public interface ICategoryRepository extends CrudRepository<CategoryDomain, Long
 
     Collection<CategoryDomain> findByCategoryIdIsIn(Collection<Long> categoryId);
 
+    Collection<CategoryDomain> findByCategoryNameIn(Collection<String> categoryNames);
+
 //    void saveAll(List<CategoryDomain> categoryDomain);
 }

@@ -23,11 +23,15 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
+//    private CategoryService categoryService;
 
     @RequestMapping(value = "/submitUser", method = RequestMethod.POST)
     public ResponseDetail category(@RequestBody SubmitUserRequest submitUserRequest, HttpServletRequest request, HttpServletResponse response) {
         ResponseDetail responseDetail = null;
         try {
+            /*if (submitUserRequest.getCategory() != null) {
+                categoryService.saveAllCategories(submitUserRequest.getCategory());
+            }*/
             responseDetail = userService.saveUser(submitUserRequest.getDeviceId(), submitUserRequest.getCategory());
         } catch (SaveUserFailedException e) {
             return new ResponseDetail(401L);
@@ -62,6 +66,15 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
+//    public CategoryService getCategoryService() {
+//        return categoryService;
+//    }
+//
+//    @Autowired
+//    public void setCategoryService(CategoryService categoryService) {
+//        this.categoryService = categoryService;
+//    }
 
     @PostConstruct
     void afterPropertiesSet() {

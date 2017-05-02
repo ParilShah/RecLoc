@@ -1,4 +1,10 @@
 {
-  "CountryId":[1],
-  "CategoryId": [2,3,5]
+  "CountryId": [
+    1
+  ],
+  "CategoryId": [
+    2,
+    3,
+    5
+  ]
 }

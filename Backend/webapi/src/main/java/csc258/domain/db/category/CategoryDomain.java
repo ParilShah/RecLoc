@@ -1,5 +1,6 @@
 package csc258.domain.db.category;
 
+import csc258.domain.db.location.LocationDomain;
 import csc258.domain.db.user.UserDomain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -26,6 +27,11 @@ public class CategoryDomain {
 //    @ManyToMany
 //    @JoinTable(name = "user_category", joinColumns = @JoinColumn(name = "categoryId"), inverseJoinColumns = @JoinColumn(name = "deviceId"))
     private List<UserDomain> userDomains;
+
+    @ManyToMany(
+//            cascade = CascadeType.ALL,
+            mappedBy = "categoryDomains", fetch = FetchType.LAZY)
+    private List<LocationDomain> locationDomains;
 
     public CategoryDomain() {
     }

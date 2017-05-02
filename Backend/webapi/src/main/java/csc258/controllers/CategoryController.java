@@ -31,7 +31,7 @@ public class CategoryController {
         return categoryService.findCategoryByCategoryId(id);
     }
 
-    @RequestMapping(value = "/category/fetchCategories", method = RequestMethod.GET)
+    @RequestMapping(value = "/fetchCategories", method = RequestMethod.GET)
     public List<Category> fetchCategories(@RequestBody List<Category> categoryList, HttpServletRequest request, HttpServletResponse response) {
         return categoryService.findCategoriesByCategoryIds(categoryList);
     }
