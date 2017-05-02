@@ -1,0 +1,39 @@
+[
+  {
+    "locationName": "Yosemite",
+    "locationDescription": "Cool Place.",
+    "Address": {
+      "addressLine1": "",
+      "addressLine2": "",
+      "city": "",
+      "state": "",
+      "country": "",
+      "zip": "",
+      "latitude": "",
+      "longitude": ""
+    },
+    "tags": [
+      "Mountains",
+      "WaterFall",
+      "Trees"]
+  },
+
+  {
+    "locationName": "Florida",
+    "locationDescription": "Awesome Weather.",
+    "Address": {
+      "addressLine1": "",
+      "addressLine2": "",
+      "city": "",
+      "state": "",
+      "country": "",
+      "zip": "",
+      "latitude": "",
+      "longitude": ""
+    },
+    "tags": [
+      "Beach",
+      "sea"]
+  }
+
+]

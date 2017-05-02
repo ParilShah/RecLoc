@@ -1,0 +1,18 @@
+
+1.) FetchLocation : This API fetches all the locations on basis of User's Input from the Search Screen. The search
+                    criteria are below,
+                     a.) A country Selection,
+                     b.) A Category Selection.
+    Request JSON : FetchLocation/fetchLocationsRequest.json
+    Response JSON : FetchLocation/fetchLocationsResponse.json
+
+2.) FetchMyLocation : This API fetches all the locations Which are uploaded by the current user.
+
+    Request JSON : FetchMyLocation/fetchMyLocation.json
+    Response JSON : FetchMyLocation/fetchMyLocationResponse.json
+
+
+3.) FetchMyLocation : This is a multipart request. Using this API, a user can register new location along with
+                      its photo.
+    Request JSON : submitLocation/submitLocationRequest.json
+    Response JSON : submitLocation/submitLocationResponse.json
