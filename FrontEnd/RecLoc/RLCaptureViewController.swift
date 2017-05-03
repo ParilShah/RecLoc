@@ -27,11 +27,17 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if(segment.selectedSegmentIndex == 0){
-            prepareCameraController()
-        }else{
-            prepareGallery()
-        }
+//        if(segment.selectedSegmentIndex == 0){
+//            prepareCameraController()
+//        }else{
+//            prepareGallery()
+//        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        // Do any additional setup after loading the view.
+        prepareCameraController()
     }
     
     override func didReceiveMemoryWarning() {

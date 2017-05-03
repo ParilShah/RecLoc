@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8FD208F6F0716EF4E645E6B9C4B274AC'
+               BlueprintIdentifier = '3A5897FCD2621886E495618AB901B1EF'
                BlueprintName = 'Material-com.cosmicmind.material.fonts'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'com.cosmicmind.material.fonts.bundle'>

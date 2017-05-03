@@ -26,14 +26,15 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     @IBOutlet weak var descriptionTxtView:UITextView!
     @IBOutlet weak var locationLbl:UILabel!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tagListView.delegate = self
         tagListView.alignment = .left // possible values are .Left, .Center, and .Right
+        //tagListView.borderColor = UIColor(colorLiteralRed: 234, green: 77, blue: 58, alpha: 1.0)
+        
         uploadButton = UIBarButtonItem.init(title: "Upload", style: .plain, target: self, action: #selector(pressUpload(Sender:)))
+        
         self.navigationItem.rightBarButtonItem = uploadButton
         self.placeImageView!.image = placeImage
         
@@ -45,24 +46,29 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }else{
-//            let getLat: CLLocationDegrees = (self.locationFromGalleryImage?.latitude)!
-//            let getLon: CLLocationDegrees = (self.locationFromGalleryImage?.longitude)!
-//            let getMovedMapCenter: CLLocation =  CLLocation(latitude: getLat, longitude: getLon)
-//            
-//            CLGeocoder().reverseGeocodeLocation(getMovedMapCenter, completionHandler: {(placemarks, error)-> Void in
-//                
-//                if (error != nil) {
-//                    print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
-//                    return
-//                }
-//                
-//                if (placemarks?.count)! > 0 {
-//                    let pm = placemarks?.first
-//                    self.displayLocationInfo(placemark: pm!)
-//                } else {
-//                    print("Problem with the data received from geocoder")
-//                }
-//            })
+            if (self.locationFromGalleryImage?.latitude) != nil{
+                let getLat: CLLocationDegrees = (self.locationFromGalleryImage?.latitude)!
+                let getLon: CLLocationDegrees = (self.locationFromGalleryImage?.longitude)!
+                let getMovedMapCenter: CLLocation =  CLLocation(latitude: getLat, longitude: getLon)
+                
+                CLGeocoder().reverseGeocodeLocation(getMovedMapCenter, completionHandler: {(placemarks, error)-> Void in
+                    
+                    if (error != nil) {
+                        print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                        return
+                    }
+                    
+                    if (placemarks?.count)! > 0 {
+                        let pm = placemarks?.first
+                        self.displayLocationInfo(placemark: pm!)
+                    } else {
+                        print("Problem with the data received from geocoder")
+                    }
+                })
+            }else{
+                self.locationLbl.text = "United States"
+            }
+            
         }
         
         let instanceOfCustomObject: RLPhotoManipulate = RLPhotoManipulate.init(block: {(response: Any?, error:Error?)in
@@ -117,12 +123,10 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     
     // MARK: Custom Methods
     func displayLocationInfo(placemark: CLPlacemark) {
-        
-            //stop updating location to save battery life
-            locationManager.stopUpdatingLocation()
-            print(placemark.addressDictionary!)
-            self.locationLbl.text = (placemark.name!+","+placemark.country!)
-        
+        //stop updating location to save battery life
+        locationManager.stopUpdatingLocation()
+        print(placemark.addressDictionary!)
+        self.locationLbl.text = (placemark.name!+","+placemark.country!)
     }
     
     // MARK: UITextViewDelegate
