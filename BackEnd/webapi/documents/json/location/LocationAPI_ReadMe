@@ -16,3 +16,8 @@
                       its photo.
     Request JSON : submitLocation/submitLocationRequest.json
     Response JSON : submitLocation/submitLocationResponse.json
+
+4.) FetchLocationsByCategoriesById: To fetch locations using categories (In which user is interested.)
+
+    Request JSON : FetchLocationByCategoriesId/ fetchLocationsByCategoriesByIdRequest.json
+    Response JSON : FetchLocationByCategoriesId/ fetchLocationsByCategoriesByIdResponse.json
