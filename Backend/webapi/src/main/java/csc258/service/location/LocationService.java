@@ -1,22 +1,23 @@
 package csc258.service.location;
 
 import csc258.dao.CategoryDao;
+import csc258.dao.UserDao;
 import csc258.dao.location.LocationDao;
 import csc258.domain.db.category.CategoryDomain;
 import csc258.domain.db.location.LocationDomain;
+import csc258.domain.frontend.location.Location;
+import csc258.domain.frontend.location.fetchLocationsByCategoriesById.FetchLocationsByCategoriesByIdRequest;
 import csc258.domain.frontend.location.submitlocation.SubmitLocationRequest;
 import csc258.domain.frontend.photo.PhotoDetails;
-import csc258.domain.frontend.user.User;
+import csc258.mappers.category.CategoryMapper;
+import csc258.mappers.location.AddressMapper;
 import csc258.mappers.location.LocationMapper;
 import csc258.mappers.user.UserMapper;
-import csc258.service.file.FileSaveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -26,12 +27,12 @@ import java.util.UUID;
  */
 @Service
 public class LocationService {
-
     @Autowired
     private LocationDao locationDao;
-
     @Autowired
     private CategoryDao categoryDao;
+    @Autowired
+    private UserDao userDao;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LocationService.class);
 
@@ -41,9 +42,8 @@ public class LocationService {
         boolean isPhotoSaveSuccessful = savePhoto(submitLocationRequest);
         List<CategoryDomain> categoryDomainList = categoryDao.findByCategoryNameIn(submitLocationRequest.getLocation().getLocationDetails().getTags());
         LocationDomain locationDomain = LocationMapper.mapLocationFrontendToBackend(submitLocationRequest.getLocation());
-        locationDomain.setUserDomains(UserMapper.mapUserListFrontendToBackend(new ArrayList<User>() {{
-            add(submitLocationRequest.getUser());
-        }}));
+        locationDomain.setUserDomain(UserMapper.mapUserFrontendToBackend(submitLocationRequest.getUser()));
+        locationDomain.setAddress(AddressMapper.mapAddressFrontendToBackend(submitLocationRequest.getLocation().getLocationDetails().getAddress()));
         //save location to db
         try {
             locationDomain.setCategoryDomains(categoryDomainList);
@@ -59,20 +59,27 @@ public class LocationService {
 
     }
 
+    public List<Location> fetchLocationsByCategoriesById(FetchLocationsByCategoriesByIdRequest fetchLocationsByCategoriesByIdRequest) {
+        return LocationMapper.mapLocationListBackendToFrontend(
+                locationDao.fetchLocationsByCategoriesById(
+                        CategoryMapper.mapCategoryListFrontendToBackend(
+                                fetchLocationsByCategoriesByIdRequest.getCategory())));
+    }
+
     private boolean savePhoto(SubmitLocationRequest submitLocationRequest) {
-        PhotoDetails photoDetails = submitLocationRequest.getLocation().getPhotoDetails();
-        if (photoDetails == null) return true;
-        byte[] fileBytes = null;
-        try {
-            fileBytes = photoDetails.getFile() != null ? photoDetails.getFile().getBytes() : null;
-            List<String> tempList = getFilePathAndFileName(photoDetails);
-            FileSaveService.saveFileToLocal(fileBytes, tempList.get(0), tempList.get(1));
-            photoDetails.setFileName(tempList.get(0));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            LOGGER.error("Error obtaining file bytes", e);
-        }
+//        PhotoDetails photoDetails = submitLocationRequest.getLocation().getPhotoDetails();
+//        if (photoDetails == null) return true;
+//        byte[] fileBytes = null;
+//        try {
+//            fileBytes = photoDetails.getFile() != null ? photoDetails.getFile().getBytes() : null;
+//            List<String> tempList = getFilePathAndFileName(photoDetails);
+//            FileSaveService.saveFileToLocal(fileBytes, tempList.get(0), tempList.get(1));
+//            photoDetails.setFileName(tempList.get(0));
+//            return true;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            LOGGER.error("Error obtaining file bytes", e);
+//        }
         return false;
     }
 

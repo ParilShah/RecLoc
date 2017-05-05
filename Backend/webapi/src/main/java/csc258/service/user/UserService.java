@@ -44,8 +44,10 @@ public class UserService {
         CollectionUtils.addAll(userDomainList, userDomainIterable);
         return UserMapper.mapUserListBackendToFrontend(userDomainList);
 //        } catch (Exception e) {
+//            e.printStackTrace();
 //            return new ResponseDetail(401);
 //        }
+//        return null;
 //        return new ResponseDetail(200);
     }
 
@@ -54,6 +56,15 @@ public class UserService {
                 .mapUserBackendToFrontend(userDao
                         .findUserById(UserMapper
                                 .mapUserFrontendToBackend(user)));
+    }
+
+    public User fetchUserLocations(User user) {
+        UserDomain userDomain = userDao
+                .findUserById(UserMapper
+                        .mapUserFrontendToBackend(user));
+        userDomain.getLocationDomains();    //to trigger location query
+        return UserMapper
+                .mapUserBackendToFrontend(userDomain);
     }
 
     public UserDao getUserDao() {

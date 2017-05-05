@@ -33,12 +33,46 @@ public class LocationDetails implements Serializable {
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 8540902599583056313L;
+    private final static long serialVersionUID = 8872444609212129281L;
 
     /**
      * No args constructor for use in serialization
      */
     public LocationDetails() {
+    }
+
+    /**
+     * @param locationDescription
+     * @param locationName
+     */
+    public LocationDetails(String locationName, String locationDescription) {
+        super();
+        this.locationName = locationName;
+        this.locationDescription = locationDescription;
+    }
+
+    /**
+     * @param address
+     * @param locationDescription
+     * @param locationName
+     */
+    public LocationDetails(String locationName, String locationDescription, Address address) {
+        super();
+        this.locationName = locationName;
+        this.locationDescription = locationDescription;
+        this.address = address;
+    }
+
+    /**
+     * @param tags
+     * @param locationDescription
+     * @param locationName
+     */
+    public LocationDetails(String locationName, String locationDescription, List<String> tags) {
+        super();
+        this.locationName = locationName;
+        this.locationDescription = locationDescription;
+        this.tags = tags;
     }
 
     /**

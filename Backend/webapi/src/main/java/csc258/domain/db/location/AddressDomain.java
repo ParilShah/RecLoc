@@ -2,6 +2,7 @@ package csc258.domain.db.location;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 /**
  * Created by desair4 on 4/24/2017.
  */
-//@Entity(name = "Address")
+@Entity(name = "Address")
 public class AddressDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -20,6 +21,9 @@ public class AddressDomain {
     private String state;
     private String country;
     private String zip;
+
+    public AddressDomain() {
+    }
 
     public AddressDomain(String city, String state, String country) {
         this.city = city;
@@ -102,41 +106,21 @@ public class AddressDomain {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AddressDomain)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         AddressDomain that = (AddressDomain) o;
 
-        if (getId() != that.getId()) return false;
-        if (!getAddressLine1().equals(that.getAddressLine1())) return false;
-        if (getAddressLine2() != null ? !getAddressLine2().equals(that.getAddressLine2()) : that.getAddressLine2() != null)
-            return false;
-        if (getCity() != null ? !getCity().equals(that.getCity()) : that.getCity() != null) return false;
-        if (getState() != null ? !getState().equals(that.getState()) : that.getState() != null) return false;
-        if (getCountry() != null ? !getCountry().equals(that.getCountry()) : that.getCountry() != null) return false;
-        return getZip() != null ? getZip().equals(that.getZip()) : that.getZip() == null;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getAddressLine1().hashCode();
-        result = 31 * result + (getAddressLine2() != null ? getAddressLine2().hashCode() : 0);
-        result = 31 * result + (getCity() != null ? getCity().hashCode() : 0);
-        result = 31 * result + (getState() != null ? getState().hashCode() : 0);
-        result = 31 * result + (getCountry() != null ? getCountry().hashCode() : 0);
-        result = 31 * result + (getZip() != null ? getZip().hashCode() : 0);
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("addressLine1", addressLine1)
-                .append("addressLine2", addressLine2)
-                .append("city", city)
-                .append("state", state)
-                .append("country", country)
-                .append("zip", zip)
                 .toString();
     }
 }

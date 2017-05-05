@@ -18,7 +18,6 @@ public class UserDomain implements Serializable {
     @Id
     private String deviceId;
 
-    //        @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userDomains")
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "user_category", joinColumns = @JoinColumn(name = "device_Id",
             referencedColumnName = "deviceId"
@@ -28,9 +27,7 @@ public class UserDomain implements Serializable {
             ))
     private List<CategoryDomain> categoryDomains;
 
-    @ManyToMany(
-//            cascade = CascadeType.ALL,
-            mappedBy = "userDomains", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userDomain", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private List<LocationDomain> locationDomains;
 
     public UserDomain() {
@@ -43,6 +40,12 @@ public class UserDomain implements Serializable {
     public UserDomain(String deviceId, List<CategoryDomain> categoryDomains) {
         this.deviceId = deviceId;
         this.categoryDomains = categoryDomains;
+    }
+
+    public UserDomain(String deviceId, List<CategoryDomain> categoryDomains, List<LocationDomain> locationDomains) {
+        this.deviceId = deviceId;
+        this.categoryDomains = categoryDomains;
+        this.locationDomains = locationDomains;
     }
 
     public String getDeviceId() {
@@ -59,6 +62,14 @@ public class UserDomain implements Serializable {
 
     public void setCategoryDomains(List<CategoryDomain> categoryDomains) {
         this.categoryDomains = categoryDomains;
+    }
+
+    public List<LocationDomain> getLocationDomains() {
+        return locationDomains;
+    }
+
+    public void setLocationDomains(List<LocationDomain> locationDomains) {
+        this.locationDomains = locationDomains;
     }
 
     @Override

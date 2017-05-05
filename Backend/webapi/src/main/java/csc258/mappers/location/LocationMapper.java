@@ -14,16 +14,15 @@ public class LocationMapper {
 
     public static Location mapLocationBackendToFrontend(LocationDomain locationDomain) {
         if (locationDomain == null) return null;
-//        return new Location(new LocationDetails(
-//                locationDomain.getLocationName(),
-//                locationDomain.getLocationDescription(),
-//                AddressMapper.mapAddressBackendToFrontend(
-////                        locationDomain.getAddress()
-//                        null
-//                ),
+        return new Location(new LocationDetails(
+                locationDomain.getLocationName(),
+                locationDomain.getLocationDescription(),
+                AddressMapper.mapAddressBackendToFrontend(
+                        locationDomain.getAddress()
+                )
 //                locationDomain.getCategoryDomains()
-//        ));
-        return null;
+        ));
+//        return null;
     }
 
     public static List<Location> mapLocationListBackendToFrontend(List<LocationDomain> locationDomainList) {

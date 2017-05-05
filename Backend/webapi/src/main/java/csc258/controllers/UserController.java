@@ -2,6 +2,7 @@ package csc258.controllers;
 
 import csc258.domain.frontend.category.Category;
 import csc258.domain.frontend.common.ResponseDetail;
+import csc258.domain.frontend.location.Location;
 import csc258.domain.frontend.user.User;
 import csc258.domain.frontend.user.submituser.SubmitUserRequest;
 import csc258.exceptions.SaveUserFailedException;
@@ -56,6 +57,12 @@ public class UserController {
     public List<Category> fetchUserCategories(@PathVariable String deviceId, HttpServletRequest request, HttpServletResponse response) {
         final User user = userService.fetchUser(new User(deviceId));
         return user.getCategory();
+    }
+
+    @RequestMapping(value = "/fetchUserLocations/{deviceId}", method = RequestMethod.GET)
+    public List<Location> fetchUserLocations(@PathVariable String deviceId) {
+        final User user = userService.fetchUser(new User(deviceId));
+        return user.getLocations();
     }
 
     public UserService getUserService() {

@@ -2,7 +2,7 @@ spring:
     profiles:
 #        active: dev
     datasource:
-#            dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+            dataSourceClassName: org.h2.jdbcx.JdbcDataSource
             url: jdbc:h2:mem:RecLoc;DB_CLOSE_DELAY=-1
             databaseName:
             serverName:

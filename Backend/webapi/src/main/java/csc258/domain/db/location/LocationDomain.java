@@ -19,7 +19,9 @@ public class LocationDomain {
 
     private String locationName;
     private String locationDescription;
-//    private AddressDomain address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private AddressDomain address;
 
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "location_category", joinColumns = @JoinColumn(name = "location_Id",
@@ -30,18 +32,16 @@ public class LocationDomain {
             ))
     private List<CategoryDomain> categoryDomains;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    @JoinTable(name = "location_user", joinColumns = @JoinColumn(name = "location_Id",
-            referencedColumnName = "locationId"
-    ),
-            inverseJoinColumns = @JoinColumn(name = "device_id",
-                    referencedColumnName = "deviceId"
-            ))
-    private List<UserDomain> userDomains;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "deviceId")
+    private UserDomain userDomain;
+
+    public LocationDomain() {
+    }
 
     public LocationDomain(String locationName, AddressDomain address) {
         this.locationName = locationName;
-//        this.address = address;
+        this.address = address;
     }
 
     public LocationDomain(String locationName, String locationDescription) {
@@ -52,14 +52,14 @@ public class LocationDomain {
     public LocationDomain(String locationName, String locationDescription, AddressDomain address) {
         this.locationName = locationName;
         this.locationDescription = locationDescription;
-//        this.address = address;
+        this.address = address;
     }
 
     public LocationDomain(String locationName, String locationDescription, AddressDomain address, List<CategoryDomain> categoryDomains) {
         this.locationName = locationName;
         this.locationDescription = locationDescription;
-//        this.address = address;
-//        this.categoryDomains = categoryDomains;
+        this.address = address;
+        this.categoryDomains = categoryDomains;
     }
 
     public String getLocationName() {
@@ -78,14 +78,6 @@ public class LocationDomain {
         this.locationDescription = locationDescription;
     }
 
-//    public AddressDomain getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(AddressDomain address) {
-//        this.address = address;
-//    }
-
     public int getLocationId() {
         return locationId;
     }
@@ -102,12 +94,20 @@ public class LocationDomain {
         this.categoryDomains = categoryDomains;
     }
 
-    public List<UserDomain> getUserDomains() {
-        return userDomains;
+    public UserDomain getUserDomain() {
+        return userDomain;
     }
 
-    public void setUserDomains(List<UserDomain> userDomains) {
-        this.userDomains = userDomains;
+    public void setUserDomain(UserDomain userDomain) {
+        this.userDomain = userDomain;
+    }
+
+    public AddressDomain getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDomain address) {
+        this.address = address;
     }
 
     @Override

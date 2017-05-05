@@ -28,7 +28,7 @@ public class SubmitLocationRequest implements Serializable {
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -7132173029696519102L;
+    private final static long serialVersionUID = 5148508120706511082L;
 
     /**
      * No args constructor for use in serialization

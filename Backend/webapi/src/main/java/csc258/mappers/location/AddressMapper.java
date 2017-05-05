@@ -10,10 +10,16 @@ public class AddressMapper {
 
     public static Address mapAddressBackendToFrontend(AddressDomain addressDomain) {
         if (addressDomain == null) return null;
-        return new Address(addressDomain.getAddressLine1(), addressDomain.getAddressLine2(), addressDomain.getCity(), addressDomain.getState(), addressDomain.getCountry(), addressDomain.getZip());
+        return new Address(addressDomain.getAddressLine1(),
+                addressDomain.getAddressLine2(),
+                addressDomain.getCity(),
+                addressDomain.getState(),
+                addressDomain.getCountry(),
+                addressDomain.getZip());
     }
 
     public static AddressDomain mapAddressFrontendToBackend(Address address) {
+        if (address == null) return null;
         return new AddressDomain(address.getAddressLine1(), address.getAddressLine2(), address.getCity(), address.getState(), address.getCountry(), address.getZip());
     }
 }

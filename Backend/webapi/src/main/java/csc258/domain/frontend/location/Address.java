@@ -17,7 +17,9 @@ import java.util.Map;
         "city",
         "state",
         "country",
-        "zip"
+        "zip",
+        "latitude",
+        "longitude"
 })
 public class Address implements Serializable {
 
@@ -33,15 +35,41 @@ public class Address implements Serializable {
     private String country;
     @JsonProperty("zip")
     private String zip;
+    @JsonProperty("latitude")
+    private String latitude;
+    @JsonProperty("longitude")
+    private String longitude;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 3517218394550731004L;
+    private final static long serialVersionUID = -6419435328891464869L;
 
     /**
      * No args constructor for use in serialization
      */
     public Address() {
+    }
+
+    /**
+     * @param zip
+     * @param state
+     * @param longitude
+     * @param latitude
+     * @param addressLine2
+     * @param addressLine1
+     * @param country
+     * @param city
+     */
+    public Address(String addressLine1, String addressLine2, String city, String state, String country, String zip, String latitude, String longitude) {
+        super();
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zip = zip;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
@@ -60,6 +88,8 @@ public class Address implements Serializable {
         this.state = state;
         this.country = country;
         this.zip = zip;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     @JsonProperty("addressLine1")
@@ -152,6 +182,36 @@ public class Address implements Serializable {
         return this;
     }
 
+    @JsonProperty("latitude")
+    public String getLatitude() {
+        return latitude;
+    }
+
+    @JsonProperty("latitude")
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public Address withLatitude(String latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    @JsonProperty("longitude")
+    public String getLongitude() {
+        return longitude;
+    }
+
+    @JsonProperty("longitude")
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public Address withLongitude(String longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
@@ -174,7 +234,7 @@ public class Address implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(addressLine1).append(addressLine2).append(city).append(state).append(country).append(zip).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(addressLine1).append(addressLine2).append(city).append(state).append(country).append(zip).append(latitude).append(longitude).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -186,7 +246,7 @@ public class Address implements Serializable {
             return false;
         }
         Address rhs = ((Address) other);
-        return new EqualsBuilder().append(addressLine1, rhs.addressLine1).append(addressLine2, rhs.addressLine2).append(city, rhs.city).append(state, rhs.state).append(country, rhs.country).append(zip, rhs.zip).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(addressLine1, rhs.addressLine1).append(addressLine2, rhs.addressLine2).append(city, rhs.city).append(state, rhs.state).append(country, rhs.country).append(zip, rhs.zip).append(latitude, rhs.latitude).append(longitude, rhs.longitude).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

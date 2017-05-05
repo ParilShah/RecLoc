@@ -1,6 +1,8 @@
 package csc258.controllers;
 
 import csc258.domain.frontend.common.ResponseDetail;
+import csc258.domain.frontend.location.Location;
+import csc258.domain.frontend.location.fetchLocationsByCategoriesById.FetchLocationsByCategoriesByIdRequest;
 import csc258.domain.frontend.location.submitlocation.SubmitLocationRequest;
 import csc258.service.location.LocationService;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by desair4 on 4/13/2017.
@@ -36,6 +39,11 @@ public class LocationController {
             LOGGER.error("Location save failed", e);
         }
         return new ResponseDetail(400L, "Location Save Failed");
+    }
+
+    @RequestMapping(value = "/fetchLocationsByCategoriesById", method = RequestMethod.POST)
+    public List<Location> fetchLocationsByCategoriesById(@RequestBody FetchLocationsByCategoriesByIdRequest fetchLocationsByCategoriesByIdRequest) {
+        return locationService.fetchLocationsByCategoriesById(fetchLocationsByCategoriesByIdRequest);
     }
 
     public LocationService getLocationService() {

@@ -2,6 +2,7 @@ package csc258.domain.frontend.user;
 
 import com.fasterxml.jackson.annotation.*;
 import csc258.domain.frontend.category.Category;
+import csc258.domain.frontend.location.Location;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -24,6 +25,10 @@ public class User implements Serializable {
     @JsonProperty("category")
     @Valid
     private List<Category> category = null;
+    @JsonProperty("locations")
+    @Valid
+    private List<Location> locations = null;
+
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -53,6 +58,17 @@ public class User implements Serializable {
         this.category = category;
     }
 
+    /**
+     * @param category
+     * @param deviceId
+     */
+    public User(String deviceId, List<Category> category, List<Location> locationList) {
+        super();
+        this.deviceId = deviceId;
+        this.category = category;
+        this.locations = locationList;
+    }
+
     @JsonProperty("deviceId")
     public String getDeviceId() {
         return deviceId;
@@ -80,6 +96,21 @@ public class User implements Serializable {
 
     public User withCategory(List<Category> category) {
         this.category = category;
+        return this;
+    }
+
+    @JsonProperty("locations")
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    @JsonProperty("locations")
+    public void setLocation(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public User withLocations(List<Location> locations) {
+        this.locations = locations;
         return this;
     }
 
@@ -117,7 +148,6 @@ public class User implements Serializable {
             return false;
         }
         User rhs = ((User) other);
-        return new EqualsBuilder().append(deviceId, rhs.deviceId).append(category, rhs.category).append(additionalProperties, rhs.additionalProperties).isEquals();
+        return new EqualsBuilder().append(deviceId, rhs.deviceId).append(category, rhs.category).append(locations, rhs.locations).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
-
 }
