@@ -27,8 +27,14 @@ class RLPlacesCollectionViewController: UICollectionViewController {
         self.items.append(value2)
         self.items.append(value3)
         
+        let rlPlacesVM = RLPlacesVM.init(urlString:"http://localhost:8080/location/fetchLocationsByCategoriesById", paramerts:nil, block:{(response:AnyObject)in
+            self.items = response as! [Categories]
+        })
+        rlPlacesVM.fetchLocationsByCategoriesIds()
+
+        
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = false
     }
 
     override func didReceiveMemoryWarning() {

@@ -17,21 +17,16 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
     @IBOutlet var captureImageView: UIImageView!
     @IBOutlet var nextBarButton: UIBarButtonItem!
     
+    var isFromGallery : Bool = false
     var captureSesssion : AVCaptureSession!
     var cameraOutput : AVCapturePhotoOutput!
     var previewLayer : AVCaptureVideoPreviewLayer!
     var locationFromGalleryImage : CLLocationCoordinate2D?
-    var isFromGallery : Bool = false
     let picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        if(segment.selectedSegmentIndex == 0){
-//            prepareCameraController()
-//        }else{
-//            prepareGallery()
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,51 +65,74 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didTakePhoto(){
-        let settings = AVCapturePhotoSettings()
-        let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
-        let previewFormat = [
-            kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
-            kCVPixelBufferWidthKey as String: 160,
-            kCVPixelBufferHeightKey as String: 160
-        ]
-        settings.previewPhotoFormat = previewFormat
-        cameraOutput.capturePhoto(with: settings, delegate:self)
+    // MARK: Custom Methods
+    func prepareGallery(){
+        captureView.alpha = 0
+        previewView.alpha = 0
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .savedPhotosAlbum
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
+        present(picker, animated: true, completion: nil)
     }
     
-    //MARK: AVCapturePhotoCaptureDelegate
-    func capture(_ captureOutput: AVCapturePhotoOutput,  didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?,  previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings:  AVCaptureResolvedPhotoSettings, bracketSettings:   AVCaptureBracketedStillImageSettings?, error: Error?){
-        
-            if let error = error {
-                print("error occure : \(error.localizedDescription)")
-            }
-        
-            if  let sampleBuffer = photoSampleBuffer,
-                let previewBuffer = previewPhotoSampleBuffer,
-                let dataImage =  AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer:  sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
-                
-                print(UIImage(data: dataImage)?.size as Any)
-            
-                let dataProvider = CGDataProvider(data: dataImage as CFData)
-                let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
-                let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
-            
-                self.captureImageView.image = image
-                self.isFromGallery = false
-                pressNext()
-            } else {
-                print("some error here")
-            }
+    @IBAction func changePhotoSource(){
+        if segment.selectedSegmentIndex == 0{
+            prepareCameraController()
+        }else{
+            prepareGallery()
         }
+    }
+
+    @IBAction func pressNext(){
+        //photoSubmit
+        let yourVC = self.storyboard?.instantiateViewController(withIdentifier: "RLPhotoEditViewController") as! RLPhotoEditViewController
+        yourVC.placeImage = self.captureImageView.image
+        yourVC.locationFromGalleryImage = self.locationFromGalleryImage
+        yourVC.isFromGallery = self.isFromGallery
+        self.navigationController?.pushViewController(yourVC, animated: true)
+    }
     
-    // MARK: Custom Methods
+}
+
+extension RLCaptureViewController{
+    func prepareCameraController(){
+        // Prepare all camera related work.
+        captureView.alpha = 1
+        previewView.alpha = 1
+        captureSesssion = AVCaptureSession()
+        captureSesssion.sessionPreset = AVCaptureSessionPresetPhoto
+        cameraOutput = AVCapturePhotoOutput()
+        
+        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        if let input = try? AVCaptureDeviceInput(device: device) {
+            if (captureSesssion.canAddInput(input)) {
+                captureSesssion.addInput(input)
+                if (captureSesssion.canAddOutput(cameraOutput)) {
+                    captureSesssion.addOutput(cameraOutput)
+                    previewLayer = AVCaptureVideoPreviewLayer(session: captureSesssion)
+                    previewLayer.frame = previewView.bounds
+                    previewView.layer.addSublayer(previewLayer)
+                    captureSesssion.startRunning()
+                }
+            } else {
+                print("issue here : captureSesssion.canAddInput")
+            }
+        } else {
+            print("some problem here")
+        }
+    }
+    
+    
     // This method you can use somewhere you need to know camera permission state
     func askPermission() {
-    
+        
         let cameraPermissionStatus =  AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch cameraPermissionStatus {
         case .authorized:
             print("Already Authorized")
+            
         case .denied:
             print("denied")
             let alert = UIAlertController(title: "Sorry :(" , message: "But  could you please grant permission for camera within device settings",  preferredStyle: .alert)
@@ -145,67 +163,48 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
                         let alert = UIAlertController(title: "WHY?" , message:  "Camera it is the main feature of our application", preferredStyle: .alert)
                         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                         alert.addAction(action)
-                        self?.present(alert, animated: true, completion: nil)  
-                    } 
+                        self?.present(alert, animated: true, completion: nil)
+                    }
                 }
             });
         }
     }
-    
-    func prepareGallery(){
-        captureView.alpha = 0
-        previewView.alpha = 0
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(picker, animated: true, completion: nil)
-    }
-    
-    func prepareCameraController(){
-        // Prepare all camera related work.
-        captureView.alpha = 1
-        previewView.alpha = 1
-        captureSesssion = AVCaptureSession()
-        captureSesssion.sessionPreset = AVCaptureSessionPresetPhoto
-        cameraOutput = AVCapturePhotoOutput()
+
+    //MARK: AVCapturePhotoCaptureDelegate
+    func capture(_ captureOutput: AVCapturePhotoOutput,  didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?,  previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings:  AVCaptureResolvedPhotoSettings, bracketSettings:   AVCaptureBracketedStillImageSettings?, error: Error?){
         
-        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        if let error = error {
+            print("error occure : \(error.localizedDescription)")
+        }
         
-        if let input = try? AVCaptureDeviceInput(device: device) {
-            if (captureSesssion.canAddInput(input)) {
-                captureSesssion.addInput(input)
-                if (captureSesssion.canAddOutput(cameraOutput)) {
-                    captureSesssion.addOutput(cameraOutput)
-                    previewLayer = AVCaptureVideoPreviewLayer(session: captureSesssion)
-                    previewLayer.frame = previewView.bounds
-                    previewView.layer.addSublayer(previewLayer)
-                    captureSesssion.startRunning()
-                }
-            } else {
-                print("issue here : captureSesssion.canAddInput")
-            }
+        if  let sampleBuffer = photoSampleBuffer,
+            let previewBuffer = previewPhotoSampleBuffer,
+            let dataImage =  AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer:  sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
+            
+            print(UIImage(data: dataImage)?.size as Any)
+            
+            let dataProvider = CGDataProvider(data: dataImage as CFData)
+            let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
+            let image = UIImage(cgImage: cgImageRef, scale: 1.0, orientation: UIImageOrientation.right)
+            
+            self.captureImageView.image = image
+            self.isFromGallery = false
+            pressNext()
         } else {
-            print("some problem here")
+            print("some error here")
         }
     }
-
-    @IBAction func changePhotoSource(){
-        if (segment.selectedSegmentIndex == 0){
-            prepareCameraController()
-        }else{
-            prepareGallery()
-        }
+    
+    @IBAction func didTakePhoto(){
+        let settings = AVCapturePhotoSettings()
+        let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
+        let previewFormat = [
+            kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
+            kCVPixelBufferWidthKey as String: 160,
+            kCVPixelBufferHeightKey as String: 160
+        ]
+        settings.previewPhotoFormat = previewFormat
+        cameraOutput.capturePhoto(with: settings, delegate:self)
     }
 
-    
-    @IBAction func pressNext(){
-        //photoSubmit
-        let yourVC = self.storyboard?.instantiateViewController(withIdentifier: "RLPhotoEditViewController") as! RLPhotoEditViewController
-        yourVC.placeImage = self.captureImageView.image
-        yourVC.locationFromGalleryImage = self.locationFromGalleryImage
-        yourVC.isFromGallery = self.isFromGallery
-        self.navigationController?.pushViewController(yourVC, animated: true)
-    }
-    
 }

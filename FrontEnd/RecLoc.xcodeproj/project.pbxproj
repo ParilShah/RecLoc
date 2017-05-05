@@ -23,6 +23,9 @@
 		FF6E131F1E45FE2F00207DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6E131D1E45FE2F00207DB5 /* LaunchScreen.storyboard */; };
 		FF6E132A1E45FE3000207DB5 /* RecLocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13291E45FE3000207DB5 /* RecLocTests.swift */; };
 		FF6E13351E45FE3000207DB5 /* RecLocUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13341E45FE3000207DB5 /* RecLocUITests.swift */; };
+		FF7592FF1EBC4E3500B04CB0 /* RLPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */; };
+		FF7593011EBC4F1800B04CB0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593001EBC4F1800B04CB0 /* Location.swift */; };
+		FF7593031EBC4F2400B04CB0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593021EBC4F2400B04CB0 /* Address.swift */; };
 		FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
 		FF9CB1081E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
 		FF9CB1091E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
@@ -85,6 +88,9 @@
 		FF6E13301E45FE3000207DB5 /* RecLocUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecLocUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13341E45FE3000207DB5 /* RecLocUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecLocUITests.swift; sourceTree = "<group>"; };
 		FF6E13361E45FE3000207DB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlacesVM.swift; sourceTree = "<group>"; };
+		FF7593001EBC4F1800B04CB0 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FF7593021EBC4F2400B04CB0 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLInterestViewController.swift; sourceTree = "<group>"; };
 		FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLTabViewController.swift; sourceTree = "<group>"; };
 		FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlacesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +168,7 @@
 			children = (
 				FF6E13161E45FE2F00207DB5 /* ViewController.swift */,
 				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
+				FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */,
 				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
 				FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */,
 			);
@@ -238,6 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				FFD12DD81EB867D7006B6F4F /* Categories.swift */,
+				FF7593001EBC4F1800B04CB0 /* Location.swift */,
+				FF7593021EBC4F2400B04CB0 /* Address.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -538,6 +547,7 @@
 			files = (
 				FF9CB10B1E5C766D006E4E5C /* RLTabViewController.swift in Sources */,
 				FFD12DD91EB867D7006B6F4F /* Categories.swift in Sources */,
+				FF7593011EBC4F1800B04CB0 /* Location.swift in Sources */,
 				FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */,
 				FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */,
 				FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */,
@@ -547,8 +557,10 @@
 				FFBB347E1EB816BA0074B484 /* RLNetworking.swift in Sources */,
 				FF3C3D721EA1FAC2009B6200 /* RLPhotoManipulate.m in Sources */,
 				FF9CB1131E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */,
+				FF7593031EBC4F2400B04CB0 /* Address.swift in Sources */,
 				FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */,
 				FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */,
+				FF7592FF1EBC4E3500B04CB0 /* RLPlacesVM.swift in Sources */,
 				FFD12DD61EB8643D006B6F4F /* RLInterestVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

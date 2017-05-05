@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class RLInterestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var tableView:UITableView?
@@ -30,12 +31,13 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
     // MARK: CUSTOM METHODS
     @IBAction func onPressDone(_ sender: Any?){
         let arry = getSelectedCategoriesArray()
-        let dic:[String: Any] = ["deviceId":"1042323", "category":arry]
+        let dic:[String: Any] = ["deviceId":"10423223", "category":arry]
         let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/user/submitUser", paramerts:dic, block:{(response:AnyObject)in
             let s = response as! [String:Any]
             let code = s["responseCode"] as! Int
             if code == 200{
-                UserDefaults.standard.set(arry, forKey: "Categories") //setObject
+                UserDefaults.standard.set(arry, forKey: "Categories") // Category Objects
+                UserDefaults.standard.set(dic["deviceId"], forKey: "User") // User Object
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let controller = storyboard.instantiateViewController(withIdentifier: "RLTab")
                 self.present(controller, animated: true, completion: nil)
@@ -43,7 +45,23 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         })
         rlInterestVM.submitUser()
     }
-    
+    /*
+    @IBAction func onPressDone(_ sender: Any?){
+        //let arry = getSelectedCategoriesArray()
+        let userDic:[String: String] = ["deviceId":"1042323"]
+        let addrsDic:[String: String] = ["addressLine1":"","addressLine2":"","city":"","state":"","country":"","zip":"","latitude":"","longitude":""]
+        let catArray:[String] = ["Snow","Mountaion"]
+        let dicAddress:[String: Any] = ["locationName":"Florida","locationDescription":"Cool Place","Address":addrsDic, "tags":catArray]
+        let dicFinal:[String: Any] = ["locationDetails":dicAddress]
+        
+        let dic:[String: Any] = ["user":userDic, "location":dicFinal]
+        
+        let request:RLNetworking = RLNetworking.init()
+        request.uploadImageUsingPost(url: "http://localhost:8080/location/submitLocation", parameters: dic, block:{(response:JSON) -> Void in
+            print(response)
+        })
+    }
+    */
     func fetchCategories(){
         let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/category/fetchAllCategories", paramerts:nil, block:{(response:AnyObject)in
             self.items = response as! [Categories]
