@@ -36,6 +36,8 @@ public class LocationDomain {
     @JoinColumn(name = "deviceId")
     private UserDomain userDomain;
 
+    private String photoName;
+
     public LocationDomain() {
     }
 
@@ -108,6 +110,14 @@ public class LocationDomain {
 
     public void setAddress(AddressDomain address) {
         this.address = address;
+    }
+
+    public String getPhotoName() {
+        return photoName;
+    }
+
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
     }
 
     @Override

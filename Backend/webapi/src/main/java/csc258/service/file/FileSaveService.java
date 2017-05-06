@@ -17,7 +17,7 @@ public class FileSaveService {
     public static boolean saveFileToLocal(byte[] fileBytes, String fileName, String filePath) {
         if (fileBytes == null) return false;
         try {
-            FileUtils.writeByteArrayToFile(new File(filePath + File.pathSeparator + filePath), fileBytes);
+            FileUtils.writeByteArrayToFile(new File(filePath + File.separator + fileName), fileBytes);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
