@@ -11,6 +11,8 @@ import GoogleMaps
 import TagListView
 
 class RLLocationDetailViewController: UIViewController {
+    public var location:Location?
+    
     public var placeName:String?
     public var placeImage:UIImage?
     public var placeDescription:String?
@@ -21,7 +23,7 @@ class RLLocationDetailViewController: UIViewController {
 
     
     @IBOutlet weak var placeImageView: UIImageView!
-    @IBOutlet weak var placeNameLabel: UITextView!
+    @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var tagListView:TagListView!
     @IBOutlet weak var mapView:UIView!
     
@@ -29,24 +31,27 @@ class RLLocationDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = self.placeName
-        self.placeImageView?.image = placeImage
-        for name in placeTags! {
-            self.tagListView?.addTag(name)
+        self.navigationItem.title = location?.locationName
+//        self.placeImageView?.image = placeImage
+        if let t = placeTags{
+            for name in t {
+                self.tagListView?.addTag(name)
+            }
         }
-        self.placeNameLabel.text = placeDescription
+        self.placeNameLabel.text = location?.locationDescription
         
         // Create a GMSCameraPosition that tells the map to display the
         // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.camera(withLatitude: placeLat!, longitude: placeLang!, zoom: 6.0)
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
         let mapView2 = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
         self.mapView?.addSubview(mapView2)
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
-        marker.position = self.placeLocation!
+        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
         marker.title = "Sydney"
         marker.snippet = "Australia"
+        marker.icon = UIImage(named:"flat-marker")
         marker.map = mapView2
 
     }

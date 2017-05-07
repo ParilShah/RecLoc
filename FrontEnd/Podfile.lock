@@ -16,6 +16,7 @@ PODS:
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
   - Material/Core (2.6.3)
+  - NVActivityIndicatorView (3.6.1)
   - Sharaku (1.0.2)
   - SwiftyJSON (3.1.4)
   - TagListView (1.1.0)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - GooglePlacePicker
   - GooglePlaces
   - Material (~> 2.0)
+  - NVActivityIndicatorView
   - Sharaku
   - SwiftyJSON
   - TagListView (~> 1.0)
@@ -39,10 +41,11 @@ SPEC CHECKSUMS:
   GooglePlacePicker: 345b1aabd42c9d6d9bf2369c1bae1234d903e764
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
+  NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
   Sharaku: c18de569fc99f6e936f46ca812b571826cc658a7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TagListView: d0267a71393f3c73db5c9ea2f979ac1125fcab56
 
-PODFILE CHECKSUM: c03bc2f1615033a3647fa633c0ac277852aca67e
+PODFILE CHECKSUM: ea83fff28285130288e0ca4fd9a42ab8b98c9fc3
 
 COCOAPODS: 1.2.0

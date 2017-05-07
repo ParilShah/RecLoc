@@ -41,38 +41,37 @@ class RLNetworking{
         }
     }
 
-    func uploadImageUsingPost(url:String, parameters:[String:Any]?,block: @escaping (JSON)->Void){
-//        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON {
-//            response in
-//            switch response.result {
-//            case .success:
-//                block(JSON(data: response.data!))
-//                break
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+    func uploadImageUsingPost(url:String, parameters:Any?,block: @escaping (JSON)->Void){
         let image = UIImage(named: "Mountain")
-
-        Alamofire.upload(
-            multipartFormData: { multipartFormData in
-                if  let imageData = UIImageJPEGRepresentation(image!, 0.6) {
-                    multipartFormData.append(imageData, withName: "Mountain", fileName: "file.png", mimeType: "image/png")
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            if  let imageData = UIImageJPEGRepresentation(image!, 0.6) {
+                multipartFormData.append(imageData, withName: "image", fileName: "Mountain.png", mimeType: "image/png")
+                do {
+                    let data = try JSONSerialization.data(withJSONObject:parameters as Any, options:[.prettyPrinted])
+                    let dataString = String(data: data, encoding: String.Encoding.utf8)!
+                    print(dataString)
+                    // do other stuff on success
+                    multipartFormData.append(dataString.data(using: String.Encoding.utf8)!, withName: "jsonRequest")                    
+                } catch {
+                    print("JSON serialization failed:  \(error)")
                 }
-
-        },
-            to: "http://localhost:8080/location/submitLocation",
-            encodingCompletion: { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
+            }
+            
+        }, usingThreshold: UInt64.init(),
+           to: "http://localhost:8080/location/submitLocation",
+           method: .post,
+           headers: nil,
+           encodingCompletion: { encodingResult in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    debugPrint(response)
                 }
-        }
-        )
-    }
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+        
+       }
 
 }

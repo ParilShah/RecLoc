@@ -10,7 +10,7 @@ import UIKit
 import TagListView
 import CoreLocation
 import AWSRekognition
-
+import SwiftyJSON
 
 class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
     
@@ -98,6 +98,18 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     
     func pressUpload(Sender: Any?) {
         print("Upload")
+        let userDic:[String: String] = ["deviceId":"1234"]
+        let addrsDic:[String: String] = ["addressLine1":"Yosemite Valley","addressLine2":"","city":"Yosemite","state":"California","country":"United States","zip":"95811","latitude":"37.8651","longitude":"119.5383"]
+        let catArray:[String] = ["Snow","Mountain","Forest"]
+        let dicAddress:[String: Any] = ["locationName":"Yosemite","locationDescription":"One of the best National Park","Address":addrsDic, "tags":catArray]
+        let dicFinal:[String: Any] = ["locationDetails":dicAddress]
+        
+        let dic:[String: Any] = ["user":userDic, "location":dicFinal]
+        let parameters:[String: Any] = ["jsonRequest":dic]
+        let request:RLNetworking = RLNetworking.init()
+        request.uploadImageUsingPost(url: "http://localhost:8080/location/submitLocation", parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
+            print(response)
+        })
     }
     
     // MARK: - CLLocationManagerDelegate

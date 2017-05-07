@@ -13,6 +13,7 @@ pod 'TagListView', '~> 1.0'
 pod 'Material', '~> 2.0'
 pod 'Sharaku'
 pod 'SwiftyJSON'
+pod 'NVActivityIndicatorView'
 
   # Pods for RecLoc
 

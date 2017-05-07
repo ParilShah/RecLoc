@@ -26,22 +26,27 @@ class RLPlacesVM {
         let request:RLNetworking = RLNetworking.init()
         request.fetchResponseUsingPost(url: self.urlString, parameters: self.parameters, block:{(response:JSON) -> Void in
             print(response)
-//            var arry = [AnyObject]()
-//            for i in response["category"].array!{
-//                let cat = Categories.init(jsonObject: i)
-//                arry.append(cat as AnyObject)
-//            }
-//            self.SuccessBlock(arry as AnyObject)
+            var arry = [AnyObject]()
+            for i in response.array!{
+                let tempLocation = i["locationDetails"] as JSON
+                let location = Location.init(jsonObject: tempLocation as JSON)
+                arry.append(location as AnyObject)
+            }
+            self.SuccessBlock(arry as AnyObject)
         })
     }
     
     public func fetchUserLocations(){
-        self.parameters = parametersForFetchUserLocation()
         let request:RLNetworking = RLNetworking.init()
-        request.fetchResponseUsingPost(url: self.urlString, parameters: self.parameters, block: {(response:JSON) -> Void in
-            print(response)
-//            let dictionary:[String:Any] = response.dictionaryObject!
-//            self.SuccessBlock(dictionary as AnyObject)
+        let url = urlForFetchUserLocation()
+        request.fetchResponseUsingGet(url: url, parameters: nil, block: {(response:JSON) -> Void in
+            var arry = [AnyObject]()
+            for i in response.array!{
+                let tempLocation = i["locationDetails"] as JSON
+                let location = Location.init(jsonObject: tempLocation as JSON)
+                arry.append(location as AnyObject)
+            }
+            self.SuccessBlock(arry as AnyObject)
         })
     }
     
@@ -56,10 +61,10 @@ class RLPlacesVM {
         return parameters
     }
     
-    private func parametersForFetchUserLocation()->[String:String]{
+    private func urlForFetchUserLocation()->String{
         let user = UserDefaults.standard.object(forKey: "User") as! String
-        let parameters: [String:String] = ["deviceId": user]
-        return parameters
+        let url = "\(self.urlString)/\(user)"
+        return url
     }
 
 }

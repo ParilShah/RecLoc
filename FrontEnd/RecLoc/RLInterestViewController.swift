@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import NVActivityIndicatorView
 
 class RLInterestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var tableView:UITableView?
@@ -31,7 +32,8 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
     // MARK: CUSTOM METHODS
     @IBAction func onPressDone(_ sender: Any?){
         let arry = getSelectedCategoriesArray()
-        let dic:[String: Any] = ["deviceId":"10423223", "category":arry]
+//        let dic:[String: Any] = ["deviceId":"1237", "category":arry]
+        let dic:[String: Any] = ["deviceId":"1234", "category":arry]
         let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/user/submitUser", paramerts:dic, block:{(response:AnyObject)in
             let s = response as! [String:Any]
             let code = s["responseCode"] as! Int
@@ -57,16 +59,23 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         let dic:[String: Any] = ["user":userDic, "location":dicFinal]
         
         let request:RLNetworking = RLNetworking.init()
-        request.uploadImageUsingPost(url: "http://localhost:8080/location/submitLocation", parameters: dic, block:{(response:JSON) -> Void in
+        request.fetchResponseUsingPost(url: "http://localhost:8080/location/submitLocation", parameters: dic, block:{(response:JSON) -> Void in
             print(response)
         })
     }
     */
     func fetchCategories(){
+        // Below part is a Activity Indicator View which can be improved.
+        let points = CGPoint(x: UIScreen.main.bounds.width/2.0 - 25, y: UIScreen.main.bounds.height/2.0 - 25)
+        let activityIndicator =  NVActivityIndicatorView(frame: CGRect(x: points.x, y: points.y, width: 50, height: 50), type: .ballScaleMultiple, color: UIColor.init(colorLiteralRed: 216.0/255.0, green: 67.0/255.0, blue: 21.0/255.0, alpha: 1.0), padding: NVActivityIndicatorView.DEFAULT_PADDING)
+        self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/category/fetchAllCategories", paramerts:nil, block:{(response:AnyObject)in
             self.items = response as! [Categories]
             self.selectedRows = Array(repeating:0, count:self.items.count)
             self.tableView?.reloadData()
+            activityIndicator.stopAnimating()
         })
         rlInterestVM.fetchCategories()
     }
@@ -81,6 +90,7 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         }
         return arryForCategories
     }
+    
 }
 
 extension RLInterestViewController {
@@ -109,6 +119,5 @@ extension RLInterestViewController {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
         self.selectedRows[indexPath.row] = 0;
-        
     }
 }

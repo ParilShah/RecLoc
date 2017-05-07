@@ -26,6 +26,7 @@
 		FF7592FF1EBC4E3500B04CB0 /* RLPlacesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */; };
 		FF7593011EBC4F1800B04CB0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593001EBC4F1800B04CB0 /* Location.swift */; };
 		FF7593031EBC4F2400B04CB0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593021EBC4F2400B04CB0 /* Address.swift */; };
+		FF7593091EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593081EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift */; };
 		FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
 		FF9CB1081E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
 		FF9CB1091E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
@@ -91,6 +92,7 @@
 		FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlacesVM.swift; sourceTree = "<group>"; };
 		FF7593001EBC4F1800B04CB0 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		FF7593021EBC4F2400B04CB0 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		FF7593081EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLAlbumCollectionViewController.swift; sourceTree = "<group>"; };
 		FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLInterestViewController.swift; sourceTree = "<group>"; };
 		FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLTabViewController.swift; sourceTree = "<group>"; };
 		FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlacesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -167,8 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				FF6E13161E45FE2F00207DB5 /* ViewController.swift */,
-				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
 				FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */,
+				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
 				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
 				FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */,
 			);
@@ -207,6 +209,7 @@
 				FFBB347C1EB8169C0074B484 /* Utility */,
 				FF2AEA3B1E99419F00B56429 /* Places */,
 				FF2AEA3A1E99417F00B56429 /* Capture */,
+				FF75930A1EBC72D200B04CB0 /* Album */,
 				FF6E13181E45FE2F00207DB5 /* Main.storyboard */,
 				FF6E131B1E45FE2F00207DB5 /* Assets.xcassets */,
 				FF6E131D1E45FE2F00207DB5 /* LaunchScreen.storyboard */,
@@ -231,6 +234,14 @@
 				FF6E13361E45FE3000207DB5 /* Info.plist */,
 			);
 			path = RecLocUITests;
+			sourceTree = "<group>";
+		};
+		FF75930A1EBC72D200B04CB0 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				FF7593081EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift */,
+			);
+			name = Album;
 			sourceTree = "<group>";
 		};
 		FFBB347C1EB8169C0074B484 /* Utility */ = {
@@ -551,6 +562,7 @@
 				FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */,
 				FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */,
 				FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */,
+				FF7593091EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift in Sources */,
 				FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */,
 				FF205D691E96211D00B34434 /* RLPlaceCollectionViewCell.swift in Sources */,
 				FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */,
@@ -729,6 +741,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "RecLoc/RecLoc-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -745,6 +758,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RecLoc/RecLoc-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
