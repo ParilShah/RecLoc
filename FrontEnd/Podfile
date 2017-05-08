@@ -10,10 +10,11 @@ pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
 pod 'TagListView', '~> 1.0'
-pod 'Material', '~> 2.0'
 pod 'Sharaku'
 pod 'SwiftyJSON'
 pod 'NVActivityIndicatorView'
+pod 'DZNEmptyDataSet'
+pod 'Pulley'
 
   # Pods for RecLoc
 

@@ -41,11 +41,11 @@ class RLNetworking{
         }
     }
 
-    func uploadImageUsingPost(url:String, parameters:Any?,block: @escaping (JSON)->Void){
-        let image = UIImage(named: "Mountain")
+    func uploadImageUsingPost(url:String, image:UIImage!, parameters:Any?, block: @escaping (JSON)->Void){
+        
         Alamofire.upload(multipartFormData: { multipartFormData in
             if  let imageData = UIImageJPEGRepresentation(image!, 0.6) {
-                multipartFormData.append(imageData, withName: "image", fileName: "Mountain.png", mimeType: "image/png")
+                multipartFormData.append(imageData, withName: "image", fileName: "file.png", mimeType: "image/png")
                 do {
                     let data = try JSONSerialization.data(withJSONObject:parameters as Any, options:[.prettyPrinted])
                     let dataString = String(data: data, encoding: String.Encoding.utf8)!
@@ -58,7 +58,7 @@ class RLNetworking{
             }
             
         }, usingThreshold: UInt64.init(),
-           to: "http://localhost:8080/location/submitLocation",
+           to: url,
            method: .post,
            headers: nil,
            encodingCompletion: { encodingResult in
@@ -73,5 +73,4 @@ class RLNetworking{
         })
         
        }
-
 }

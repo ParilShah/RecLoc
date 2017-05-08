@@ -9,19 +9,27 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import DZNEmptyDataSet
 import NVActivityIndicatorView
 
-class RLInterestViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class RLInterestViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
     @IBOutlet var tableView:UITableView?
+    var nextButton:UIBarButtonItem!
+    var selectedRowCount:Int = 0
     var items = [Categories]()
     var selectedRows = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.tableView!.emptyDataSetSource = self
+        self.tableView!.emptyDataSetDelegate = self
         self.tableView!.tableFooterView = UIView()
-        fetchCategories()
         
+        nextButton = UIBarButtonItem.init(title: "Done", style: .plain, target: self, action: #selector(onPressDone(Sender:)))
+        self.navigationItem.rightBarButtonItem = nextButton
+        nextButton.isEnabled = false
+        fetchCategories()
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,10 +38,10 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     // MARK: CUSTOM METHODS
-    @IBAction func onPressDone(_ sender: Any?){
+    @IBAction func onPressDone(Sender: Any?){
         let arry = getSelectedCategoriesArray()
-//        let dic:[String: Any] = ["deviceId":"1237", "category":arry]
-        let dic:[String: Any] = ["deviceId":"1234", "category":arry]
+        let dic:[String: Any] = ["deviceId":"1237", "category":arry]
+//        let dic:[String: Any] = ["deviceId":"1234", "category":arry]
         let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/user/submitUser", paramerts:dic, block:{(response:AnyObject)in
             let s = response as! [String:Any]
             let code = s["responseCode"] as! Int
@@ -91,6 +99,40 @@ class RLInterestViewController: UIViewController,UITableViewDelegate,UITableView
         return arryForCategories
     }
     
+    func statusOfTheBarButton(){
+        nextButton.isEnabled = selectedRowCount == 0 ? false:true
+    }
+    
+    // MARK: - DZNEmptyDataSetSource
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "RecLoc"
+        let attributes = [
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0)
+        ]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Interests will be appeared soon"
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
+        
+        let attributes = [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+            NSParagraphStyleAttributeName: paragraph
+        ]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "cracked-egg")
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.init(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
+    }    
 }
 
 extension RLInterestViewController {
@@ -113,11 +155,14 @@ extension RLInterestViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
         self.selectedRows[indexPath.row] = 1;
-        
+        selectedRowCount += 1
+        statusOfTheBarButton()
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
         self.selectedRows[indexPath.row] = 0;
+        selectedRowCount -= 1
+        statusOfTheBarButton()
     }
 }

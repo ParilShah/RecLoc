@@ -7,16 +7,16 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 import NVActivityIndicatorView
 
 private let reuseIdentifier = "PlacesCell"
 
-class RLAlbumCollectionViewController: UICollectionViewController {
+class RLAlbumCollectionViewController: UICollectionViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     var items = [Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
          self.clearsSelectionOnViewWillAppear = false
 
@@ -24,6 +24,19 @@ class RLAlbumCollectionViewController: UICollectionViewController {
 //        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
+        let size: CGFloat = (self.collectionView!.frame.size.width - 5) / 2.0
+        let cellSize = CGSize(width:size, height:size)
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = cellSize
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        layout.minimumLineSpacing = 1.0
+        layout.minimumInteritemSpacing = 1.0
+        self.collectionView?.setCollectionViewLayout(layout, animated: true)
+        
+        self.collectionView!.emptyDataSetSource = self
+        self.collectionView!.emptyDataSetDelegate = self
+        
         fetchUserLocations()
     }
 
@@ -46,9 +59,40 @@ class RLAlbumCollectionViewController: UICollectionViewController {
         })
         rlPlacesVM.fetchUserLocations()
     }
+    
+    // MARK: - DZNEmptyDataSetSource
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No Photos"
+        let attributes = [
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18.0)
+        ]
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Get started by uploading a photo."
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byWordWrapping
+        paragraph.alignment = .center
+        
+        let attributes = [
+            NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
+            NSParagraphStyleAttributeName: paragraph
+        ]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "placeholder_photo")
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.init(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
+    }
+
     /*
      // MARK: - Navigation
-     
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using [segue destinationViewController].
@@ -79,7 +123,6 @@ extension RLAlbumCollectionViewController {
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let retval = CGSize(width:(self.collectionView?.frame.size.width)!/2, height:64);
         return retval;

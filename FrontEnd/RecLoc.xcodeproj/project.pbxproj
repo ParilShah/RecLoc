@@ -27,6 +27,8 @@
 		FF7593011EBC4F1800B04CB0 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593001EBC4F1800B04CB0 /* Location.swift */; };
 		FF7593031EBC4F2400B04CB0 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593021EBC4F2400B04CB0 /* Address.swift */; };
 		FF7593091EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7593081EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift */; };
+		FF91DD311EC052CE0051DA38 /* RLMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF91DD301EC052CE0051DA38 /* RLMapViewController.swift */; };
+		FF91DD331EC052E20051DA38 /* RLLocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF91DD321EC052E20051DA38 /* RLLocationInfoViewController.swift */; };
 		FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
 		FF9CB1081E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
 		FF9CB1091E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */; };
@@ -93,6 +95,8 @@
 		FF7593001EBC4F1800B04CB0 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		FF7593021EBC4F2400B04CB0 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		FF7593081EBC72CB00B04CB0 /* RLAlbumCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLAlbumCollectionViewController.swift; sourceTree = "<group>"; };
+		FF91DD301EC052CE0051DA38 /* RLMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMapViewController.swift; sourceTree = "<group>"; };
+		FF91DD321EC052E20051DA38 /* RLLocationInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLLocationInfoViewController.swift; sourceTree = "<group>"; };
 		FF9CB1061E5C6D83006E4E5C /* RLInterestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLInterestViewController.swift; sourceTree = "<group>"; };
 		FF9CB10A1E5C766D006E4E5C /* RLTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLTabViewController.swift; sourceTree = "<group>"; };
 		FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPlacesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
 				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
 				FF205D6A1E963F7300B34434 /* RLLocationDetailViewController.swift */,
+				FF91DD301EC052CE0051DA38 /* RLMapViewController.swift */,
+				FF91DD321EC052E20051DA38 /* RLLocationInfoViewController.swift */,
 			);
 			name = Places;
 			sourceTree = "<group>";
@@ -559,6 +565,7 @@
 				FF9CB10B1E5C766D006E4E5C /* RLTabViewController.swift in Sources */,
 				FFD12DD91EB867D7006B6F4F /* Categories.swift in Sources */,
 				FF7593011EBC4F1800B04CB0 /* Location.swift in Sources */,
+				FF91DD331EC052E20051DA38 /* RLLocationInfoViewController.swift in Sources */,
 				FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */,
 				FF9CB1071E5C6D83006E4E5C /* RLInterestViewController.swift in Sources */,
 				FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */,
@@ -572,6 +579,7 @@
 				FF7593031EBC4F2400B04CB0 /* Address.swift in Sources */,
 				FF205D6B1E963F7300B34434 /* RLLocationDetailViewController.swift in Sources */,
 				FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */,
+				FF91DD311EC052CE0051DA38 /* RLMapViewController.swift in Sources */,
 				FF7592FF1EBC4E3500B04CB0 /* RLPlacesVM.swift in Sources */,
 				FFD12DD61EB8643D006B6F4F /* RLInterestVM.swift in Sources */,
 			);

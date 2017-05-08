@@ -12,7 +12,7 @@ import CoreLocation
 import AWSRekognition
 import SwiftyJSON
 
-class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLocationManagerDelegate, UITextViewDelegate{
+class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, UITextFieldDelegate{
     
     public var placeImage:UIImage!
     public var locationFromGalleryImage : CLLocationCoordinate2D?
@@ -20,26 +20,44 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     var isFromGallery:Bool = false
     
     var uploadButton: UIBarButtonItem!
-    @IBOutlet weak var tagListView:TagListView!
-    @IBOutlet weak var placeImageView:UIImageView!
-    @IBOutlet weak var placeHolderLabel:UILabel!
-    @IBOutlet weak var descriptionTxtView:UITextView!
+    var locationMark:CLPlacemark?
+    var tags:[String]=[]
+    
     @IBOutlet weak var locationLbl:UILabel!
+    @IBOutlet weak var tagListView:TagListView!
+    @IBOutlet weak var placeHolderLabel:UILabel!
+    @IBOutlet weak var placeImageView:UIImageView!
+    @IBOutlet weak var locationTxtField:UITextField!
+    @IBOutlet weak var descriptionTxtView:UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tagListView.delegate = self
-        tagListView.alignment = .left // possible values are .Left, .Center, and .Right
-        //tagListView.borderColor = UIColor(colorLiteralRed: 234, green: 77, blue: 58, alpha: 1.0)
-        
+        tagListView.alignment = .left
         uploadButton = UIBarButtonItem.init(title: "Upload", style: .plain, target: self, action: #selector(pressUpload(Sender:)))
-        
         self.navigationItem.rightBarButtonItem = uploadButton
         self.placeImageView!.image = placeImage
         
+        // configuration for the screen.
+        configurationForLocation()
+        fetchTagForImageFromAWS()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - TagListViewDelegate
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        print("Tag pressed: \(title), \(sender)")
+    }
+    
+    // MARK: Custom Methods
+    func configurationForLocation(){
         // TODO: When the photo is taken from Camera, then use the below and move it in the function.
-        // Configuration for getting CoreLocation        
+        // Configuration for getting CoreLocation
         if(!isFromGallery){
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -70,6 +88,10 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
             }
             
         }
+    
+    }
+    
+    func fetchTagForImageFromAWS(){
         
         let instanceOfCustomObject: RLPhotoManipulate = RLPhotoManipulate.init(block: {(response: Any?, error:Error?)in
             if (error == nil){
@@ -77,70 +99,51 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
                 DispatchQueue.main.async {
                     for object in (response as? Array<Any>)!{
                         let jsonResult = object as! AWSRekognitionLabel
-                        //print(jsonResult.name)
                         self.tagListView.addTag(jsonResult.name!)
+                        self.tags.append(jsonResult.name!)
                     }
                 }
             }
         })
         instanceOfCustomObject.returnDictionary(placeImage!)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - TagListViewDelegate
-    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        print("Tag pressed: \(title), \(sender)")
-    }
     
     func pressUpload(Sender: Any?) {
         print("Upload")
-        let userDic:[String: String] = ["deviceId":"1234"]
-        let addrsDic:[String: String] = ["addressLine1":"Yosemite Valley","addressLine2":"","city":"Yosemite","state":"California","country":"United States","zip":"95811","latitude":"37.8651","longitude":"119.5383"]
-        let catArray:[String] = ["Snow","Mountain","Forest"]
-        let dicAddress:[String: Any] = ["locationName":"Yosemite","locationDescription":"One of the best National Park","Address":addrsDic, "tags":catArray]
-        let dicFinal:[String: Any] = ["locationDetails":dicAddress]
+        let locationDic:[String: String] = getLatitudeAndLongitude()
+        let userDic:[String: String] = ["deviceId":UserDefaults.standard.object(forKey: "User") as! String]
+        let addrsDic:[String: String?] = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"],"longitude":locationDic["longitude"]]
         
-        let dic:[String: Any] = ["user":userDic, "location":dicFinal]
-        let parameters:[String: Any] = ["jsonRequest":dic]
+        let tags:[String] = self.tags
+        let dicAddress:[String: Any] = ["locationName":locationTxtField.text as Any,"locationDescription":descriptionTxtView.text as Any,"Address":addrsDic, "tags":tags]
+        let dicLocation:[String: Any] = ["locationDetails":dicAddress]
+        
+        let dicUserAndLocation:[String: Any] = ["user":userDic, "location":dicLocation]
+        let parameters:[String: Any] = ["jsonRequest":dicUserAndLocation]
         let request:RLNetworking = RLNetworking.init()
-        request.uploadImageUsingPost(url: "http://localhost:8080/location/submitLocation", parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
+        request.uploadImageUsingPost(url: "http://localhost:8080/location/submitLocation",image:placeImageView.image!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
             print(response)
         })
     }
     
-    // MARK: - CLLocationManagerDelegate
-    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
-        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)-> Void in
-            if (error != nil) {
-                print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
-                return
-            }
+    func getLatitudeAndLongitude()->[String:String]{
+        var latString: String
+        var longString: String
+        if(!isFromGallery){
+            let latitude = self.locationManager.location?.coordinate.latitude
+            let longitude = self.locationManager.location?.coordinate.longitude
+            latString = String(describing: latitude)
+            longString = String(describing: longitude)
             
-            if (placemarks?.count)! > 0 {
-                let pm = placemarks?.first
-                self.displayLocationInfo(placemark: pm!)
-            } else {
-                print("Problem with the data received from geocoder")
-            }
-        })
+        } else {
+            latString = String(describing: self.locationFromGalleryImage?.latitude)
+            longString = String(describing: self.locationFromGalleryImage?.longitude)
+        }
+        return ["latitude":latString,"longitude":longString]
     }
-    
-    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
-        print("Error while updating location " + error.localizedDescription)
-    }
-    
-    // MARK: Custom Methods
-    func displayLocationInfo(placemark: CLPlacemark) {
-        //stop updating location to save battery life
-        locationManager.stopUpdatingLocation()
-        print(placemark.addressDictionary!)
-        self.locationLbl.text = (placemark.name!+","+placemark.country!)
-    }
-    
+}
+
+extension RLPhotoSubmitViewController {
     // MARK: UITextViewDelegate
     public func textViewDidBeginEditing(_ textView: UITextView){
         self.placeHolderLabel.isHidden = true
@@ -159,5 +162,43 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
             textView.resignFirstResponder()
         }
         return true
+    }
+
+}
+
+extension RLPhotoSubmitViewController {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        return true
+    }
+}
+
+extension RLPhotoSubmitViewController {
+    // MARK: - CLLocationManagerDelegate
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)-> Void in
+            if (error != nil) {
+                print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                return
+            }
+            
+            if (placemarks?.count)! > 0 {
+                let locMark = placemarks?.first
+                self.displayLocationInfo(placemark: locMark!)
+            } else {
+                print("Problem with the data received from geocoder")
+            }
+        })
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        print("Error while updating location " + error.localizedDescription)
+    }
+    
+    // MARK: CUSTOM METHOD FOR LOCATION
+    func displayLocationInfo(placemark: CLPlacemark) {
+        locationManager.stopUpdatingLocation()
+        print(placemark.addressDictionary!)
+        self.locationMark = placemark
+        self.locationLbl.text = (placemark.name!+","+placemark.country!)
     }
 }

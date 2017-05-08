@@ -19,17 +19,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Material-com.cosmicmind.material.fonts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Material-com.cosmicmind.material.icons.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Material.xcscheme</key>
+		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -54,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pulley.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Sharaku.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,42 +67,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>17887E5908E3389F3870D0FEF56BCBEB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1A1FB83445D2221BC819C455D0510F79</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>39AA3FC7447AC6B6A131668CFF9C01CD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3A5897FCD2621886E495618AB901B1EF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3B0EC9F7F0B3F06A35C9C367273A791B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3EDFE4052B5DE7D509935AC0774CB135</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5ACFCBB5C36270A9DF9A2D2D11708867</key>
+		<key>53F9E7842CDB6599D52A81A36EC09566</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>74D569D73A083A2A2AE9F2CB81515460</key>
+		<key>58C5BA9DE2DA5B3FAD976A3DAF7654AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>64EFE31054AEC38F014A36B420D52EC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>83F9E74A301BDB6504F81A407C9B8B39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,17 +102,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D511562A8961C5B7A5DD87BAE2374F2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>B0598A59C8979E6E0E40B8920F046CFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>BC2BC9D501E3AAAC948F0A5FC0F36AD3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D386C75EFD4F03725E4EFB866B600B9A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD1DBCC1DF68514CF23AA06E1AB43A68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB745913718E82BD47B0E2466EB6A75E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
