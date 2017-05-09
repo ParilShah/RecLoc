@@ -50,7 +50,7 @@
 -- --------------------------------------------Table Generation end-------------------------------------------------
 
 -- -----------------------Fake Data Insertion
-INSERT INTO category (category_name, category_id) VALUES ('India', 5);
+INSERT INTO category (category_name, category_id) VALUES ('River', 5);
 INSERT INTO category (category_name, category_id) VALUES ('Forest', 1);
 -- 2017-05-02 21:37:15.552 TRACE 11056 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Forest]
 -- 2017-05-02 21:37:15.552 TRACE 11056 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [1]
@@ -63,7 +63,7 @@ INSERT INTO category (category_name, category_id) VALUES ('Mountain', 3);
 -- 2017-05-02 21:37:15.553 TRACE 11056 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Mountain]
 -- 2017-05-02 21:37:15.553 TRACE 11056 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [3]
 -- 2017-05-02 21:37:15.553 DEBUG 11056 --- [           main] org.hibernate.SQL                        : insert into category (category_name, category_id) values (?, ?)
-INSERT INTO category (category_name, category_id) VALUES ('Disney', 4);
+INSERT INTO category (category_name, category_id) VALUES ('Waterfall', 4);
 -- 2017-05-02 21:37:15.553 TRACE 11056 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [Disney]
 -- 2017-05-02 21:37:15.553 TRACE 11056 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [4]
 -- 2017-05-02 21:37:15.563 DEBUG 11056 --- [           main] org.hibernate.SQL                        : select userdomain0_.device_id as device_i1_4_0_ from user userdomain0_ where userdomain0_.device_id=?

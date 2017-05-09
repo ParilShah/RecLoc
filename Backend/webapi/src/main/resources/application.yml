@@ -21,8 +21,11 @@ spring:
             hibernate:
                 cache.use_query_cache: false
                 show_sql: true
-
 #            hibernate.generate_statistics: true
+    http:
+        multipart:
+                max-file-size: 10MB
+                max-request-size: 10MB
 
 multipart:
   maxFileSize: 10MB

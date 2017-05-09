@@ -97,8 +97,10 @@ public class LocationService {
     private String getFilePath() {
 
         //TODO get from systemProperties
-        return "C:/Users/desair4/D drive/Rushi/Paril/images/temp";
-//        return System.getProperty("fileBasePath1");
+//        return "C:/Users/desair4/D drive/Rushi/Paril/images/temp";
+//        return "/Users/Paril/Desktop/RecLocImagePath";
+
+        return System.getProperty("fileBasePath");
 //        String basePath = System.getProperty("fileBasePath");
 //        if (photoDetails.getFilePath() == null) {
 //            return basePath + UUID.randomUUID().toString();

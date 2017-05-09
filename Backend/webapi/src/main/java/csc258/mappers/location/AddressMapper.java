@@ -15,11 +15,13 @@ public class AddressMapper {
                 addressDomain.getCity(),
                 addressDomain.getState(),
                 addressDomain.getCountry(),
-                addressDomain.getZip());
+                addressDomain.getZip(),
+                addressDomain.getLatitude(),
+                addressDomain.getLongitude());
     }
 
     public static AddressDomain mapAddressFrontendToBackend(Address address) {
         if (address == null) return null;
-        return new AddressDomain(address.getAddressLine1(), address.getAddressLine2(), address.getCity(), address.getState(), address.getCountry(), address.getZip());
+        return new AddressDomain(address.getAddressLine1(), address.getAddressLine2(), address.getCity(), address.getState(), address.getCountry(), address.getZip(),address.getLatitude(),address.getLongitude());
     }
 }

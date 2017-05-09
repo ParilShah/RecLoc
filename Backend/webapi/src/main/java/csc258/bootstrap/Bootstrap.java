@@ -43,33 +43,33 @@ public class Bootstrap {
             CategoryDomain forest = new CategoryDomain(1L, "Forest");
             CategoryDomain beach = new CategoryDomain(2L, "Beach");
             CategoryDomain mountain = new CategoryDomain(3L, "Mountain");
-            CategoryDomain disney = new CategoryDomain(4L, "Disney");
-            CategoryDomain india = new CategoryDomain(5L, "India");
+            CategoryDomain river = new CategoryDomain(4L, "River");
+            CategoryDomain waterfall = new CategoryDomain(5L, "Waterfall");
 
             List<CategoryDomain> categoryDomainList1 = new ArrayList<CategoryDomain>() {{
-                add(india);
+                add(river);
                 add(forest);
                 add(beach);
                 add(mountain);
-                add(disney);
+                add(waterfall);
             }};
             categoryService.getCategoryDao().saveAllCategories(categoryDomainList1);
             List<CategoryDomain> categoryDomainList2 = new ArrayList<CategoryDomain>() {{
-                add(india);
+                add(river);
                 add(forest);
 //                add(beach);
 //                add(mountain);
 //                add(disney);
             }};
             List<CategoryDomain> categoryDomainList3 = new ArrayList<CategoryDomain>() {{
-                add(india);
+                add(river);
 //                add(forest);
 //                add(beach);
 //                add(mountain);
 //                add(disney);
             }};
             List<CategoryDomain> categoryDomainList4 = new ArrayList<CategoryDomain>() {{
-                add(india);
+                add(river);
 //                add(forest);
                 add(beach);
                 add(mountain);

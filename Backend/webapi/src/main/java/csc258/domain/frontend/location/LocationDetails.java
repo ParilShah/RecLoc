@@ -16,7 +16,8 @@ import java.util.Map;
         "locationName",
         "locationDescription",
         "Address",
-        "tags"
+        "tags",
+        "locationPhoto"
 })
 public class LocationDetails implements Serializable {
 
@@ -30,6 +31,8 @@ public class LocationDetails implements Serializable {
     @JsonProperty("tags")
     @Valid
     private List<String> tags = null;
+    @JsonProperty("locationPhoto")
+    private String locationPhoto;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -89,6 +92,19 @@ public class LocationDetails implements Serializable {
         this.tags = tags;
     }
 
+    /**
+     * @param address
+     * @param locationDescription
+     * @param locationName
+     */
+    public LocationDetails(String locationName, String locationDescription, Address address, String locationPhoto) {
+        super();
+        this.locationName = locationName;
+        this.locationDescription = locationDescription;
+        this.address = address;
+        this.locationPhoto = locationPhoto;
+    }
+
     @JsonProperty("locationName")
     public String getLocationName() {
         return locationName;
@@ -146,6 +162,21 @@ public class LocationDetails implements Serializable {
 
     public LocationDetails withTags(List<String> tags) {
         this.tags = tags;
+        return this;
+    }
+
+    @JsonProperty("locationPhoto")
+    public String getLocationPhoto() {
+        return locationPhoto;
+    }
+
+    @JsonProperty("locationPhoto")
+    public void setLocationPhoto(String locationPhoto) {
+        this.locationPhoto = locationPhoto;
+    }
+
+    public LocationDetails withLocationPhoto(String locationPhoto) {
+        this.locationPhoto = locationPhoto;
         return this;
     }
 

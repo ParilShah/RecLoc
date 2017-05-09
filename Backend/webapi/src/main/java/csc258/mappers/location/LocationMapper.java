@@ -19,7 +19,8 @@ public class LocationMapper {
                 locationDomain.getLocationDescription(),
                 AddressMapper.mapAddressBackendToFrontend(
                         locationDomain.getAddress()
-                )
+                ),
+                locationDomain.getPhotoName()
 //                locationDomain.getCategoryDomains()
         ));
 //        return null;

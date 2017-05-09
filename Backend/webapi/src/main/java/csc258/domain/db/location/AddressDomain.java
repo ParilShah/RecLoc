@@ -21,6 +21,8 @@ public class AddressDomain {
     private String state;
     private String country;
     private String zip;
+    private String latitude;
+    private String longitude;
 
     public AddressDomain() {
     }
@@ -45,6 +47,17 @@ public class AddressDomain {
         this.state = state;
         this.country = country;
         this.zip = zip;
+    }
+
+    public AddressDomain(String addressLine1, String addressLine2, String city, String state, String country, String zip, String latitude, String longitude) {
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zip = zip;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public long getId() {
@@ -101,6 +114,20 @@ public class AddressDomain {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getLatitude() {return latitude;}
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     @Override
