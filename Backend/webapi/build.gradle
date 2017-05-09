@@ -10,8 +10,10 @@ buildscript {
         mavenCentral()
         maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
+        jcenter()
     }
     dependencies {
+        classpath 'org.springframework:springloaded:1.2.6.RELEASE'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath group: 'org.springframework', name: 'springloaded', version: '1.2.7.RELEASE'
 //        classpath("org.springframework.boot:spring-boot-devtools")
@@ -24,6 +26,15 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 apply plugin: "idea"
+
+//For hot deploy refer : https://docs.spring.io/spring-boot/docs/current/reference/html/howto-hotswapping.html
+//If still hot deploy doesnt work refer : https://www.mkyong.com/spring-boot/intellij-idea-spring-boot-template-reload-is-not-working/
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
 
 sourceCompatibility = 1.8
 
