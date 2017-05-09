@@ -36,6 +36,14 @@ public class CategoryDomain {
     public CategoryDomain() {
     }
 
+    public CategoryDomain(Long categoryId1) {
+        this.categoryId = categoryId1;
+    }
+
+    public CategoryDomain(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public CategoryDomain(long categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
@@ -69,6 +77,14 @@ public class CategoryDomain {
 
     public void setUserDomains(List<UserDomain> userDomains) {
         this.userDomains = userDomains;
+    }
+
+    public List<LocationDomain> getLocationDomains() {
+        return locationDomains;
+    }
+
+    public void setLocationDomains(List<LocationDomain> locationDomains) {
+        this.locationDomains = locationDomains;
     }
 
     public void addUserDomain(UserDomain userDomain) {

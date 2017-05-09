@@ -5,7 +5,11 @@ import csc258.dao.UserDao;
 import csc258.dao.location.LocationDao;
 import csc258.domain.db.category.CategoryDomain;
 import csc258.domain.db.location.LocationDomain;
+import csc258.domain.frontend.category.Category;
+import csc258.domain.frontend.location.Address;
 import csc258.domain.frontend.location.Location;
+import csc258.domain.frontend.location.LocationDetails;
+import csc258.domain.frontend.location.fetchLocations.FetchLocationsRequest;
 import csc258.domain.frontend.location.fetchLocationsByCategoriesById.FetchLocationsByCategoriesByIdRequest;
 import csc258.domain.frontend.location.submitlocation.SubmitLocationRequest;
 import csc258.mappers.category.CategoryMapper;
@@ -21,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by desair4 on 4/24/2017.
@@ -38,6 +43,7 @@ public class LocationService {
 
     public boolean saveLocation(SubmitLocationRequest submitLocationRequest, MultipartFile file) {
 
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>" + submitLocationRequest);
         //TODO what to do if photo save is not successful
         Map<String, String> fileMap = savePhoto(file);
         List<CategoryDomain> categoryDomainList = categoryDao.findByCategoryNameIn(submitLocationRequest.getLocation().getLocationDetails().getTags());
@@ -56,15 +62,33 @@ public class LocationService {
         return false;
     }
 
-    public void findLocations() {
-
-    }
-
     public List<Location> fetchLocationsByCategoriesById(FetchLocationsByCategoriesByIdRequest fetchLocationsByCategoriesByIdRequest) {
         return LocationMapper.mapLocationListBackendToFrontend(
                 locationDao.fetchLocationsByCategoriesById(
                         CategoryMapper.mapCategoryListFrontendToBackend(
                                 fetchLocationsByCategoriesByIdRequest.getCategory())));
+    }
+
+    public List<Location> fetchLocations(FetchLocationsRequest fetchLocationsRequest) {
+//        Location location = new Location(
+//                new LocationDetails(new Address(fetchLocationsRequest.getCountry()),
+//                fetchLocationsRequest.getCategory().parallelStream().map(Category::getCategoryId).collect(Collectors.toList())));
+        Location location = new Location();
+        LocationDetails locationDetails = new LocationDetails();
+        if (fetchLocationsRequest.getCountry() == null && (fetchLocationsRequest.getCategory() == null && fetchLocationsRequest.getCategory().isEmpty()))
+            return null;
+
+        if (fetchLocationsRequest.getCountry() != null) {
+            locationDetails.setAddress(new Address(fetchLocationsRequest.getCountry()));
+        }
+        if (fetchLocationsRequest.getCategory() != null) {
+            locationDetails.setCategoryIds(fetchLocationsRequest.getCategory().parallelStream().map(Category::getCategoryId).collect(Collectors.toList()));
+        }
+
+        location.setLocationDetails(locationDetails);
+        return LocationMapper.mapLocationListBackendToFrontend(locationDao.
+                fetchLocations(LocationMapper.
+                        mapLocationFrontendToBackend(location)));
     }
 
     private Map<String, String> savePhoto(MultipartFile file) {

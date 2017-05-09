@@ -3,6 +3,7 @@ package csc258.mappers.location;
 import csc258.domain.db.location.LocationDomain;
 import csc258.domain.frontend.location.Location;
 import csc258.domain.frontend.location.LocationDetails;
+import csc258.mappers.category.CategoryMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,11 +40,21 @@ public class LocationMapper {
     public static LocationDomain mapLocationFrontendToBackend(Location location) {
         if (location == null) return null;
         LocationDetails locationDetails = location.getLocationDetails();
-        return new LocationDomain(
+        LocationDomain locationDomain = new LocationDomain(
                 locationDetails.getLocationName(),
                 locationDetails.getLocationDescription(),
                 AddressMapper.mapAddressFrontendToBackend(locationDetails.getAddress())
-//                locationDetails.getTags()
         );
+        List<String> tags = location.getLocationDetails().getTags();
+        if (tags != null) {
+            locationDomain.setCategoryDomains(CategoryMapper.mapTagListFrontendToCategoryBackend(tags));
+        }
+
+        List<Long> categoryIds = location.getLocationDetails().getCategoryIds();
+        if (categoryIds != null) {
+            locationDomain.setCategoryDomains(CategoryMapper.mapCategoryIdListFrontendToCategoryBackend(categoryIds));
+        }
+
+        return locationDomain;
     }
 }

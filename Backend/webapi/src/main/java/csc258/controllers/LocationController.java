@@ -2,6 +2,7 @@ package csc258.controllers;
 
 import csc258.domain.frontend.common.ResponseDetail;
 import csc258.domain.frontend.location.Location;
+import csc258.domain.frontend.location.fetchLocations.FetchLocationsRequest;
 import csc258.domain.frontend.location.fetchLocationsByCategoriesById.FetchLocationsByCategoriesByIdRequest;
 import csc258.domain.frontend.location.submitlocation.SubmitLocationRequest;
 import csc258.service.location.LocationService;
@@ -47,10 +48,16 @@ public class LocationController {
         return new ResponseDetail(400L, "Location Save Failed");
     }
 
-    @RequestMapping(value = "/fetchLocationsByCategoriesId", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/fetchLocationsByCategoriesId", method = RequestMethod.POST)
     public List<Location> fetchLocationsByCategoriesById(@RequestBody FetchLocationsByCategoriesByIdRequest fetchLocationsByCategoriesByIdRequest) {
         List<Location> locations = locationService.fetchLocationsByCategoriesById(fetchLocationsByCategoriesByIdRequest);
         return locations;
+    }*/
+
+    @RequestMapping(value = "/fetchLocations", method = RequestMethod.POST)
+    public List<Location> fetchLocations(@RequestBody FetchLocationsRequest fetchLocationsRequest) {
+        return locationService.fetchLocations(fetchLocationsRequest);
+//        return locations;
     }
 
     @RequestMapping(value = "/fetchLocationsByCountryAndCategoriesId", method = RequestMethod.POST)

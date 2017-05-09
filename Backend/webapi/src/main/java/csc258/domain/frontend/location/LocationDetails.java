@@ -31,6 +31,9 @@ public class LocationDetails implements Serializable {
     @JsonProperty("tags")
     @Valid
     private List<String> tags = null;
+    @JsonProperty("category")
+    @Valid
+    private List<Long> categoryIds = null;
     @JsonProperty("locationPhoto")
     private String locationPhoto;
     @JsonIgnore
@@ -76,6 +79,16 @@ public class LocationDetails implements Serializable {
         this.locationName = locationName;
         this.locationDescription = locationDescription;
         this.tags = tags;
+    }
+
+    /**
+     * @param categoryrIds1
+     * @param address1
+     */
+    public LocationDetails(Address address1, List<Long> categoryrIds1) {
+        super();
+        address = address1;
+        this.categoryIds = categoryrIds1;
     }
 
     /**
@@ -180,9 +193,12 @@ public class LocationDetails implements Serializable {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    public List<Long> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(List<Long> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 
     @JsonAnyGetter
@@ -198,6 +214,11 @@ public class LocationDetails implements Serializable {
     public LocationDetails withAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     @Override

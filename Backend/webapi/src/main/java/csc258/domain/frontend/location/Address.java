@@ -51,6 +51,14 @@ public class Address implements Serializable {
     }
 
     /**
+     * @param country
+     */
+    public Address(String country) {
+        super();
+        this.country = country;
+    }
+
+    /**
      * @param zip
      * @param state
      * @param longitude
