@@ -46,9 +46,9 @@ public class CategoryDao {
         return categoryRepository.save(categoryDomain);
     }
 
-    public void saveAllCategories(List<CategoryDomain> categoryDomain) {
-        categoryRepository.save(categoryDomain);
-    }
+//    public void saveAllCategories(List<CategoryDomain> categoryDomain) {
+////        categoryRepository.save(categoryDomain);
+//    }
 
     public ICategoryRepository getCategoryRepository() {
         return categoryRepository;

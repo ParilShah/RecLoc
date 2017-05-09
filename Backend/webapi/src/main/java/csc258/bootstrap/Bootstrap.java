@@ -53,7 +53,7 @@ public class Bootstrap {
                 add(mountain);
                 add(waterfall);
             }};
-            categoryService.getCategoryDao().saveAllCategories(categoryDomainList1);
+//            categoryService.getCategoryDao().saveAllCategories(categoryDomainList1);
             List<CategoryDomain> categoryDomainList2 = new ArrayList<CategoryDomain>() {{
                 add(river);
                 add(forest);

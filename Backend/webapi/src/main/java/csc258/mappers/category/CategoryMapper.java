@@ -30,4 +30,12 @@ public class CategoryMapper {
         if (category == null) return null;
         return new CategoryDomain(category.getCategoryId(), category.getCategoryName());
     }
+
+    public static List<CategoryDomain> mapTagListFrontendToCategoryBackend(List<String> tags) {
+        return tags.parallelStream().map(CategoryDomain::new).collect(Collectors.toList());
+    }
+
+    public static List<CategoryDomain> mapCategoryIdListFrontendToCategoryBackend(List<Long> tags) {
+        return tags.parallelStream().map(CategoryDomain::new).collect(Collectors.toList());
+    }
 }

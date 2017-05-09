@@ -23,10 +23,10 @@ public class CategoryService {
 
     private CategoryDao categoryDao;
 
-    public void saveAllCategories(List<Category> category) {
-        List<CategoryDomain> categoryDomain = CategoryMapper.mapCategoryListFrontendToBackend(category);
-        categoryDao.saveAllCategories(categoryDomain);
-    }
+//    public void saveAllCategories(List<Category> category) {
+//        List<CategoryDomain> categoryDomain = CategoryMapper.mapCategoryListFrontendToBackend(category);
+//        categoryDao.saveAllCategories(categoryDomain);
+//    }
 
     public FetchCategoryResponse fetchAllCategories() {
         Iterable<CategoryDomain> categoryDomainIterable = categoryDao.fetchAllCategories();
