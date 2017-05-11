@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by desair4 on 4/15/2017.
+ * Created by Paril on 4/15/2017.
  */
 @Entity(name = "User")
 public class UserDomain implements Serializable {

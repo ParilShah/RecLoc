@@ -4,7 +4,7 @@ import csc258.domain.db.location.AddressDomain;
 import csc258.domain.frontend.location.Address;
 
 /**
- * Created by desair4 on 4/24/2017.
+ * Created by Paril on 4/24/2017.
  */
 public class AddressMapper {
 

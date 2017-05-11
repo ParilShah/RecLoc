@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by desair4 on 4/15/2017.
+ * Created by Paril on 4/15/2017.
  */
 public interface ICategoryRepository extends CrudRepository<CategoryDomain, Long> {
     CategoryDomain findByCategoryId(Long id1);

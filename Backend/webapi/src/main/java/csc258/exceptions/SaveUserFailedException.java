@@ -1,7 +1,7 @@
 package csc258.exceptions;
 
 /**
- * Created by desair4 on 4/21/2017.
+ * Created by Paril on 4/21/2017.
  */
 public class SaveUserFailedException extends Exception {
     public SaveUserFailedException() {

@@ -4,7 +4,7 @@ import csc258.domain.db.user.UserDomain;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Created by desair4 on 4/16/2017.
+ * Created by Paril on 4/16/2017.
  */
 public interface IUserRepository extends CrudRepository<UserDomain, String> {
     UserDomain findByDeviceId(String deviceId);

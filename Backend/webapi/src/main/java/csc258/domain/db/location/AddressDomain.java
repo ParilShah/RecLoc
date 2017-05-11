@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * Created by desair4 on 4/24/2017.
+ * Created by Paril on 4/24/2017.
  */
 @Entity(name = "Address")
 public class AddressDomain {
