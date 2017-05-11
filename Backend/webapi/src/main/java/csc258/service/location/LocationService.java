@@ -10,13 +10,10 @@ import csc258.domain.frontend.location.Address;
 import csc258.domain.frontend.location.Location;
 import csc258.domain.frontend.location.LocationDetails;
 import csc258.domain.frontend.location.fetchLocations.FetchLocationsRequest;
-import csc258.domain.frontend.location.fetchLocationsByCategoriesById.FetchLocationsByCategoriesByIdRequest;
 import csc258.domain.frontend.location.submitlocation.SubmitLocationRequest;
-import csc258.mappers.category.CategoryMapper;
 import csc258.mappers.location.AddressMapper;
 import csc258.mappers.location.LocationMapper;
 import csc258.mappers.user.UserMapper;
-import csc258.service.file.FileSaveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +21,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * Created by desair4 on 4/24/2017.
+ * Created by Paril on 4/24/2017.
  */
 @Service
 public class LocationService {
@@ -45,12 +44,19 @@ public class LocationService {
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>" + submitLocationRequest);
         //TODO what to do if photo save is not successful
-        Map<String, String> fileMap = savePhoto(file);
+//        Map<String, String> fileMap = savePhoto(file);
         List<CategoryDomain> categoryDomainList = categoryDao.findByCategoryNameIn(submitLocationRequest.getLocation().getLocationDetails().getTags());
         LocationDomain locationDomain = LocationMapper.mapLocationFrontendToBackend(submitLocationRequest.getLocation());
         locationDomain.setUserDomain(UserMapper.mapUserFrontendToBackend(submitLocationRequest.getUser()));
         locationDomain.setAddress(AddressMapper.mapAddressFrontendToBackend(submitLocationRequest.getLocation().getLocationDetails().getAddress()));
-        locationDomain.setPhotoName(fileMap.get("fileName"));
+        byte[] bytes = null;//new byte[0];
+        try {
+            bytes = file.getBytes();
+            locationDomain.setPhotoBytes(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        locationDomain.setPhotoName(fileMap.get("fileName"));
         //save location to db
         try {
             locationDomain.setCategoryDomains(categoryDomainList);
@@ -62,12 +68,12 @@ public class LocationService {
         return false;
     }
 
-    public List<Location> fetchLocationsByCategoriesById(FetchLocationsByCategoriesByIdRequest fetchLocationsByCategoriesByIdRequest) {
+    /*public List<Location> fetchLocationsByCategoriesById(FetchLocationsByCategoriesByIdRequest fetchLocationsByCategoriesByIdRequest) {
         return LocationMapper.mapLocationListBackendToFrontend(
                 locationDao.fetchLocationsByCategoriesById(
                         CategoryMapper.mapCategoryListFrontendToBackend(
                                 fetchLocationsByCategoriesByIdRequest.getCategory())));
-    }
+    }*/
 
     public List<Location> fetchLocations(FetchLocationsRequest fetchLocationsRequest) {
 //        Location location = new Location(
@@ -91,25 +97,25 @@ public class LocationService {
                         mapLocationFrontendToBackend(location)));
     }
 
-    private Map<String, String> savePhoto(MultipartFile file) {
-        if (file == null) return null;
-
-        try {
-            byte[] fileBytes = file.getBytes();
-            if (fileBytes == null) return null;
-            List<String> tempList = getFilePathAndFileName(file);
-            String fileName = tempList.get(0);
-            String filePath = tempList.get(1);
-            FileSaveService.saveFileToLocal(fileBytes, fileName, filePath);
-            return new HashMap<String, String>() {{
-                put("fileName", fileName);
-            }};
-        } catch (IOException e) {
-            e.printStackTrace();
-            LOGGER.error("Error obtaining file bytes", e);
-        }
-        return null;
-    }
+//    private Map<String, String> savePhoto(MultipartFile file) {
+//        if (file == null) return null;
+//
+//        try {
+//            byte[] fileBytes = file.getBytes();
+//            if (fileBytes == null) return null;
+//            List<String> tempList = getFilePathAndFileName(file);
+//            String fileName = tempList.get(0);
+//            String filePath = tempList.get(1);
+//            FileSaveService.saveFileToLocal(fileBytes, fileName, filePath);
+//            return new HashMap<String, String>() {{
+//                put("fileName", fileName);
+//            }};
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            LOGGER.error("Error obtaining file bytes", e);
+//        }
+//        return null;
+//    }
 
     private List<String> getFilePathAndFileName(MultipartFile file) {
         List<String> list = new LinkedList<>();
@@ -121,7 +127,7 @@ public class LocationService {
     private String getFilePath() {
 
         //TODO get from systemProperties
-//        return "C:/Users/desair4/D drive/Rushi/Paril/images/temp";
+//        return "C:/Users/Paril/D drive/Rushi/Paril/images/temp";
 //        return "/Users/Paril/Desktop/RecLocImagePath";
 
         return System.getProperty("fileBasePath");

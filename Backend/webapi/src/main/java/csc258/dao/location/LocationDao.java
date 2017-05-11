@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Created by desair4 on 4/24/2017.
+ * Created by Paril on 4/24/2017.
  */
 @Component
 @Transactional
@@ -22,9 +22,9 @@ public class LocationDao {
         return locationRepository.save(location);
     }
 
-    public List<LocationDomain> fetchLocationsByCategoriesById(List<CategoryDomain> categories) {
-        return locationRepository.findByCategoryDomainsIn(categories);
-    }
+    /*public List<LocationDomain> fetchLocationsByCategoriesById(List<CategoryDomain> categories) {
+        return locationRepository.findDistinctLocationDomainsByCategoryDomainsIn(categories);
+    }*/
 
     public List<LocationDomain> fetchLocations(LocationDomain locationDomains) {
 //        Example<LocationDomain> locationDomainExample = Example.of(locationDomains);
@@ -36,9 +36,9 @@ public class LocationDao {
         if (addressDomain != null && categoryDomains != null) {
             return locationRepository.findDistinctLocationDomainsByAddressCountryAndCategoryDomainsIn(addressDomain.getCountry(), categoryDomains);
         } else if (categoryDomains != null) {
-            return locationRepository.findByCategoryDomainsIn(categoryDomains);
+            return locationRepository.findDistinctLocationDomainsByCategoryDomainsIn(categoryDomains);
         } else {
-            return locationRepository.findByAddressCountry(addressDomain.getCountry());
+            return locationRepository.findDistinctLocationDomainsByAddressCountry(addressDomain.getCountry());
         }
 
 //        return StreamSupport

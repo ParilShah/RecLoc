@@ -24,6 +24,9 @@ public class Location implements Serializable {
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 6220818399085514099L;
 
+    @JsonProperty("photoBytes")
+    private byte[] photoBytes;
+
     /**
      * No args constructor for use in serialization
      */
@@ -38,6 +41,16 @@ public class Location implements Serializable {
         this.locationDetails = locationDetails;
     }
 
+    /**
+     * @param locationDetails
+     * @param bytes
+     */
+    public Location(LocationDetails locationDetails, byte[] bytes) {
+        super();
+        this.locationDetails = locationDetails;
+        this.photoBytes = bytes;
+    }
+
     @JsonProperty("locationDetails")
     public LocationDetails getLocationDetails() {
         return locationDetails;
@@ -46,6 +59,14 @@ public class Location implements Serializable {
     @JsonProperty("locationDetails")
     public void setLocationDetails(LocationDetails locationDetails) {
         this.locationDetails = locationDetails;
+    }
+
+    public byte[] getPhotoBytes() {
+        return photoBytes;
+    }
+
+    public void setPhotoBytes(byte[] photoBytes) {
+        this.photoBytes = photoBytes;
     }
 
     public Location withLocationDetails(LocationDetails locationDetails) {

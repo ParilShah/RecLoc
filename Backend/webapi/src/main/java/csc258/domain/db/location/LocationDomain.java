@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Created by desair4 on 4/24/2017.
+ * Created by Paril on 4/24/2017.
  */
 @Entity(name = "location")
 public class LocationDomain {
@@ -37,6 +37,9 @@ public class LocationDomain {
     private UserDomain userDomain;
 
     private String photoName;
+
+    @Lob
+    private byte[] photoBytes;
 
     public LocationDomain() {
     }
@@ -118,6 +121,14 @@ public class LocationDomain {
 
     public void setPhotoName(String photoName) {
         this.photoName = photoName;
+    }
+
+    public byte[] getPhotoBytes() {
+        return photoBytes;
+    }
+
+    public void setPhotoBytes(byte[] photoBytes) {
+        this.photoBytes = photoBytes;
     }
 
     @Override
