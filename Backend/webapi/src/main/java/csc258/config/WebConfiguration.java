@@ -4,14 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 /**
- * Created by desair4 on 4/21/2017.
+ * Created by Paril on 4/21/2017.
  */
+@Profile("dev")
 @Configuration
 public class WebConfiguration implements ServletContextInitializer {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebConfiguration.class);
