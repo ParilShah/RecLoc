@@ -1,16 +1,17 @@
 spring:
     profiles:
-#        active: dev
+        active: prod,default
     datasource:
-            dataSourceClassName: org.h2.jdbcx.JdbcDataSource
-            url: jdbc:h2:mem:RecLoc;DB_CLOSE_DELAY=-1
-            databaseName:
+            dataSourceClassName: com.mysql.jdbc.Driver
+#            url: jdbc:h2:mem:RecLoc;DB_CLOSE_DELAY=-1
+            url: jdbc:mysql://recloc258.cgfnhcujlxhd.us-west-2.rds.amazonaws.com:3306
+            databaseName: recloc
             serverName:
-            username:
-            password:
+            username: admin
+            password: admin123
     jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-        database: H2
+        database-platform: org.hibernate.dialect.MySQL5Dialect
+        database: MYSQL
         openInView: true
         show_sql: true
 #        generate-ddl: true
@@ -22,6 +23,7 @@ spring:
                 cache.use_query_cache: false
                 show_sql: true
 #            hibernate.generate_statistics: true
+#    entitymanager.packagesToScan: csc258
     http:
         multipart:
                 max-file-size: 10MB
