@@ -4,11 +4,11 @@ spring:
     datasource:
             dataSourceClassName: com.mysql.jdbc.Driver
 #            url: jdbc:h2:mem:RecLoc;DB_CLOSE_DELAY=-1
-            url: jdbc:mysql://recloc258.cgfnhcujlxhd.us-west-2.rds.amazonaws.com:3306
+            url: jdbc:mysql://recloc258.cgfnhcujlxhd.us-west-2.rds.amazonaws.com:3306/recloc
             databaseName: recloc
             serverName:
             username: admin
-            password: admin123
+            password: admin1234
     jpa:
         database-platform: org.hibernate.dialect.MySQL5Dialect
         database: MYSQL
@@ -16,7 +16,8 @@ spring:
         show_sql: true
 #        generate-ddl: true
         hibernate:
-            ddl-auto: create-drop
+#            ddl-auto: create-drop
+            ddl-auto: update
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
         properties:
             hibernate:
