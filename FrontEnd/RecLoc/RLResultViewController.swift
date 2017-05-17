@@ -1,30 +1,32 @@
 //
-//  RLPlacesCollectionViewController.swift
+//  RLResultViewController.swift
 //  RecLoc
 //
-//  Created by Paril Shah on 2/21/17.
+//  Created by Paril Shah on 5/17/17.
 //  Copyright © 2017 Paril Shah. All rights reserved.
 //
 
 import UIKit
-import MapKit
 import Pulley
 import DZNEmptyDataSet
 import NVActivityIndicatorView
 
 private let reuseIdentifier = "PlacesCell"
 
-class RLPlacesCollectionViewController: UICollectionViewController,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class RLResultViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     var items = [Any]()
-
+    public var locationString:String?
+    public var category:Categories?
+    
+    @IBOutlet var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
-        // Call API for fetching all locations.
+
+        // Do any additional setup after loading the view.
         self.collectionView!.emptyDataSetSource = self
         self.collectionView!.emptyDataSetDelegate = self
-        self.navigationItem.title = "List of Locations"
+        self.navigationItem.title = "Your Search Result"
         fetchAllLocations()
     }
 
@@ -33,7 +35,7 @@ class RLPlacesCollectionViewController: UICollectionViewController,DZNEmptyDataS
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - CUSTOM METHODS
+
     func fetchAllLocations(){
         let points = CGPoint(x: UIScreen.main.bounds.width/2.0 - 25, y: UIScreen.main.bounds.height/2.0 - 25)
         let activityIndicator =  NVActivityIndicatorView(frame: CGRect(x: points.x, y: points.y, width: 50, height: 50), type: .ballScaleMultiple, color: UIColor.init(colorLiteralRed: 216.0/255.0, green: 67.0/255.0, blue: 21.0/255.0, alpha: 1.0), padding: NVActivityIndicatorView.DEFAULT_PADDING)
@@ -45,32 +47,25 @@ class RLPlacesCollectionViewController: UICollectionViewController,DZNEmptyDataS
             self.collectionView?.reloadData()
             activityIndicator.stopAnimating()
         })
-        rlPlacesVM.fetchLocationsByCategoriesIds()
+        rlPlacesVM.fetchLocationsByCategoriesIdsandCountry(country: locationString!, category:category!)
     }
-    
-    @IBAction func pressSearch(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "RLSearchController")
-        let navController = UINavigationController.init(rootViewController: controller)
-        self.present(navController, animated: true, completion: nil)
-    }
+
 }
 
-
-extension RLPlacesCollectionViewController {
-
+extension RLResultViewController {
+    
     // MARK: UICollectionViewDataSource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return self.items.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! RLPlaceCollectionViewCell
         var location = items[indexPath.row] as! Location
         cell.textLabel?.text = location.locationName
@@ -94,7 +89,7 @@ extension RLPlacesCollectionViewController {
         return locationImage!
     }
     
-    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PrimaryContentViewController") as! RLMapViewController
         let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerContentViewController") as! RLLocationInfoViewController
         mainContentVC.location = items[indexPath.row] as? Location
@@ -105,11 +100,11 @@ extension RLPlacesCollectionViewController {
         pulleyDrawerVC.initialDrawerPosition = .collapsed
         self.present(pulleyDrawerVC, animated: true, completion: nil)
     }
-
+    
 }
 
-extension RLPlacesCollectionViewController {
-
+extension RLResultViewController {
+    
     // MARK: - DZNEmptyDataSetSource
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "RecLoc"
@@ -120,7 +115,7 @@ extension RLPlacesCollectionViewController {
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Please Wait...We are fetching locations."
+        let text = "Searching locations for"+locationString!+"and"+(category?.categoryName)!
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
@@ -133,13 +128,13 @@ extension RLPlacesCollectionViewController {
         return NSAttributedString(string: text, attributes: attributes)
     }
     /*
-    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: "placeholder_photo")
-    }
-    */
+     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+     return UIImage(named: "placeholder_photo")
+     }
+     */
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return UIColor.init(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
     }
-
-
+    
+    
 }

@@ -24,6 +24,7 @@ class RLPhotoEditViewController: UIViewController, SHViewControllerDelegate {
         nextButton = UIBarButtonItem.init(title: "Next", style: .plain, target: self, action: #selector(pressNext(Sender:)))
         self.navigationItem.rightBarButtonItem = nextButton
         placeImageView.image = placeImage
+        self.navigationItem.title = "Edit Photo"
     }
 
     override func didReceiveMemoryWarning() {

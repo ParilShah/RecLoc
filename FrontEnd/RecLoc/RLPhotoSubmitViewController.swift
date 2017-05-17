@@ -37,8 +37,10 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         tagListView.alignment = .left
         uploadButton = UIBarButtonItem.init(title: "Upload", style: .plain, target: self, action: #selector(pressUpload(Sender:)))
         self.navigationItem.rightBarButtonItem = uploadButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.placeImageView!.image = placeImage
-                
+        self.descriptionTxtView.layer.cornerRadius = 5.0
+        self.navigationItem.title = "Uplod Location"
         // configuration for the screen.
         configurationForLocation()
         fetchTagForImageFromAWS()
@@ -84,7 +86,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
                     }
                 })
             }else{
-                self.locationLbl.text = "United States"
+                self.locationLbl.text = "CSUS, Sacramento, California, United States"
             }
             
         }
@@ -101,6 +103,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
                         let jsonResult = object as! AWSRekognitionLabel
                         self.tagListView.addTag(jsonResult.name!)
                         self.tags.append(jsonResult.name!)
+                        self.changeBarButtonStatus()
                     }
                 }
             }
@@ -109,7 +112,6 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     }
     
     func pressUpload(Sender: Any?) {
-        print("Upload")
         let locationDic:[String: String] = getLatitudeAndLongitude()
         let userDic:[String: String] = ["deviceId":UserDefaults.standard.object(forKey: "User") as! String]
         let addrsDic:[String: String?] = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
@@ -123,7 +125,10 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         let request:RLNetworking = RLNetworking.init()
         request.uploadImageUsingPost(url: Constant.baseURL+"location/submitLocation",image:placeImageView.image!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
             print(response)
+            
         })
+        self.navigationController?.popToRootViewController(animated: true)
+        self.tabBarController?.selectedIndex = 0
     }
     
     func getLatitudeAndLongitude()->[String:String]{
@@ -136,10 +141,24 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
             longString = String(format: "%f", longitude!)
             
         } else {
-            latString = String(format: "%f", (self.locationFromGalleryImage?.latitude)!)
-            longString = String(format: "%f", (self.locationFromGalleryImage?.longitude)!)
+            if (locationFromGalleryImage == nil) {
+                latString = "38.5604"
+                longString = "121.4241"
+            }else{
+                latString = String(format: "%f", (self.locationFromGalleryImage?.latitude)!)
+                longString = String(format: "%f", (self.locationFromGalleryImage?.longitude)!)
+            }
         }
         return ["latitude":latString,"longitude":longString]
+    }
+    
+    func changeBarButtonStatus(){
+        if self.locationTxtField.text?.characters.count != 0 && self.tags.count != 0 {
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+        }else{
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    
     }
 }
 
@@ -167,6 +186,10 @@ extension RLPhotoSubmitViewController {
 }
 
 extension RLPhotoSubmitViewController {
+    public func textFieldDidEndEditing(_ textField: UITextField){
+        changeBarButtonStatus()
+    }
+    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         return true
     }

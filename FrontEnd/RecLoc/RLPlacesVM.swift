@@ -21,8 +21,8 @@ class RLPlacesVM {
     }
     
     // To fetch locations from server on basis of User's interest.  
-    public func fetchLocationsByCategoriesIds(with country: String){
-        self.parameters = parametersForFetchLocationsByCategories(with: country)
+    public func fetchLocationsByCategoriesIds(){
+        self.parameters = parametersForFetchLocationsByCategories()
         let request:RLNetworking = RLNetworking.init()
         request.fetchResponseUsingPost(url: self.urlString, parameters: self.parameters, block:{(response:JSON) -> Void in
             print(response)
@@ -36,6 +36,23 @@ class RLPlacesVM {
             self.SuccessBlock(arry as AnyObject)
         })
     }
+
+    public func fetchLocationsByCategoriesIdsandCountry(country: String, category:Categories){
+        self.parameters = parametersForFetchLocationsByCategoriesandCountry(withcountry: country, category: category)
+        let request:RLNetworking = RLNetworking.init()
+        request.fetchResponseUsingPost(url: self.urlString, parameters: self.parameters, block:{(response:JSON) -> Void in
+            print(response)
+            var arry = [AnyObject]()
+            for i in response.array!{
+                let tempLocation = i["locationDetails"] as JSON
+                let imageString = i["photoBytes"] as JSON
+                let location = Location.init(jsonObject: tempLocation as JSON, imageString:imageString.string!)
+                arry.append(location as AnyObject)
+            }
+            self.SuccessBlock(arry as AnyObject)
+        })
+    }
+
     
     public func fetchUserLocations(){
         let request:RLNetworking = RLNetworking.init()
@@ -57,12 +74,9 @@ class RLPlacesVM {
         return categories as AnyObject
     }
     
-    private func parametersForFetchLocationsByCategories(with country:String)->[String:AnyObject]{
+    private func parametersForFetchLocationsByCategories()->[String:AnyObject]{
         let categories = retrieveSavedCategories() 
-        var parameters: [String:AnyObject] = ["category": categories as AnyObject]
-        if (country.characters.count != 0) {
-            parameters["country"] = country as AnyObject
-        }
+        let parameters: [String:AnyObject] = ["category": categories as AnyObject]
         return parameters
     }
     
@@ -70,6 +84,13 @@ class RLPlacesVM {
         let user = UserDefaults.standard.object(forKey: "User") as! String
         let url = "\(self.urlString)/\(user)"
         return url
+    }
+    
+    private func parametersForFetchLocationsByCategoriesandCountry(withcountry:String, category:Categories)->[String:AnyObject]{
+        let categories = ["categoryId":String(format: "%ld", category.categoryId!), "categoryName":category.categoryName]
+        let catArray  = [categories]
+        let parameters: [String:AnyObject] = ["category": catArray as AnyObject, "country":withcountry as AnyObject]
+        return parameters
     }
 
 }

@@ -108,56 +108,39 @@ extension RLAlbumCollectionViewController {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! RLPlaceCollectionViewCell
         // Configure the cell
-        let location = items[indexPath.row] as! Location
-        //        cell.imageView?.image = UIImage(named:(dictionary["ImageName"] as? String)!)
+        var location = items[indexPath.row] as! Location
         cell.textLabel?.text = location.locationName
+        let image: UIImage?
+        if (location.locationPhoto == nil){
+            image = convertDataToImage(withData: location)
+            location.locationPhoto = image
+            items[indexPath.row] = location
+        }else{
+            image = location.locationPhoto
+        }
+        cell.imageView?.image = image
         return cell
     }
     
+    func convertDataToImage(withData location:Location) -> UIImage{
+        var locationImage:UIImage?
+        let locationImageDataString:String = location.photoBytes!
+        let locationImageData = NSData(base64Encoded: locationImageDataString, options:NSData.Base64DecodingOptions.init(rawValue: 0))
+        locationImage = UIImage(data:locationImageData! as Data,scale:1.0)!
+        return locationImage!
+    }
+
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let retval = CGSize(width:(self.collectionView?.frame.size.width)!/2, height:64);
         return retval;
     }
     
-    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
-
 }

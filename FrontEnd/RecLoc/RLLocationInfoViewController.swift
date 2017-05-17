@@ -9,12 +9,15 @@
 import UIKit
 import Pulley
 import TagListView
+import AWSRekognition
 
-class RLLocationInfoViewController: UIViewController {
+class RLLocationInfoViewController: UIViewController, TagListViewDelegate {
 
     public var location:Location?
     public var placeTags:Array<String>?
     public var locationImage:UIImage?
+    var tags:[String]=[]
+    
     @IBOutlet weak var placeImageView: UIImageView!
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var placeDescriptionLabel: UILabel!
@@ -75,14 +78,30 @@ class RLLocationInfoViewController: UIViewController {
             }
         }
         placeAddressLabel.text = variableString
+        fetchTagForImageFromAWS()
+    }
+    
+    func fetchTagForImageFromAWS(){
         
-//        if let t = placeTags{
-//            for name in t {
-//                self.tagListView?.addTag(name)
-//            }
-//        }
+        let instanceOfCustomObject: RLPhotoManipulate = RLPhotoManipulate.init(block: {(response: Any?, error:Error?)in
+            if (error == nil){
+                print(response!)
+                DispatchQueue.main.async {
+                    for object in (response as? Array<Any>)!{
+                        let jsonResult = object as! AWSRekognitionLabel
+                        self.tagListView.addTag(jsonResult.name!)
+                        self.tags.append(jsonResult.name!)
+                    }
+                }
+            }
+        })
+        instanceOfCustomObject.returnDictionary(placeImageView.image!)
     }
 
+    // MARK: - TagListViewDelegate
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        print("Tag pressed: \(title), \(sender)")
+    }
 }
 
 extension RLLocationInfoViewController: PulleyDrawerViewControllerDelegate {

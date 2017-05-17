@@ -15,6 +15,7 @@
 		FF2AEA391E99416F00B56429 /* RLPhotoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AEA381E99416F00B56429 /* RLPhotoEditViewController.swift */; };
 		FF3C3D721EA1FAC2009B6200 /* RLPhotoManipulate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3C3D711EA1FAC2009B6200 /* RLPhotoManipulate.m */; };
 		FF4409621E94DD64004EDE14 /* RLPhotoSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */; };
+		FF526B611ECCB1E50020D00E /* RLResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF526B601ECCB1E50020D00E /* RLResultViewController.swift */; };
 		FF6E13151E45FE2F00207DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */; };
 		FF6E13171E45FE2F00207DB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E13161E45FE2F00207DB5 /* ViewController.swift */; };
 		FF6E131A1E45FE2F00207DB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF6E13181E45FE2F00207DB5 /* Main.storyboard */; };
@@ -77,6 +78,7 @@
 		FF3C3D701EA1FAC2009B6200 /* RLPhotoManipulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RLPhotoManipulate.h; sourceTree = "<group>"; };
 		FF3C3D711EA1FAC2009B6200 /* RLPhotoManipulate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RLPhotoManipulate.m; sourceTree = "<group>"; };
 		FF4409611E94DD64004EDE14 /* RLPhotoSubmitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLPhotoSubmitViewController.swift; sourceTree = "<group>"; };
+		FF526B601ECCB1E50020D00E /* RLResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLResultViewController.swift; sourceTree = "<group>"; };
 		FF6E13111E45FE2F00207DB5 /* RecLoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecLoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6E13141E45FE2F00207DB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF6E13161E45FE2F00207DB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				FF6E13161E45FE2F00207DB5 /* ViewController.swift */,
+				FF526B601ECCB1E50020D00E /* RLResultViewController.swift */,
 				FF7592FE1EBC4E3500B04CB0 /* RLPlacesVM.swift */,
 				FF9CB1121E5C771F006E4E5C /* RLPlacesCollectionViewController.swift */,
 				FF205D671E96196D00B34434 /* RLPlaceCollectionViewCell.swift */,
@@ -578,6 +581,7 @@
 				FF9CB1131E5C771F006E4E5C /* RLPlacesCollectionViewController.swift in Sources */,
 				FF7593031EBC4F2400B04CB0 /* Address.swift in Sources */,
 				FF862F171ECB207B008E78A7 /* RLConstant.swift in Sources */,
+				FF526B611ECCB1E50020D00E /* RLResultViewController.swift in Sources */,
 				FF1B04A41E80AC9600CE9729 /* RLCaptureViewController.swift in Sources */,
 				FF91DD311EC052CE0051DA38 /* RLMapViewController.swift in Sources */,
 				FF7592FF1EBC4E3500B04CB0 /* RLPlacesVM.swift in Sources */,
