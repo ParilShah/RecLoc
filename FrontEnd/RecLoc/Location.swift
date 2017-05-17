@@ -12,12 +12,15 @@ import SwiftyJSON
 struct Location {
     var locationName:String?
     var locationDescription:String?
+    var photoBytes:String?
+    var locationPhoto:UIImage?
     var tag:[JSON]?
     var address:Address?
     
-    init(jsonObject:JSON) {
+    init(jsonObject:JSON, imageString:String) {
         locationName = jsonObject["locationName"].string
         locationDescription = jsonObject["locationDescription"].string
+        photoBytes = imageString
         tag = jsonObject["tags"].arrayValue
         address = Address.init(jsonObject: jsonObject["Address"])
     }

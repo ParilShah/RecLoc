@@ -21,15 +21,16 @@ class RLPlacesVM {
     }
     
     // To fetch locations from server on basis of User's interest.  
-    public func fetchLocationsByCategoriesIds(){
-        self.parameters = parametersForFetchLocationsByCategories()
+    public func fetchLocationsByCategoriesIds(with country: String){
+        self.parameters = parametersForFetchLocationsByCategories(with: country)
         let request:RLNetworking = RLNetworking.init()
         request.fetchResponseUsingPost(url: self.urlString, parameters: self.parameters, block:{(response:JSON) -> Void in
             print(response)
             var arry = [AnyObject]()
             for i in response.array!{
                 let tempLocation = i["locationDetails"] as JSON
-                let location = Location.init(jsonObject: tempLocation as JSON)
+                let imageString = i["photoBytes"] as JSON
+                let location = Location.init(jsonObject: tempLocation as JSON, imageString:imageString.string!)
                 arry.append(location as AnyObject)
             }
             self.SuccessBlock(arry as AnyObject)
@@ -43,7 +44,8 @@ class RLPlacesVM {
             var arry = [AnyObject]()
             for i in response.array!{
                 let tempLocation = i["locationDetails"] as JSON
-                let location = Location.init(jsonObject: tempLocation as JSON)
+                let imageString = i["photoBytes"] as JSON
+                let location = Location.init(jsonObject: tempLocation as JSON, imageString:imageString.string!)
                 arry.append(location as AnyObject)
             }
             self.SuccessBlock(arry as AnyObject)
@@ -55,9 +57,12 @@ class RLPlacesVM {
         return categories as AnyObject
     }
     
-    private func parametersForFetchLocationsByCategories()->[String:AnyObject]{
+    private func parametersForFetchLocationsByCategories(with country:String)->[String:AnyObject]{
         let categories = retrieveSavedCategories() 
-        let parameters: [String:AnyObject] = ["category": categories as AnyObject]
+        var parameters: [String:AnyObject] = ["category": categories as AnyObject]
+        if (country.characters.count != 0) {
+            parameters["country"] = country as AnyObject
+        }
         return parameters
     }
     

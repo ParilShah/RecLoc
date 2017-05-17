@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Pulley
 import NVActivityIndicatorView
 
 private let reuseIdentifier = "PlacesCell"
@@ -35,24 +36,13 @@ class RLPlacesCollectionViewController: UICollectionViewController {
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        let rlPlacesVM = RLPlacesVM.init(urlString:"http://localhost:8080/location/fetchLocationsByCategoriesId", paramerts:nil, block:{(response:AnyObject)in
+        let rlPlacesVM = RLPlacesVM.init(urlString: Constant.baseURL + "location/fetchLocations", paramerts:nil, block:{(response:AnyObject)in
             self.items = response as! [Location]
             self.collectionView?.reloadData()
             activityIndicator.stopAnimating()
         })
-        rlPlacesVM.fetchLocationsByCategoriesIds()
+        rlPlacesVM.fetchLocationsByCategoriesIds(with: "")
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
@@ -71,59 +61,38 @@ extension RLPlacesCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! RLPlaceCollectionViewCell
-        // Configure the cell
-        let location = items[indexPath.row] as! Location
-        //        cell.imageView?.image = UIImage(named:(dictionary["ImageName"] as? String)!)
+        var location = items[indexPath.row] as! Location
         cell.textLabel?.text = location.locationName
+        let image: UIImage?
+        if (location.locationPhoto == nil){
+            image = convertDataToImage(withData: location)
+            location.locationPhoto = image
+            items[indexPath.row] = location
+        }else{
+            image = location.locationPhoto
+        }
+        cell.imageView?.image = image
         return cell
     }
     
-    
-    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let yourVC = self.storyboard?.instantiateViewController(withIdentifier: "locationDetails") as! RLLocationDetailViewController
-//        let dictionary = items[indexPath.row] as! NSDictionary
-//        yourVC.placeName = dictionary["Name"] as? String
-//        yourVC.placeImage = UIImage(named:(dictionary["ImageName"] as? String)!)
-//        yourVC.placeTags = dictionary["Tags"] as? Array
-//        yourVC.placeDescription = dictionary["Description"] as? String
-//        let lat = Double((dictionary["lat"] as? String)!)
-//        let lang = Double((dictionary["lang"] as? String)!)
-//        yourVC.placeLat = lat!
-//        yourVC.placeLang = lang!
-//        yourVC.placeLocation = CLLocationCoordinate2D(latitude: lat!, longitude: lang!)
-        yourVC.location = items[indexPath.row] as? Location
-        self.navigationController?.pushViewController(yourVC, animated: true)
+    func convertDataToImage(withData location:Location) -> UIImage{
+        var locationImage:UIImage?
+        let locationImageDataString:String = location.photoBytes!
+        let locationImageData = NSData(base64Encoded: locationImageDataString, options:NSData.Base64DecodingOptions.init(rawValue: 0))
+        locationImage = UIImage(data:locationImageData! as Data,scale:1.0)!
+        return locationImage!
     }
     
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
+    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mainContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PrimaryContentViewController") as! RLMapViewController
+        let drawerContentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DrawerContentViewController") as! RLLocationInfoViewController
+        mainContentVC.location = items[indexPath.row] as? Location
+        drawerContentVC.location = items[indexPath.row] as? Location
+        drawerContentVC.locationImage = ((items[indexPath.row] as? Location)?.locationPhoto)!
+        let pulleyDrawerVC = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
+        
+        pulleyDrawerVC.initialDrawerPosition = .collapsed
+        self.present(pulleyDrawerVC, animated: true, completion: nil)
+    }
 
 }

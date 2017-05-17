@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var pickerCountry:UIPickerView!
     @IBOutlet weak var toolBar:UIToolbar!
     
-    var countries: [String] = ["US", "UK", "UAE", "India", "China"]
+    var countries: [String] = ["United States", "United Kingdom", "India", "China"]
     var selectedCountry:String!
     
     override func viewDidLoad() {

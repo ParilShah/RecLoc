@@ -15,9 +15,9 @@ struct Address {
     var city:String?
     var state:String?
     var country:String?
-    var zip:Int?
-    var latitude:Double?
-    var longitude:Double?
+    var zip:String?
+    var latitude:String?
+    var longitude:String?
     
     init(jsonObject:JSON) {
         addressLine1 = jsonObject["addressLine1"].string
@@ -25,9 +25,9 @@ struct Address {
         city = jsonObject["city"].string
         state = jsonObject["state"].string
         country = jsonObject["country"].string
-        zip = jsonObject["zip"].int
-        latitude = jsonObject["latitude"].double
-        longitude = jsonObject["longitude"].double
+        zip = jsonObject["zip"].string
+        latitude = jsonObject["latitude"].stringValue
+        longitude = jsonObject["longitude"].stringValue
     }
 
 }

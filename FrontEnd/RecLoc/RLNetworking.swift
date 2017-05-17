@@ -33,7 +33,7 @@ class RLNetworking{
                     response in
                     switch response.result {
                     case .success:
-                        block(JSON(data: response.data!))
+                        block(JSON(data: response.data! ))
                         break
                     case .failure(let error):
                         print(error)
@@ -51,7 +51,8 @@ class RLNetworking{
                     let dataString = String(data: data, encoding: String.Encoding.utf8)!
                     print(dataString)
                     // do other stuff on success
-                    multipartFormData.append(dataString.data(using: String.Encoding.utf8)!, withName: "jsonRequest")                    
+                    multipartFormData.append(dataString.data(using: String.Encoding.utf8)!, withName: "jsonRequest")
+                    
                 } catch {
                     print("JSON serialization failed:  \(error)")
                 }

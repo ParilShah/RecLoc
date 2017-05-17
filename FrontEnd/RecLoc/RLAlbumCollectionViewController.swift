@@ -52,7 +52,7 @@ class RLAlbumCollectionViewController: UICollectionViewController,DZNEmptyDataSe
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        let rlPlacesVM = RLPlacesVM.init(urlString:"http://localhost:8080/user/fetchUserLocations", paramerts:nil, block:{(response:AnyObject)in
+        let rlPlacesVM = RLPlacesVM.init(urlString:Constant.baseURL+"user/fetchUserLocations", paramerts:nil, block:{(response:AnyObject)in
             self.items = response as! [Location]
             self.collectionView?.reloadData()
             activityIndicator.stopAnimating()

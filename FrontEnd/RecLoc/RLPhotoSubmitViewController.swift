@@ -38,7 +38,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         uploadButton = UIBarButtonItem.init(title: "Upload", style: .plain, target: self, action: #selector(pressUpload(Sender:)))
         self.navigationItem.rightBarButtonItem = uploadButton
         self.placeImageView!.image = placeImage
-        
+                
         // configuration for the screen.
         configurationForLocation()
         fetchTagForImageFromAWS()
@@ -112,7 +112,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         print("Upload")
         let locationDic:[String: String] = getLatitudeAndLongitude()
         let userDic:[String: String] = ["deviceId":UserDefaults.standard.object(forKey: "User") as! String]
-        let addrsDic:[String: String?] = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"],"longitude":locationDic["longitude"]]
+        let addrsDic:[String: String?] = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
         
         let tags:[String] = self.tags
         let dicAddress:[String: Any] = ["locationName":locationTxtField.text as Any,"locationDescription":descriptionTxtView.text as Any,"Address":addrsDic, "tags":tags]
@@ -121,23 +121,23 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         let dicUserAndLocation:[String: Any] = ["user":userDic, "location":dicLocation]
         let parameters:[String: Any] = ["jsonRequest":dicUserAndLocation]
         let request:RLNetworking = RLNetworking.init()
-        request.uploadImageUsingPost(url: "http://localhost:8080/location/submitLocation",image:placeImageView.image!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
+        request.uploadImageUsingPost(url: Constant.baseURL+"location/submitLocation",image:placeImageView.image!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
             print(response)
         })
     }
     
     func getLatitudeAndLongitude()->[String:String]{
-        var latString: String
-        var longString: String
+        var latString: String!
+        var longString: String!
         if(!isFromGallery){
             let latitude = self.locationManager.location?.coordinate.latitude
             let longitude = self.locationManager.location?.coordinate.longitude
-            latString = String(describing: latitude)
-            longString = String(describing: longitude)
+            latString = String(format: "%f", latitude!)
+            longString = String(format: "%f", longitude!)
             
         } else {
-            latString = String(describing: self.locationFromGalleryImage?.latitude)
-            longString = String(describing: self.locationFromGalleryImage?.longitude)
+            latString = String(format: "%f", (self.locationFromGalleryImage?.latitude)!)
+            longString = String(format: "%f", (self.locationFromGalleryImage?.longitude)!)
         }
         return ["latitude":latString,"longitude":longString]
     }

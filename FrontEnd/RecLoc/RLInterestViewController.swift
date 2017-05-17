@@ -25,6 +25,7 @@ class RLInterestViewController: UIViewController, UITableViewDelegate, UITableVi
         self.tableView!.emptyDataSetSource = self
         self.tableView!.emptyDataSetDelegate = self
         self.tableView!.tableFooterView = UIView()
+        self.tableView!.sectionHeaderHeight = 70
         
         nextButton = UIBarButtonItem.init(title: "Done", style: .plain, target: self, action: #selector(onPressDone(Sender:)))
         self.navigationItem.rightBarButtonItem = nextButton
@@ -40,9 +41,10 @@ class RLInterestViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: CUSTOM METHODS
     @IBAction func onPressDone(Sender: Any?){
         let arry = getSelectedCategoriesArray()
-        let dic:[String: Any] = ["deviceId":"1237", "category":arry]
-//        let dic:[String: Any] = ["deviceId":"1234", "category":arry]
-        let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/user/submitUser", paramerts:dic, block:{(response:AnyObject)in
+        let uuid = NSUUID().uuidString
+//        let dic:[String: Any] = ["deviceId":"1237", "category":arry]
+        let dic:[String: Any] = ["deviceId":uuid, "category":arry]
+        let rlInterestVM = RLInterestVM.init(urlString: Constant.baseURL + "user/submitUser", paramerts:dic, block:{(response:AnyObject)in
             let s = response as! [String:Any]
             let code = s["responseCode"] as! Int
             if code == 200{
@@ -55,31 +57,14 @@ class RLInterestViewController: UIViewController, UITableViewDelegate, UITableVi
         })
         rlInterestVM.submitUser()
     }
-    /*
-    @IBAction func onPressDone(_ sender: Any?){
-        //let arry = getSelectedCategoriesArray()
-        let userDic:[String: String] = ["deviceId":"1042323"]
-        let addrsDic:[String: String] = ["addressLine1":"","addressLine2":"","city":"","state":"","country":"","zip":"","latitude":"","longitude":""]
-        let catArray:[String] = ["Snow","Mountaion"]
-        let dicAddress:[String: Any] = ["locationName":"Florida","locationDescription":"Cool Place","Address":addrsDic, "tags":catArray]
-        let dicFinal:[String: Any] = ["locationDetails":dicAddress]
-        
-        let dic:[String: Any] = ["user":userDic, "location":dicFinal]
-        
-        let request:RLNetworking = RLNetworking.init()
-        request.fetchResponseUsingPost(url: "http://localhost:8080/location/submitLocation", parameters: dic, block:{(response:JSON) -> Void in
-            print(response)
-        })
-    }
-    */
+    
     func fetchCategories(){
         // Below part is a Activity Indicator View which can be improved.
         let points = CGPoint(x: UIScreen.main.bounds.width/2.0 - 25, y: UIScreen.main.bounds.height/2.0 - 25)
         let activityIndicator =  NVActivityIndicatorView(frame: CGRect(x: points.x, y: points.y, width: 50, height: 50), type: .ballScaleMultiple, color: UIColor.init(colorLiteralRed: 216.0/255.0, green: 67.0/255.0, blue: 21.0/255.0, alpha: 1.0), padding: NVActivityIndicatorView.DEFAULT_PADDING)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        
-        let rlInterestVM = RLInterestVM.init(urlString:"http://localhost:8080/category/fetchAllCategories", paramerts:nil, block:{(response:AnyObject)in
+        let rlInterestVM = RLInterestVM.init(urlString:Constant.baseURL+"category/fetchAllCategories", paramerts:nil, block:{(response:AnyObject)in
             self.items = response as! [Categories]
             self.selectedRows = Array(repeating:0, count:self.items.count)
             self.tableView?.reloadData()
@@ -164,5 +149,29 @@ extension RLInterestViewController {
         self.selectedRows[indexPath.row] = 0;
         selectedRowCount -= 1
         statusOfTheBarButton()
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let vw = UIView()
+        vw.backgroundColor = UIColor.init(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
+        let lblHeader: UILabel = UILabel.init()
+        lblHeader.numberOfLines = 0;
+        lblHeader.lineBreakMode = .byWordWrapping
+        lblHeader.text = "Your Location Suggestions will be appeared on the basis of your selections."
+        vw.addSubview(lblHeader)
+        return vw
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        let vw:UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 70))
+        vw.backgroundColor = UIColor.init(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
+        let lblHeader: UILabel = UILabel.init(frame: CGRect(x: 10, y: 10, width: self.view.bounds.size.width-10, height: 60))
+        lblHeader.numberOfLines = 0;
+        lblHeader.lineBreakMode = .byWordWrapping
+        lblHeader.text = "Your Location Suggestions will be appeared on the basis of your selections."
+        lblHeader.textColor = UIColor.darkText
+        lblHeader.font = UIFont.boldSystemFont(ofSize: 14.0)
+        vw.addSubview(lblHeader)
+        return vw
     }
 }

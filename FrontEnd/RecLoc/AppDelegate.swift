@@ -17,13 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil) // this assumes your storyboard is titled "Main.storyboard"
-//        let yourVC = mainStoryboard.instantiateViewControllerWithIdentifier("YOUR_VC_IDENTIFIER") as! YourViewController // inside "YOUR_VC_IDENTIFIER" substitute the Storyboard ID you created in step 2 for the view controller you want to open here. And substitute YourViewController with the name of your view controller, like, for example, ViewController2.
-//        appDelegate.window?.rootViewController = yourVC
-//        appDelegate.window?.makeKeyAndVisible()
-        
         GMSServices.provideAPIKey("AIzaSyD9mNFQqvpbHnwYw5BNVp6jn_oes7zXcOI")
         UINavigationBar.appearance().barTintColor = UIColor(colorLiteralRed: 41/255, green: 128/255, blue: 185/255, alpha: 1)
         
@@ -32,6 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor(colorLiteralRed: 41/255, green: 128/255, blue: 185/255, alpha: 1)
         UITabBar.appearance().tintColor = UIColor.white
         UITabBar.appearance().unselectedItemTintColor = UIColor.white
+        
+        
+        //let user = UserDefaults.standard.object(forKey: "User") as! String
+        if UserDefaults.standard.object(forKey: "User") != nil{
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window = UIWindow(frame: UIScreen.main.bounds)
+            
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil) // this assumes your storyboard is titled "Main.storyboard"
+            let yourVC = mainStoryboard.instantiateViewController(withIdentifier: "RLTab") as! RLTabViewController // inside "YOUR_VC_IDENTIFIER" substitute the Storyboard ID you created in step 2 for the view controller you want to open here. And substitute YourViewController with the name of your view controller, like, for example, ViewController2.
+            appDelegate.window?.rootViewController = yourVC
+            appDelegate.window?.makeKeyAndVisible()
+        }
+        
         return true
     }
 
