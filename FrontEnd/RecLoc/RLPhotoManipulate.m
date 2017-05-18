@@ -39,7 +39,7 @@
     request.minConfidence = [NSNumber numberWithInt:60];
     
     [Rekognition detectLabels:request completionHandler:^(AWSRekognitionDetectLabelsResponse * _Nullable response, NSError * _Nullable error) {
-        NSLog(@"%@",response.labels);
+        NSLog(@"AWS:%@",response.labels);
         self.completionBlock(response.labels, error);
     }];
 }

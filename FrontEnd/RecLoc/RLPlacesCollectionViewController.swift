@@ -82,6 +82,8 @@ extension RLPlacesCollectionViewController {
             image = location.locationPhoto
         }
         cell.imageView?.image = image
+        cell.directionButton?.tag = indexPath.row
+        cell.directionButton?.addTarget(self, action:#selector(pressDirection(sender:)), for: .touchUpInside)
         return cell
     }
     
@@ -91,6 +93,18 @@ extension RLPlacesCollectionViewController {
         let locationImageData = NSData(base64Encoded: locationImageDataString, options:NSData.Base64DecodingOptions.init(rawValue: 0))
         locationImage = UIImage(data:locationImageData! as Data,scale:1.0)!
         return locationImage!
+    }
+    
+    func pressDirection(sender:UIButton){
+        let location:Location = self.items[sender.tag] as! Location
+        let latitude = Double((location.address?.latitude)!)
+        let longitude = Double((location.address?.longitude)!)
+
+        let coordinate = CLLocationCoordinate2DMake(latitude!,longitude!)
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+        mapItem.name = location.locationName
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+
     }
     
     public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -132,6 +132,14 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         let request:RLNetworking = RLNetworking.init()
         request.uploadImageUsingPost(url: Constant.baseURL+"location/submitLocation",image:imageToUpload!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
             print(response)
+            let s = response.dictionaryObject
+            let code = s?["responseCode"] as! Int
+            if code != 200{
+                let alert = UIAlertController(title: "Error" , message: "There is some problem with uploading a location. Please try again to upload.",  preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .cancel,  handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
             
         })
         self.navigationController?.popToRootViewController(animated: true)
