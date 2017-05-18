@@ -49,7 +49,7 @@ class RLNetworking{
                 do {
                     let data = try JSONSerialization.data(withJSONObject:parameters as Any, options:[.prettyPrinted])
                     let dataString = String(data: data, encoding: String.Encoding.utf8)!
-                    print(dataString)
+                    //print(dataString)
                     // do other stuff on success
                     multipartFormData.append(dataString.data(using: String.Encoding.utf8)!, withName: "jsonRequest")
                     

@@ -25,7 +25,7 @@ class RLPlacesVM {
         self.parameters = parametersForFetchLocationsByCategories()
         let request:RLNetworking = RLNetworking.init()
         request.fetchResponseUsingPost(url: self.urlString, parameters: self.parameters, block:{(response:JSON) -> Void in
-            print(response)
+            //print(response)
             var arry = [AnyObject]()
             for i in response.array!{
                 let tempLocation = i["locationDetails"] as JSON

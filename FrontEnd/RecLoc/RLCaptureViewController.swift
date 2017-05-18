@@ -127,7 +127,6 @@ extension RLCaptureViewController{
     
     // This method you can use somewhere you need to know camera permission state
     func askPermission() {
-        
         let cameraPermissionStatus =  AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         switch cameraPermissionStatus {
         case .authorized:
@@ -158,9 +157,8 @@ extension RLCaptureViewController{
                 else {
                     // User Rejected
                     print("User Rejected")
-                    
                     DispatchQueue.main.async(){
-                        let alert = UIAlertController(title: "WHY?" , message:  "Camera it is the main feature of our application", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Error" , message:  "Camera it is the main feature of our application", preferredStyle: .alert)
                         let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                         alert.addAction(action)
                         self?.present(alert, animated: true, completion: nil)

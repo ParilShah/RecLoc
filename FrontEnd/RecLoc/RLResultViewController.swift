@@ -17,6 +17,7 @@ class RLResultViewController: UIViewController, UICollectionViewDelegate, UIColl
     var items = [Any]()
     public var locationString:String?
     public var category:Categories?
+    var stringPlaceHolder: String?
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -27,6 +28,8 @@ class RLResultViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.collectionView!.emptyDataSetSource = self
         self.collectionView!.emptyDataSetDelegate = self
         self.navigationItem.title = "Your Search Result"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "navHome"), style:.plain, target: self, action: #selector(pressHome))
+        self.stringPlaceHolder = "Searching locations for "+locationString!+" and "+(category?.categoryName)!
         fetchAllLocations()
     }
 
@@ -35,7 +38,10 @@ class RLResultViewController: UIViewController, UICollectionViewDelegate, UIColl
         // Dispose of any resources that can be recreated.
     }
     
-
+    func pressHome(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func fetchAllLocations(){
         let points = CGPoint(x: UIScreen.main.bounds.width/2.0 - 25, y: UIScreen.main.bounds.height/2.0 - 25)
         let activityIndicator =  NVActivityIndicatorView(frame: CGRect(x: points.x, y: points.y, width: 50, height: 50), type: .ballScaleMultiple, color: UIColor.init(colorLiteralRed: 216.0/255.0, green: 67.0/255.0, blue: 21.0/255.0, alpha: 1.0), padding: NVActivityIndicatorView.DEFAULT_PADDING)
@@ -44,6 +50,7 @@ class RLResultViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let rlPlacesVM = RLPlacesVM.init(urlString: Constant.baseURL + "location/fetchLocations", paramerts:nil, block:{(response:AnyObject)in
             self.items = response as! [Location]
+            self.stringPlaceHolder = (self.items.count == 0) ? "No Result Found. Right now, We are improving our collections. Please change your search criteria." : "Searching locations for "+self.locationString!+" and "+(self.category?.categoryName)!
             self.collectionView?.reloadData()
             activityIndicator.stopAnimating()
         })
@@ -96,7 +103,6 @@ extension RLResultViewController {
         drawerContentVC.location = items[indexPath.row] as? Location
         drawerContentVC.locationImage = ((items[indexPath.row] as? Location)?.locationPhoto)!
         let pulleyDrawerVC = PulleyViewController(contentViewController: mainContentVC, drawerViewController: drawerContentVC)
-        
         pulleyDrawerVC.initialDrawerPosition = .collapsed
         self.present(pulleyDrawerVC, animated: true, completion: nil)
     }
@@ -115,7 +121,7 @@ extension RLResultViewController {
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Searching locations for"+locationString!+"and"+(category?.categoryName)!
+        let text = stringPlaceHolder
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .byWordWrapping
         paragraph.alignment = .center
@@ -124,8 +130,7 @@ extension RLResultViewController {
             NSFontAttributeName: UIFont.systemFont(ofSize: 14.0),
             NSParagraphStyleAttributeName: paragraph
         ]
-        
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: text!, attributes: attributes)
     }
     /*
      func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {

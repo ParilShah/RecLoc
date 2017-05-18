@@ -20,9 +20,6 @@ class RLAlbumCollectionViewController: UICollectionViewController,DZNEmptyDataSe
         // Uncomment the following line to preserve selection between presentations
          self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
         // Do any additional setup after loading the view.
         let size: CGFloat = (self.collectionView!.frame.size.width - 5) / 2.0
         let cellSize = CGSize(width:size, height:size)
@@ -36,7 +33,7 @@ class RLAlbumCollectionViewController: UICollectionViewController,DZNEmptyDataSe
         
         self.collectionView!.emptyDataSetSource = self
         self.collectionView!.emptyDataSetDelegate = self
-        
+
         fetchUserLocations()
     }
 
@@ -90,15 +87,12 @@ class RLAlbumCollectionViewController: UICollectionViewController,DZNEmptyDataSe
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return UIColor.init(red: 236.0/255.0, green: 240.0/255.0, blue: 241.0/255.0, alpha: 1.0)
     }
-
-    /*
-     // MARK: - Navigation
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    @IBAction func pressRefresh(){
+        self.items.removeAll()
+        fetchUserLocations()
+    }
+    
 }
 
 extension RLAlbumCollectionViewController {

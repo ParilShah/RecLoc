@@ -31,7 +31,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U0C-yc-1aN" id="x26-yx-ThX">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -227,7 +227,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlacesCell" id="8nh-Mh-RHJ" customClass="RLPlaceCollectionViewCell" customModule="RecLoc" customModuleProvider="target">
-                                        <rect key="frame" x="19.666666666666668" y="0.0" width="375" height="252"/>
+                                        <rect key="frame" x="20" y="0.0" width="375" height="252"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
@@ -318,7 +318,7 @@
         <scene sceneID="Cv4-sr-Zr1">
             <objects>
                 <collectionViewController id="pts-fK-paf" customClass="RLPlacesCollectionViewController" customModule="RecLoc" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ep4-Yk-yXZ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="Ep4-Yk-yXZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,7 +330,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlacesCell" id="IhK-cT-XOh" customClass="RLPlaceCollectionViewCell" customModule="RecLoc" customModuleProvider="target">
-                                <rect key="frame" x="19.666666666666668" y="0.0" width="375" height="250"/>
+                                <rect key="frame" x="20" y="0.0" width="375" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
@@ -400,7 +400,7 @@
                         <viewControllerLayoutGuide type="top" id="WEl-En-7QL"/>
                         <viewControllerLayoutGuide type="bottom" id="xGs-fo-qUZ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="E7S-K2-Z3y">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="E7S-K2-Z3y">
                         <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -526,7 +526,7 @@
                         <viewControllerLayoutGuide type="top" id="XNb-yL-B9s"/>
                         <viewControllerLayoutGuide type="bottom" id="eSh-9y-eLB"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gun-oS-4zo">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="gun-oS-4zo">
                         <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -759,7 +759,13 @@
                             <outlet property="delegate" destination="S1R-4x-fLe" id="hFe-jJ-w89"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="My Album" id="S4j-aR-0ZT"/>
+                    <navigationItem key="navigationItem" title="My Album" id="S4j-aR-0ZT">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="refresh" id="Jfc-sW-ZEr">
+                            <connections>
+                                <action selector="pressRefresh" destination="S1R-4x-fLe" id="lok-g8-cXm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ub-4m-jI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

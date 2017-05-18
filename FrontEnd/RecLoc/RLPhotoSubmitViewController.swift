@@ -114,7 +114,13 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     func pressUpload(Sender: Any?) {
         let locationDic:[String: String] = getLatitudeAndLongitude()
         let userDic:[String: String] = ["deviceId":UserDefaults.standard.object(forKey: "User") as! String]
-        let addrsDic:[String: String?] = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
+        let addrsDic:[String: String?]
+        if (self.locationMark != nil){
+            addrsDic = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
+        } else {
+            addrsDic = ["addressLine1":"6000 J Street","addressLine2":"","city":"Sacramento","state":"California","country":"United States","zip":"95825","latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
+        
+        }
         
         let tags:[String] = self.tags
         let dicAddress:[String: Any] = ["locationName":locationTxtField.text as Any,"locationDescription":descriptionTxtView.text as Any,"Address":addrsDic, "tags":tags]
@@ -122,8 +128,10 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         
         let dicUserAndLocation:[String: Any] = ["user":userDic, "location":dicLocation]
         let parameters:[String: Any] = ["jsonRequest":dicUserAndLocation]
+        let imageData = UIImageJPEGRepresentation(placeImageView.image!, 0.2)!
+        let imageToUpload = UIImage(data: imageData)
         let request:RLNetworking = RLNetworking.init()
-        request.uploadImageUsingPost(url: Constant.baseURL+"location/submitLocation",image:placeImageView.image!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
+        request.uploadImageUsingPost(url: Constant.baseURL+"location/submitLocation",image:imageToUpload!,parameters: parameters["jsonRequest"], block:{(response:JSON) -> Void in
             print(response)
             
         })
@@ -143,7 +151,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         } else {
             if (locationFromGalleryImage == nil) {
                 latString = "38.5604"
-                longString = "121.4241"
+                longString = "-121.4241"
             }else{
                 latString = String(format: "%f", (self.locationFromGalleryImage?.latitude)!)
                 longString = String(format: "%f", (self.locationFromGalleryImage?.longitude)!)
@@ -191,6 +199,7 @@ extension RLPhotoSubmitViewController {
     }
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
         return true
     }
 }

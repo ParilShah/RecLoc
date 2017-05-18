@@ -42,6 +42,7 @@ class RLInterestViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func onPressDone(Sender: Any?){
         let arry = getSelectedCategoriesArray()
         let uuid = NSUUID().uuidString
+        //let uuid = "6789012345"
 //        let dic:[String: Any] = ["deviceId":"1237", "category":arry]
         let dic:[String: Any] = ["deviceId":uuid, "category":arry]
         let rlInterestVM = RLInterestVM.init(urlString: Constant.baseURL + "user/submitUser", paramerts:dic, block:{(response:AnyObject)in
