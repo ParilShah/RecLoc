@@ -40,6 +40,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.placeImageView!.image = placeImage
         self.descriptionTxtView.layer.cornerRadius = 5.0
+        self.placeImageView.layer.cornerRadius = 5.0
         self.navigationItem.title = "Uplod Location"
         // configuration for the screen.
         configurationForLocation()
@@ -77,16 +78,15 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
                         print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
                         return
                     }
-                    
                     if (placemarks?.count)! > 0 {
                         let pm = placemarks?.first
                         self.displayLocationInfo(placemark: pm!)
-                    } else {
+                    }else{
                         print("Problem with the data received from geocoder")
                     }
                 })
             }else{
-                self.locationLbl.text = "CSUS, Sacramento, California, United States"
+                self.locationLbl.text = "CSUS, Sacramento, California, United States, 95819"
             }
             
         }
@@ -94,7 +94,6 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
     }
     
     func fetchTagForImageFromAWS(){
-        
         let instanceOfCustomObject: RLPhotoManipulate = RLPhotoManipulate.init(block: {(response: Any?, error:Error?)in
             if (error == nil){
                 print(response!)
@@ -118,7 +117,7 @@ class RLPhotoSubmitViewController: UIViewController, TagListViewDelegate, CLLoca
         if (self.locationMark != nil){
             addrsDic = ["addressLine1":self.locationMark!.thoroughfare,"addressLine2":"","city":self.locationMark!.locality,"state":self.locationMark!.administrativeArea,"country":self.locationMark!.country!,"zip":self.locationMark!.postalCode,"latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
         } else {
-            addrsDic = ["addressLine1":"6000 J Street","addressLine2":"","city":"Sacramento","state":"California","country":"United States","zip":"95825","latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
+            addrsDic = ["addressLine1":"6000 J Street","addressLine2":"","city":"Sacramento","state":"California","country":"United States","zip":"95819","latitude":locationDic["latitude"]!,"longitude":locationDic["longitude"]!]
         
         }
         
@@ -212,7 +211,6 @@ extension RLPhotoSubmitViewController {
                 print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
                 return
             }
-            
             if (placemarks?.count)! > 0 {
                 let locMark = placemarks?.first
                 self.displayLocationInfo(placemark: locMark!)

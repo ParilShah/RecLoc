@@ -20,6 +20,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var items = [Categories]()
     var isSelectionFromCountry = true
     var selectionOfInterest:Int = 0
+    var selectionOfCountry:Int = 0
     var countries: [String] = ["United States", "United Kingdom", "India", "China", "Japan", "France", "Egypt"]
     var selectedCountry:String!
     var selectedInterest:String!
@@ -30,7 +31,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.pickerCountry.isHidden = true
         self.toolBar.isHidden = true
         self.selectedCountry = countries.first
-        //barBtnDone?.isEnabled = false
         self.btnInterestLocation.isEnabled = false
         self.navigationItem.rightBarButtonItem = barBtnDone
         self.navigationItem.leftBarButtonItem = barBtnCancel
@@ -80,6 +80,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
         if isSelectionFromCountry{
             self.selectedCountry = countries[row]
+            self.selectionOfCountry = row
         }else {
             self.selectedInterest = self.items[row].categoryName
             self.selectionOfInterest = row
@@ -108,8 +109,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
         }
-
-        //dismiss(animated: true, completion: nil)
     }
     
     @IBAction func searchInterest(){
@@ -119,7 +118,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.pickerCountry.isHidden = false
             self.toolBar.isHidden = false
         }, completion: { (finished: Bool) in
-            
+            self.pickerCountry.selectRow(self.selectionOfInterest, inComponent: 0, animated:false)
         })
     }
     
@@ -130,7 +129,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.pickerCountry.isHidden = false
             self.toolBar.isHidden = false
         }, completion: { (finished: Bool) in
-            
+            self.pickerCountry.selectRow(self.selectionOfCountry, inComponent: 0, animated:false)
         })
     }
     

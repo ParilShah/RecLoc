@@ -33,6 +33,7 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
         super.viewWillAppear(true)
         // Do any additional setup after loading the view.
         prepareCameraController()
+        segment.selectedSegmentIndex = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,6 +63,7 @@ class RLCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate, 
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        segment.selectedSegmentIndex = 0
         dismiss(animated: true, completion: nil)
     }
     
@@ -116,10 +118,10 @@ extension RLCaptureViewController{
                     previewView.layer.addSublayer(previewLayer)
                     captureSesssion.startRunning()
                 }
-            } else {
+            }else{
                 print("issue here : captureSesssion.canAddInput")
             }
-        } else {
+        }else{
             print("some problem here")
         }
     }
