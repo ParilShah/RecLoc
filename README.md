@@ -1,6 +1,4 @@
-CSC 258 Distributed System project, Swift | REST(Spring) | AWS
-
-This is a term project for Distribution System course.
+Distributed System, Swift | REST(Spring) | AWS
 
 Objective: Suggest travel location to user on basis of image recognition deep learning.
 
